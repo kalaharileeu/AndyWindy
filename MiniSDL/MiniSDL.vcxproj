@@ -143,6 +143,7 @@
     <ClInclude Include="GeneralParameters.h" />
     <ClInclude Include="InputHandler.h" />
     <ClInclude Include="Intruder.h" />
+    <ClInclude Include="Log.h" />
     <ClInclude Include="MovingObject.h" />
     <ClInclude Include="ObjectFactory.h" />
     <ClInclude Include="PlayState.h" />

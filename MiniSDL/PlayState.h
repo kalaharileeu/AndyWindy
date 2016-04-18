@@ -17,7 +17,6 @@ public:
 	virtual void draw();
 	virtual bool onEnter();
 	virtual bool onExit();
-
 	virtual std::string getStateID() const { return playid; }
 private:
 	//only one copy of this maintained for all objects

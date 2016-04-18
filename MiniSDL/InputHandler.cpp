@@ -3,7 +3,11 @@
 
 InputHandler* InputHandler::s_pInstance = 0;
 
-InputHandler::InputHandler() : m_keystates(0), m_bJoysticksInitialised(false), m_mousePosition(new Vector2D(0, 0)), MouseMoved(false)
+InputHandler::InputHandler() : m_keystates(0), m_bJoysticksInitialised(false), 
+m_mousePosition(new Vector2D(0, 0)), 
+MouseMoved(false), 
+touchfingerposition(new Vector2D(0, 0)),
+touched(false)
 {
 	// create button states for the mouse
 	for (int i = 0; i < 3; i++)
@@ -17,7 +21,8 @@ InputHandler::~InputHandler()
 	// delete anything we created dynamically
 	delete m_keystates;
 	delete m_mousePosition;
-
+	delete touchfingerposition;
+	delete liftfingerposition;
 	// clear our arrays
 	m_joystickValues.clear();
 	m_joysticks.clear();
@@ -27,7 +32,7 @@ InputHandler::~InputHandler()
 
 void InputHandler::clean()
 {
-	// we need to clean up after ourselves and close the joysticks we opened
+	//close the joysticks we opened
 	if (m_bJoysticksInitialised)
 	{
 		for (unsigned int i = 0; i < SDL_NumJoysticks(); i++)
@@ -112,7 +117,6 @@ bool InputHandler::isKeyDown(SDL_Scancode key) const
 			return false;
 		}
 	}
-
 	return false;
 }
 
@@ -163,6 +167,11 @@ Vector2D* InputHandler::getMousePosition() const
 	return m_mousePosition;
 }
 
+Vector2D* InputHandler::Gettouchposition() const
+{
+	return touchfingerposition;
+}
+
 void InputHandler::update()
 {
 	//SDL_Event event;
@@ -170,6 +179,11 @@ void InputHandler::update()
 	if (event.type != SDL_MOUSEMOTION)
 	{
 		MouseMoved = false;
+	}
+
+	if (event.type != SDL_FINGERDOWN)
+	{
+		touched = false;
 	}
 
 	while (SDL_PollEvent(&event))
@@ -212,6 +226,19 @@ void InputHandler::update()
 		case SDL_KEYUP:
 			onKeyUp();
 			break;
+			//Touch events
+		case SDL_FINGERDOWN:
+			touched = true;
+			onTouchFingerDown(event);
+			break;
+			//Touch events
+		case SDL_FINGERUP:
+			onTouchFingerDown(event);
+			break;
+			//Touch events
+		case SDL_FINGERMOTION:
+			onTouchFingerMotion();
+			break;
 
 		default:
 			break;
@@ -227,6 +254,22 @@ void InputHandler::onKeyDown()
 void InputHandler::onKeyUp()
 {
 	m_keystates = SDL_GetKeyboardState(0);
+}
+//handle touch events
+void InputHandler::onTouchFingerDown(SDL_Event &event)
+{
+	touchfingerposition->setX(event.tfinger.x);
+	touchfingerposition->setY(event.tfinger.y);
+}
+//handle touch events
+void InputHandler::onTouchFingerUp(SDL_Event &event)
+{
+
+}
+//handle touch events
+void InputHandler::onTouchFingerMotion()
+{
+
 }
 
 void InputHandler::onMouseMove(SDL_Event &event)

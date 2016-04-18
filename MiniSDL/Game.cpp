@@ -115,7 +115,7 @@ void Game::handleevents()
 void Game::clean()
 {
 	std::cout << "cleaning game\n";
-	//TheInputHandler::Instance()->clean();
+	TheInputHandler::Instance()->clean();
 	statemachine->clean();
 	statemachine = 0;
 	//delete m_pStateMachine;

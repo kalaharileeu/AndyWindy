@@ -25,9 +25,8 @@ PlayState::~PlayState()
 	}
 	CM = CollisionManager();
 }//delete the level pointer
-
 /*
-Bullet handler should be updated here, check for escape key, 
+Bullet handler should be updated here, check for escape key,
 check if player lives are enough to continue
 update level
 */

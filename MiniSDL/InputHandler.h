@@ -30,31 +30,30 @@ public:
 		return s_pInstance;
 	}
 
-	bool getMouseMoveState() { return MouseMoved; }    // init joysticks
 
+	// init joysticks
 	void initialiseJoysticks();
 	bool joysticksInitialised() const { return m_bJoysticksInitialised; }
-
 	void reset();
 
 	// update and clean the input handler
 	void update();
 	void clean();
-
 	// keyboard events
 	bool isKeyDown(SDL_Scancode key) const;
-
 	// joystick events
 	int getAxisX(int joy, int stick) const;
 	int getAxisY(int joy, int stick) const;
 	bool getButtonState(int joy, int buttonNumber) const;
-
 	// mouse events
 	bool getMouseButtonState(int buttonNumber) const;
 	Vector2D* getMousePosition() const;
+	bool getMouseMoveState() { return MouseMoved; }
+	//Gets the touch position 
+	Vector2D* Gettouchposition() const;
+	bool Gettouchstate() { return touched; }
 
 private:
-
 	InputHandler();
 	~InputHandler();
 	SDL_Event event;
@@ -64,6 +63,10 @@ private:
 	// handle keyboard events
 	void onKeyDown();
 	void onKeyUp();
+	//handle touch events
+	void onTouchFingerDown(SDL_Event &event);
+	void onTouchFingerUp(SDL_Event &event);
+	void onTouchFingerMotion();
 	// handle mouse events
 	void onMouseMove(SDL_Event& event);
 	void onMouseButtonDown(SDL_Event& event);
@@ -87,6 +90,9 @@ private:
 	std::vector<bool> m_mouseButtonStates;
 	Vector2D* m_mousePosition;
 	bool MouseMoved;
+	Vector2D* touchfingerposition;
+	Vector2D* liftfingerposition;
+	bool touched;
 
 	// singleton
 	static InputHandler* s_pInstance;

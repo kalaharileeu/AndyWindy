@@ -21,6 +21,7 @@ public:
 	void update()
 	{
 		MovingObject::update();
+		handleinput();
 	}
 
 	void draw()
@@ -49,7 +50,31 @@ public:
 		{
 			velocity.setX(v.getX());
 		}
+	}
 
+private:
+
+	void handleinput()
+	{
+		if (InputHandler::Instance()->Gettouchstate())
+		{
+			//SDL_Log("Touched !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+			float x = (position.getX() + InputHandler::Instance()->Gettouchposition()->getX()) / 2;
+			float y = (position.getY() + InputHandler::Instance()->Gettouchposition()->getY()) / 2;
+
+			position.setX(x);
+			position.setY(y);
+		}
+
+		if (InputHandler::Instance()->getMouseButtonState(0))
+		{
+			//std::cout << "mouse clicked" << std::endl;
+			float x = (position.getX() + InputHandler::Instance()->getMousePosition()->getX()) / 2;
+			float y = (position.getY() + InputHandler::Instance()->getMousePosition()->getY()) / 2;
+
+			position.setX(x);
+			position.setY(y);
+		}
 	}
 };
 
