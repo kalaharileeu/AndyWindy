@@ -1,5 +1,6 @@
 #include "Game.h"
 #include "PlayState.h"
+#include "MainMenuState.h"
 
 Game* Game::instance = 0;
 
@@ -83,9 +84,11 @@ bool Game::init(const char * title, int xpos, int ypos, bool fullscreen)
 	//register some GameObjsect here
 	// start the menu state
 	statemachine = new StateMachine();
-	/*cange ste tells statemachine a new state is coming
-	statemachine will call onenter for that state*/
-	statemachine->changeState(new PlayState());
+	/*change the state tells statemachine a new state is coming
+	statemachine will call on enter for that state*/
+	//Can start immediately with new Playstate(), I want to start with menustate
+	//statemachine->changeState(new PlayState());
+	statemachine->changeState(new MainMenuState());
 
 	boolrunning = true;
 	return true;

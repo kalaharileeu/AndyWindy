@@ -1,6 +1,9 @@
-
 /*
-• Removing one state and adding another: We will use this way to completely
+-The game loop and its pipelines: The Clean, update, draw, handleevents
+are the four pipelines pumped by the game loop.
+-StateMachine has 3 of those pipes rinnung through it, Clean, update and drad
+-Get initialized in Game.cpp.
+• Removing one state and adding another: use this way to completely
 change states without leaving the option to return
 • Adding one state without removing the previous state: This way is useful
 for pause menus and so on

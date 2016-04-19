@@ -128,10 +128,13 @@
     <ClCompile Include="GeneralParameters.cpp" />
     <ClCompile Include="InputHandler.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MainMenuState.cpp" />
+    <ClCompile Include="MenuButton.cpp" />
     <ClCompile Include="MovingObject.cpp" />
     <ClCompile Include="ObjectFactory.cpp" />
     <ClCompile Include="PlayState.cpp" />
     <ClCompile Include="StateMachine.cpp" />
+    <ClCompile Include="StateParser.cpp" />
     <ClCompile Include="TextureManager.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -144,11 +147,15 @@
     <ClInclude Include="InputHandler.h" />
     <ClInclude Include="Intruder.h" />
     <ClInclude Include="Log.h" />
+    <ClInclude Include="MainMenuState.h" />
+    <ClInclude Include="MenuButton.h" />
+    <ClInclude Include="MenuState.h" />
     <ClInclude Include="MovingObject.h" />
     <ClInclude Include="ObjectFactory.h" />
     <ClInclude Include="PlayState.h" />
     <ClInclude Include="Shield.h" />
     <ClInclude Include="StateMachine.h" />
+    <ClInclude Include="StateParser.h" />
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="Vector2D.h" />
   </ItemGroup>
