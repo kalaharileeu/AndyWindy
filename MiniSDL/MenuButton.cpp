@@ -4,9 +4,9 @@
 MenuButton::MenuButton(int ms, Vector2D pos, int w, int h, std::string id, int nf, int callbid)
 	: StaticObject(ms, pos, w, h, id, nf), m_callback(0), released(true)
 {
-	callbackid = callbackid;
+	callbackid = callbid;
 }
-
+//Not using dependency injection
 //void MenuButton::load(std::unique_ptr<LoaderParams> const &pParams)
 //{
 //    ShooterObject::load(std::move(pParams));

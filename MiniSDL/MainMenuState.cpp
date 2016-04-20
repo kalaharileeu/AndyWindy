@@ -1,6 +1,6 @@
 #include <iostream>
 #include "MainMenuState.h"
-#include "Game.h"
+//#include "Game.h"
 #include "MenuButton.h"
 #include "PlayState.h"
 #include "InputHandler.h"
@@ -8,22 +8,9 @@
 
 const std::string MainMenuState::menuid = "MENU";
 
-// Callbacks
-void MainMenuState::menutopplay()
-{
-	//change to playstate
-    TheGame::Instance()->getstatemachine()->changeState(new PlayState());
-}
-
-void MainMenuState::exitfromMenu()
-{
-    TheGame::Instance()->quit();
-}
-
-// end callbacks
-
 void MainMenuState::update()
 {
+	//TODO:Remove this the space bar should not take you to play screen
 	if(TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_SPACE))
 	{
 		menutopplay();
@@ -59,6 +46,8 @@ bool MainMenuState::onEnter()
 	//Ill just load the buttons etc. manually
     //stateParser.parseState("assets/attack.xml", s_menuID, &m_gameObjects, &m_textureIDList);
 	stateParser.parseState(menuid, &gameobjects, &textureidlist);
+	//m_callbacks reside in Menustate.h
+	//To call the function give the index: 0, 1 or 2
     m_callbacks.push_back(0);
     m_callbacks.push_back(menutopplay);
     m_callbacks.push_back(exitfromMenu);
@@ -92,7 +81,7 @@ bool MainMenuState::onExit()
     std::cout << "exiting MenuState\n";
     return true;
 }
-
+//pass in a vector of local functions to use in call back
 void MainMenuState::setCallbacks(const std::vector<Callback>& callbacks)
 {
     // go through the game objects
@@ -101,12 +90,31 @@ void MainMenuState::setCallbacks(const std::vector<Callback>& callbacks)
         for(int i = 0; i < gameobjects.size(); i++)
         {
             // if they are of type MenuButton then assign a callback based on the id passed in from the file
+			//dynamic_cast to upcast gameobject to MenuButton
             if(dynamic_cast<MenuButton*>(gameobjects[i]))
             {
-                MenuButton* pButton = dynamic_cast<MenuButton*>(gameobjects[i]);
-                pButton->setCallback(callbacks[pButton->getCallbackID()]);
+                MenuButton* button = dynamic_cast<MenuButton*>(gameobjects[i]);
+				//The buuton callback id(getCallbackId()) ties up with the 
+				//call backs in the local callback list
+				//pass the callback function to the button, based on 
+				//the call back number you get from the button
+                button->setCallback(callbacks[button->getCallbackID()]);
             }
         }
     }
 }
+// Callbacks
+void MainMenuState::menutopplay()
+{
+	//change to playstate
+	TheGame::Instance()->getstatemachine()->changeState(new PlayState());
+}
+
+void MainMenuState::exitfromMenu()
+{
+	TheGame::Instance()->quit();
+}
+
+// end callbacks
+
 
