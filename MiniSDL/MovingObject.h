@@ -11,8 +11,10 @@ public:
 	virtual ~MovingObject();
 	virtual void draw();
 	virtual void update();
+	//Getters
 	virtual std::string type() { return textureid; }
 	virtual Vector2D Getposition(){ return Vector2D(position.getX(), position.getY()); };
+	//setters
 	virtual void collision();
 
 protected:

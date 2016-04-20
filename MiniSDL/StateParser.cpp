@@ -2,101 +2,44 @@
 #include "StateParser.h"
 #include "TextureManager.h"
 #include "Game.h"
-#include "GameObjectFactory.h"
+//#include "ObjectFactory.h"
 
 using namespace std;
 
-bool StateParser::parseState(const char *stateFile, string stateID, vector<GameObject *> *pObjects, std::vector<std::string> *pTextureIDs)
+bool StateParser::parseState(string stateID, vector<GameObject *> *gameobjects, std::vector<std::string> *textureids)
 {
-    // create the XML document
-    TiXmlDocument xmlDoc;
-
-    // load the state file
-    if(!xmlDoc.LoadFile(stateFile))
-    {
-        cerr << xmlDoc.ErrorDesc() << "\n";
-        return false;
-    }
-
-    // get the root element
-    TiXmlElement* pRoot = xmlDoc.RootElement();
-    /**Process to find the passed in StateID. Pre declare the states root node*/
-    TiXmlElement* pStateRoot = 0;
-    /** get this states root node and assing it to pStateRoot */
-    for(TiXmlElement* e = pRoot->FirstChildElement(); e != NULL; e = e->NextSiblingElement())
-    {
-        if(e->Value() == stateID)
-        {
-            pStateRoot = e;
-			break;//Found it break
-        }
-    }
-
-    // pre declare the texture root
-    TiXmlElement* pTextureRoot = 0;
-    // get the root of the texture elements
-    for(TiXmlElement* e = pStateRoot->FirstChildElement(); e != NULL; e = e->NextSiblingElement())
-    {
-        if(e->Value() == string("TEXTURES"))
-        {
-            pTextureRoot = e;
-			break;
-        }
-    }
     /** now parse the textures and fill the pTextureIDs vector */
-    parseTextures(pTextureRoot, pTextureIDs);
-
-
-    // pre declare the object root node
-    TiXmlElement* pObjectRoot = 0;
-    // get the root node and assign it to pObjectRoot
-    for(TiXmlElement* e = pStateRoot->FirstChildElement(); e != NULL; e = e->NextSiblingElement())
-    {
-        if(e->Value() == string("OBJECTS"))
-        {
-            pObjectRoot = e;
-			break;
-        }
-    }
-    // now parse the objects
-    parseObjects(pObjectRoot, pObjects);
+    parseTextures(textureids);
+    parseObjects(gameobjects);
 
     return true;
 }
 /**Helper function to get the texture filename and id's and load them into TextureManager*/
-void StateParser::parseTextures(TiXmlElement* pStateRoot, std::vector<std::string> *pTextureIDs)
+void StateParser::parseTextures(std::vector<std::string> *textureids)
 {
-    // for each texture we get the filename and the desired ID and add them to the texture manager
-    for(TiXmlElement* e = pStateRoot->FirstChildElement(); e != NULL; e = e->NextSiblingElement())
-    {
-        string filenameAttribute = e->Attribute("filename");
-        string idAttribute = e->Attribute("ID");
+        string filenameattribute = "Content/Menu/button.png";
+        string idattribute = "playbutton";
+		//add the id to the list so that it can be retrieved
+		textureids->push_back(idattribute); // push the id into the list
+        TheTextureManager::Instance()->load(filenameattribute, idattribute, TheGame::Instance()->getdrawer());
 
-        pTextureIDs->push_back(idAttribute); // push the id into the list
-
-        TheTextureManager::Instance()->load(filenameAttribute, idAttribute, TheGame::Instance()->getRenderer());
+		filenameattribute = "Content/Menu/exit.png";
+		idattribute = "exitbutton";
+		//add the id to the list so that it can be retrieved
+		textureids->push_back(idattribute); // push the id into the list
+		TheTextureManager::Instance()->load(filenameattribute, idattribute, TheGame::Instance()->getdrawer());
     }
 }
 
-void StateParser::parseObjects(TiXmlElement *pStateRoot, std::vector<GameObject *> *pObjects)
+void StateParser::parseObjects(std::vector<GameObject *> *gameobjects)
 {
-    for(TiXmlElement* e = pStateRoot->FirstChildElement(); e != NULL; e = e->NextSiblingElement())
-    {
+
         int x, y, width, height, numFrames, callbackID, animSpeed;
         string textureID;
+		//gameobjects->load(std::unique_ptr<LoaderParams>(new LoaderParams(x, y, width, height, textureID, numFrames, callbackID, animSpeed)));
 
-        e->Attribute("x", &x);
-        e->Attribute("y", &y);
-        e->Attribute("width",&width);
-        e->Attribute("height", &height);
-        e->Attribute("numFrames", &numFrames);
-        e->Attribute("callbackID", &callbackID);
-        e->Attribute("animSpeed", &animSpeed);
-
-        textureID = e->Attribute("textureID");
-        //int x, int y, int width, int height, std::string textureID, int numFrames, void()
-        GameObject* pGameObject = TheGameObjectFactory::Instance()->create(e->Attribute("type"));
-        pGameObject->load(std::unique_ptr<LoaderParams>(new LoaderParams(x, y, width, height, textureID, numFrames, callbackID, animSpeed)));
-        pObjects->push_back(pGameObject);
+		//int x, int y, int width, int height, std::string textureID, int numFrames, animationspeed if needed
+		gameobjects->push_back(new MenuButton(20, 20, 400, 100, "playbutton", 0, 1));
+		gameobjects->push_back(new MenuButton(140, 140, 400, 100, "exitbutton", 0, 2));
     }
 }

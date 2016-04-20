@@ -9,15 +9,15 @@
 #include <assert.h>
 
 
-const std::string MainMenuState::s_menuID = "MENU";
+const std::string MainMenuState::menuid = "MENU";
 
 // Callbacks
-void MainMenuState::s_menuToPlay()
+void MainMenuState::menutopPlay()
 {
     TheGame::Instance()->getStateMachine()->changeState(new PlayState());
 }
 
-void MainMenuState::s_exitFromMenu()
+void MainMenuState::exitfromMenu()
 {
     TheGame::Instance()->quit();
 }
@@ -44,9 +44,9 @@ void MainMenuState::update()
 
 void MainMenuState::draw()
 {
-    if(boolloadingcomplete && !m_gameObjects.empty())
+    if(boolloadingcomplete && !gameobjects.empty())
     {
-        for(int i = 0; i < m_gameObjects.size(); i++)
+        for(int i = 0; i < gameobjects.size(); i++)
         {
             m_gameObjects[i]->draw();
         }
@@ -57,11 +57,13 @@ bool MainMenuState::onEnter()
 {
     // parse the state
     StateParser stateParser;
-    stateParser.parseState("assets/attack.xml", s_menuID, &m_gameObjects, &m_textureIDList);
-
+	//Im not going to use state parser with TinyXml
+	//Ill just load the buttons etc. manually
+    //stateParser.parseState("assets/attack.xml", s_menuID, &m_gameObjects, &m_textureIDList);
+	stateParser.parseState(menuid, &gameobjects, &textureidlist);
     m_callbacks.push_back(0);
-    m_callbacks.push_back(s_menuToPlay);
-    m_callbacks.push_back(s_exitFromMenu);
+    m_callbacks.push_back(menutopPlay);
+    m_callbacks.push_back(exitfromMenu);
 
     // set the callbacks for menu items
     setCallbacks(m_callbacks);
@@ -76,13 +78,13 @@ bool MainMenuState::onExit()
 	boolexiting = true;
 
     // clean the game objects
-    if(boolloadingcomplete && !m_gameObjects.empty())
+    if(boolloadingcomplete && !gameobjects.empty())
     {
-		m_gameObjects.back()->clean();
-		m_gameObjects.pop_back();
+		gameobjects.back()->clean();
+		gameobjects.pop_back();
     }
 
-	m_gameObjects.clear();
+	gameobjects.clear();
 
 
     /* clear the texture manager
@@ -102,14 +104,14 @@ bool MainMenuState::onExit()
 void MainMenuState::setCallbacks(const std::vector<Callback>& callbacks)
 {
     // go through the game objects
-    if(!m_gameObjects.empty())
+    if(!gameobjects.empty())
     {
-        for(int i = 0; i < m_gameObjects.size(); i++)
+        for(int i = 0; i < gameobjects.size(); i++)
         {
             // if they are of type MenuButton then assign a callback based on the id passed in from the file
-            if(dynamic_cast<MenuButton*>(m_gameObjects[i]))
+            if(dynamic_cast<MenuButton*>(gameobjects[i]))
             {
-                MenuButton* pButton = dynamic_cast<MenuButton*>(m_gameObjects[i]);
+                MenuButton* pButton = dynamic_cast<MenuButton*>(gameobjects[i]);
                 pButton->setCallback(callbacks[pButton->getCallbackID()]);
             }
         }

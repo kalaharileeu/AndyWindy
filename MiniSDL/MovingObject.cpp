@@ -4,6 +4,7 @@ Because I'm not using dependence injection here, I have to pass the
 parameter in through the constructor when I initaize the class
 This moving object is bound to the windows frame dimensions can not move
 out of it
+Dependency injection can be achived with the LoaderParameter class, or some parameter class 
 */
 MovingObject::MovingObject(int ms, Vector2D pos, int w, int h, std::string id, int nf) : GameObject()
 {    // get position
@@ -55,7 +56,7 @@ void MovingObject::update()
 	position += velocity;
 	currentframe = int(((SDL_GetTicks() / (1000 / 3)) % numframes));
 }
-
+//Setter: Set collision to true
 void MovingObject::collision()
 {
 	boolcollision = true;

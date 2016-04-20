@@ -55,7 +55,7 @@ void StateMachine::changeState(GameState *state)
 	if (!gamestate.empty())
 	{
 		//vector::back returns ref to the last element in vector
-		//
+		//If the state id is the same, do nothing
 		if (gamestate.back()->getStateID() == state->getStateID())
 		{
 			return; // do nothing

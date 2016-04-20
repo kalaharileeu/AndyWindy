@@ -34,7 +34,6 @@ public:
 	//virtual void clean() = 0;
 	// object has collided, handle accordingly
 	virtual void collision() = 0;
-	//virtual void bounce(Vector2D v) = 0;
 	// get the type of the object
 	virtual std::string type() = 0;
 	//*********getters/setters**********
