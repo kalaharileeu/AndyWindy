@@ -33,6 +33,7 @@ public:
 	//maindrawer and mainwindow are pointers and this will return them as pointers
 	SDL_Renderer* getdrawer() const { return maindrawer; }
 	SDL_Window* getWindow() const { return mainwindow; }
+	StateMachine* getstatemachine() { return statemachine; }
 	int getGameWidth() const { return gamewidth; }
 	int getGameHeight() const { return gameheight; }
 	//**********bool modifiers********

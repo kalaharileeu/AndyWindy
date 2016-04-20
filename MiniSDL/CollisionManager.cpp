@@ -59,7 +59,8 @@ void CollisionManager::checkWrapperWrappedCollision(const std::vector<GameObject
 	delete rectshield;
 	delete rectsintruder;
 }
-
+//Check for for general collision between all the game objects
+//TODO: improve, looks long and painfull
 void CollisionManager::checkgeneralcollision(const std::vector<GameObject*> &objects)
 {
 	GameObject* pointerobjectshield2;

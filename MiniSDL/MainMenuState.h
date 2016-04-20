@@ -7,7 +7,7 @@
 class MainMenuState : public MenuState
 {
     public:
-        virtual ~MainMenuState() {}
+		virtual ~MainMenuState() {};
         virtual void update();
         virtual void draw();
         virtual bool onEnter();//Enter state
@@ -21,7 +21,7 @@ class MainMenuState : public MenuState
         std::vector<GameObject*> gameobjects;//vector of GameObject* to store our menu items:
 // call back functions for menu items
 //functions as static; this is because our callback function pointers will only support static functions
-        static void menutopPlay();
+        static void menutopplay();
         static void exitfromMenu();
 };
 #endif // MAINMENUSTATE_H

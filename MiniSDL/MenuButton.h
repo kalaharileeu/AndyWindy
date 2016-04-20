@@ -21,7 +21,6 @@ public:
     int getCallbackID() { return callbackid; }
 
 private:
-
     enum button_state
     {
         MOUSE_OUT = 0,

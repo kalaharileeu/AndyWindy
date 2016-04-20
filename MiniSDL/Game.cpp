@@ -79,15 +79,14 @@ bool Game::init(const char * title, int xpos, int ypos, bool fullscreen)
 		std::cout << "window init failed\n";
 		return false;
 	}
-
 	//load some sound effect here
 	//register some GameObjsect here
-	// start the menu state
-	statemachine = new StateMachine();
 	/*change the state tells statemachine a new state is coming
 	statemachine will call on enter for that state*/
 	//Can start immediately with new Playstate(), I want to start with menustate
 	//statemachine->changeState(new PlayState());
+	// start the menu state
+	statemachine = new StateMachine();
 	statemachine->changeState(new MainMenuState());
 
 	boolrunning = true;
@@ -119,7 +118,7 @@ void Game::clean()
 {
 	std::cout << "cleaning game\n";
 	TheInputHandler::Instance()->clean();
-	statemachine->clean();
+	statemachine->clean();//Does nothing at this stage
 	statemachine = 0;
 	//delete m_pStateMachine;
 	TextureManager::Instance()->clearTextureMap();

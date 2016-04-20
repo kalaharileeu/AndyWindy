@@ -1,20 +1,18 @@
 #include <iostream>
 #include "MainMenuState.h"
-#include "TextureManager.h"
 #include "Game.h"
 #include "MenuButton.h"
 #include "PlayState.h"
 #include "InputHandler.h"
 #include "StateParser.h"
-#include <assert.h>
-
 
 const std::string MainMenuState::menuid = "MENU";
 
 // Callbacks
-void MainMenuState::menutopPlay()
+void MainMenuState::menutopplay()
 {
-    TheGame::Instance()->getStateMachine()->changeState(new PlayState());
+	//change to playstate
+    TheGame::Instance()->getstatemachine()->changeState(new PlayState());
 }
 
 void MainMenuState::exitfromMenu()
@@ -28,17 +26,17 @@ void MainMenuState::update()
 {
 	if(TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_SPACE))
 	{
-		s_menuToPlay();
+		menutopplay();
 	}
-    if(!m_gameObjects.empty())
+    if(!gameobjects.empty())
     {
-			for(int i = 0; i < m_gameObjects.size(); i++)
+		for(int i = 0; i < gameobjects.size(); i++)
+		{
+			if(gameobjects[i] != 0)
 			{
-				if(m_gameObjects[i] != 0)
-				{
-					m_gameObjects[i]->update();
-				}
+				gameobjects[i]->update();
 			}
+		}
     }
 }
 
@@ -48,7 +46,7 @@ void MainMenuState::draw()
     {
         for(int i = 0; i < gameobjects.size(); i++)
         {
-            m_gameObjects[i]->draw();
+			gameobjects[i]->draw();
         }
     }
 }
@@ -62,12 +60,10 @@ bool MainMenuState::onEnter()
     //stateParser.parseState("assets/attack.xml", s_menuID, &m_gameObjects, &m_textureIDList);
 	stateParser.parseState(menuid, &gameobjects, &textureidlist);
     m_callbacks.push_back(0);
-    m_callbacks.push_back(menutopPlay);
+    m_callbacks.push_back(menutopplay);
     m_callbacks.push_back(exitfromMenu);
-
     // set the callbacks for menu items
     setCallbacks(m_callbacks);
-
 	boolloadingcomplete = true;
     std::cout << "entering MenuState\n";
     return true;
@@ -80,19 +76,15 @@ bool MainMenuState::onExit()
     // clean the game objects
     if(boolloadingcomplete && !gameobjects.empty())
     {
-		gameobjects.back()->clean();
-		gameobjects.pop_back();
+		//delete all the game objects
+		for (std::vector<GameObject*>::iterator it = gameobjects.begin(); it != gameobjects.end(); ++it)
+		{
+			delete (*it);
+		}
+		gameobjects.clear();
+		////gameobjects.back()->clean();
+		//gameobjects.pop_back();
     }
-
-	gameobjects.clear();
-
-
-    /* clear the texture manager
-    for(int i = 0; i < m_textureIDList.size(); i++)
-    {
-        TheTextureManager::Instance()->clearFromTextureMap(m_textureIDList[i]);
-    }
-	*/
 
     // reset the input handler
     TheInputHandler::Instance()->reset();

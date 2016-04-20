@@ -80,10 +80,17 @@ void TextureManager::drawTile(std::string id, int margin, int spacing, int x, in
 
 void TextureManager::clearTextureMap()
 {
-	texturemap.clear();
+	for (std::map<std::string, SDL_Texture*>::iterator it = texturemap.begin();
+	it != texturemap.end(); ++it)
+	{
+		delete it->second;
+		texturemap.erase(it);
+	}
 }
 
 void TextureManager::clearFromTextureMap(std::string id)
 {
+	//this is probably not good enough to delete the pointer
+	//not using at this stage
 	texturemap.erase(id);
 }
