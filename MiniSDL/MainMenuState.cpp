@@ -40,7 +40,8 @@ void MainMenuState::draw()
 
 bool MainMenuState::onEnter()
 {
-    // parse the state
+    //The state parser for mainmenustate loads all the texture/objects for mainmenustate
+	//loads the texture file links and the texture ids.
     StateParser stateParser;
 	//Im not going to use state parser with TinyXml
 	//Ill just load the buttons etc. manually

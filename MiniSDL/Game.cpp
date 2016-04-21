@@ -26,8 +26,6 @@ bool Game::init(const char * title, int xpos, int ypos, bool fullscreen)
 {
 	int flags = 0;
 	////store the game width and height
-	//gamewidth = GeneralParameters::Instance()->Getxaxmax();
-	//gameheight = GeneralParameters::Instance()->Getyaxmax();
 	//Screen dimensions
 	SDL_Rect gScreenRect = { 0, 0, 320, 240 };
 	////Get device display mode

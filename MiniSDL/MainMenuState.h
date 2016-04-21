@@ -15,7 +15,6 @@ class MainMenuState : public MenuState
         virtual std::string getStateID() const { return menuid; }//What state is it?
     private:
         virtual void setCallbacks(const std::vector<Callback>&callbacks);
-
         static const std::string menuid;
 		//vector of GameObject* to store our menu items:
         std::vector<GameObject*> gameobjects;//vector of GameObject* to store our menu items:

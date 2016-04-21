@@ -1,6 +1,10 @@
-/**< StateParser is used by MainMenuState, GameState and PasueState create their Texture objects
--StateParser uses TiXMl to move throught the xml file. To find buttons etc.
- */
+/**< StateParser is used by MainMenuState, GameState and PasueState create their
+Texture objects
+-StateParser uses TiXMl to move throught the xml file. To find buttons etc. (not using)
+
+The state parser for mainmenustate loads all the texture/objects for mainmenustate
+loads the texture file links and the texture ids.
+*/
 //Im not using xml here just load the parameters manually, hard coded
 #ifndef STATEPARSER_H
 #define STATEPARSER_H

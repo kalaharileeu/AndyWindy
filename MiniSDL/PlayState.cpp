@@ -100,6 +100,16 @@ bool PlayState::onEnter()
 //Clear bullets here from BulletHandler and reset Inputhandler
 bool PlayState::onExit()
 {
+	// clean the game objects
+	if (!playobjects.empty())
+	{
+		//delete all the game objects
+		for (std::vector<GameObject*>::iterator it = playobjects.begin(); it != playobjects.end(); ++it)
+		{
+			delete (*it);
+		}
+		playobjects.clear();
+	}
 	boolexiting = true;
 	std::cout << "exiting PlayState\n";
 	return true;
