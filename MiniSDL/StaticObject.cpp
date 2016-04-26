@@ -27,9 +27,13 @@ void StaticObject::update()
 	//GP is the gameparameters
 	//Static/Stationary object no movement to update
 }
-//Setter: sets collsion to false
+
 void StaticObject::collision()
 {
+}
+//Setter: sets collsion to false
+void StaticObject::Setcollisiontrue()
+{
 	//Static/stationary object cannot collide
-	boolcollision = false;
+	boolcollision = true;
 }

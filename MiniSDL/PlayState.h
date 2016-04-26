@@ -3,6 +3,7 @@
 #pragma once
 #include "GameState.h"
 #include "CollisionManager.h"
+#include "Texter.h"
 
 class GameObject;
 class SDLGameObject;
@@ -25,5 +26,7 @@ private:
 	static const std::string playid;
 	std::vector<GameObject*> playobjects;
 	CollisionManager CM;
+	Texter texterwriter;
+	bool textdonebool = false;
 };
 

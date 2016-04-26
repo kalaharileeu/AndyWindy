@@ -9,6 +9,7 @@ Features of the texture manager:
 #include <string>
 #include <map>
 #include "SDL.h"
+#include "Vector2D.h"
 
 class TextureManager
 {
@@ -31,10 +32,15 @@ public:
 	void clearFromTextureMap(std::string id);
 
 	void draw(std::string id, int x, int y, int width, int height, SDL_Renderer* pRenderer, SDL_RendererFlip flip = SDL_FLIP_NONE);
-	void drawFrame(std::string id, int x, int y, int width, int height, int currentRow, int currentFrame, SDL_Renderer* pRenderer, double angle, int alpha, SDL_RendererFlip flip = SDL_FLIP_NONE);
-	void drawTile(std::string id, int margin, int spacing, int x, int y, int width, int height, int currentRow, int currentFrame, SDL_Renderer *pRenderer);
-
+	void drawFrame(std::string id, int x, int y, int width, int height, int currentRow, int currentFrame,
+		SDL_Renderer* pRenderer, double angle, int alpha, SDL_RendererFlip flip = SDL_FLIP_NONE);
+	void drawTile(std::string id, int margin, int spacing, int x, int y,
+		int width, int height, int currentRow, int currentFrame, SDL_Renderer *pRenderer);
+	Vector2D GetTextureDimensions(std::string id);
+	//int GetTextureWidth(std::string id) const;
 	std::map<std::string, SDL_Texture*> getTextureMap() { return texturemap; }
+
+
 
 private:
 
@@ -43,7 +49,6 @@ private:
 
 	TextureManager(const TextureManager&);
 	//TextureManager& operator=(const TextureManager&);
-
 	std::map<std::string, SDL_Texture*> texturemap;
 
 	static TextureManager* instance;

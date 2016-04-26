@@ -8,8 +8,8 @@ bool TextureManager::load(std::string fileName, std::string id, SDL_Renderer* pR
 {
 
 	SDL_Surface* tempsurface = IMG_Load(fileName.c_str());
-	//Checks
-	if (tempsurface == 0)
+	//Checks. change 0 to nullptr
+	if (tempsurface == nullptr)
 	{
 		std::cout << IMG_GetError();
 		return false;
@@ -17,8 +17,8 @@ bool TextureManager::load(std::string fileName, std::string id, SDL_Renderer* pR
 	//Create a texture from temporary surface
 	SDL_Texture* sdltexture = SDL_CreateTextureFromSurface(pRenderer, tempsurface);
 	SDL_FreeSurface(tempsurface);
-
-	if (sdltexture != 0)
+	//Change 0 to nullptr
+	if (sdltexture != nullptr)
 	{
 		texturemap[id] = sdltexture;
 		return true;
@@ -76,6 +76,23 @@ void TextureManager::drawTile(std::string id, int margin, int spacing, int x, in
 	destRect.y = y;
 
 	SDL_RenderCopyEx(pRenderer, texturemap[id], &srcRect, &destRect, 0, 0, SDL_FLIP_NONE);
+}
+//find the texture dinesions and returns them in a Vector2D
+Vector2D TextureManager::GetTextureDimensions(std::string id)
+{
+	Vector2D dimensions(0, 0);
+	if(texturemap.find(id) != texturemap.end())
+	{
+		int w, h = 0;
+		SDL_QueryTexture(texturemap[id], NULL, NULL, &w, &h);//Query
+		dimensions.setX(w);
+		dimensions.setY(h);
+	}
+	else
+	{
+		std::cout << "texture not found in the map" << std::endl;
+	}
+	return dimensions;
 }
 
 

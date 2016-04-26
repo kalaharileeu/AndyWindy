@@ -27,25 +27,27 @@ bool Game::init(const char * title, int xpos, int ypos, bool fullscreen)
 	int flags = 0;
 	////store the game width and height
 	//Screen dimensions
-	SDL_Rect gScreenRect = { 0, 0, 320, 240 };
+	SDL_Rect gScreenRect = { 0, 0, 1280, 720 };
 	////Get device display mode
 	SDL_DisplayMode displayMode;
 	//Doe not have to be sdl_init_everything can just be sdl_init_video or audio or timer
 	if (SDL_Init(SDL_INIT_EVERYTHING) == 0)
 	{
-		//all this have to be done after SDL_INIT
-		std::cout << "SDL inti success";
 		//init the window
 		if (SDL_GetCurrentDisplayMode(0, &displayMode) == 0)
 		{
+#if defined( ANDROID )
 			gScreenRect.w = displayMode.w;
 			gScreenRect.h = displayMode.h;
+#endif
 		}
 		else
 		{
 			std::cout << "Error getting the display mode - " << SDL_GetError() << "\n";
 			SDL_Log("Error getting the display mode: %s\n", SDL_GetError());
 		}
+
+
 		gamewidth = gScreenRect.w;
 		gameheight = gScreenRect.h;
 
@@ -86,7 +88,7 @@ bool Game::init(const char * title, int xpos, int ypos, bool fullscreen)
 	// start the menu state
 	statemachine = new StateMachine();
 	statemachine->changeState(new MainMenuState());
-
+	//statemachine->changeState(new PlayState());
 	boolrunning = true;
 	return true;
 }
@@ -123,5 +125,8 @@ void Game::clean()
 	//Close and destroy window
 	SDL_DestroyWindow(mainwindow);
 	SDL_DestroyRenderer(maindrawer);
+	//TTF_Quit();
+	//IMG_Quit();
 	SDL_Quit();
+
 }

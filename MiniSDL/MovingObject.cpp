@@ -56,7 +56,8 @@ void MovingObject::update()
 	position += velocity;
 	currentframe = int(((SDL_GetTicks() / (1000 / 3)) % numframes));
 }
-//Setter: Set collision to true
+//Setter: When calles Set collision to true
+//TODO: function name is not good enough
 void MovingObject::collision()
 {
 	boolcollision = true;

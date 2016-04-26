@@ -10,11 +10,13 @@ public:
 	~StaticObject();
 	virtual void draw();
 	virtual void update();
-	//Getters
+	virtual void collision();
 	virtual std::string type() { return textureid; }
 	virtual Vector2D Getposition() { return Vector2D(position.getX(), position.getY()); };
 	//Setter
-	virtual void collision();
+	virtual void Setcollisiontrue();
+	//Get
+	std::string Gettextureid() { return textureid; }
 
 protected:
 	/*constructor is protected so that it can be accessed

@@ -55,7 +55,6 @@ bool MainMenuState::onEnter()
     // set the callbacks for menu items
     setCallbacks(m_callbacks);
 	boolloadingcomplete = true;
-    std::cout << "entering MenuState\n";
     return true;
 }
 
@@ -104,18 +103,17 @@ void MainMenuState::setCallbacks(const std::vector<Callback>& callbacks)
         }
     }
 }
-// Callbacks
+// Callbacks linked to buttons
 void MainMenuState::menutopplay()
 {
 	//change to playstate
 	TheGame::Instance()->getstatemachine()->changeState(new PlayState());
 }
-
+//callbacks linked to buttons
 void MainMenuState::exitfromMenu()
 {
 	TheGame::Instance()->quit();
 }
-
 // end callbacks
 
 
