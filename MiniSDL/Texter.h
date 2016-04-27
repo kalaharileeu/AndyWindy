@@ -45,10 +45,7 @@ public:
 		}
 	}
 
-	~Texter()
-	{
-
-	}
+	~Texter(){}
 
 	void clear()
 	{

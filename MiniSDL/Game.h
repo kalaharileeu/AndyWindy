@@ -39,6 +39,10 @@ public:
 	//**********bool modifiers********
 	bool running() { return boolrunning; }
 	void quit() { boolrunning = false; }
+	//***check to see is a draw is needed***
+	//No continuous movement so no constant draw need
+	void Setredrawbool(bool boolvalue) { redraw = boolvalue; }
+	bool Getredrawbool() { return redraw; }
 
 private:
 	Game();
@@ -51,6 +55,7 @@ private:
 	int gameheight;//window width
 	//Bool values down here
 	bool boolrunning;
+	bool redraw;
 	//Stores the level file names ex "Content/map1.tmx"
 	std::vector<std::string> levelfiles;
 };

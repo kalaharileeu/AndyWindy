@@ -18,7 +18,7 @@ void MenuButton::draw()
 {
 	StaticObject::draw();
 }
-
+//The update event can cause a redraw
 void MenuButton::update()
 {
     Vector2D* pMousePos = TheInputHandler::Instance()->getMousePosition();
@@ -28,6 +28,7 @@ void MenuButton::update()
     {
         if(TheInputHandler::Instance()->getMouseButtonState(LEFT) && released)
         {
+			//CLICKED is button state 2 see header file
 			currentframe = CLICKED;
 
             if(m_callback != 0)
@@ -42,6 +43,8 @@ void MenuButton::update()
 			released = true;
             currentframe = MOUSE_OVER;
         }
+		//Set Game to redraw the update
+		TheGame::Instance()->Setredrawbool(true);
     }
     else
     {

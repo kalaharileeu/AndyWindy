@@ -28,6 +28,7 @@ int main(int argc, char* argv[])
 	if (TheGame::Instance()->init("WrapperIntruder", 100, 100, false))
 	{
 		std::cout << "game init success!\n";
+		//Move draw out of the main loop and just use redraw
 		while (TheGame::Instance()->running())
 		{
 			//SDL_GetTicks which returns the amount of milliseconds since we called SDL_Init
@@ -35,8 +36,11 @@ int main(int argc, char* argv[])
 
 			TheGame::Instance()->handleevents();
 			TheGame::Instance()->update();
-			TheGame::Instance()->draw();
-
+			if (TheGame::Instance()->Getredrawbool())
+			{
+				TheGame::Instance()->draw();
+				TheGame::Instance()->Setredrawbool(false);
+			}
 			frameTime = SDL_GetTicks() - frameStart;//game loop finnished and calculate how long it took to run
 			//If less than the time we want a frame to take, we call SDL_Delay
 			if (frameTime < DELAY_TIME)

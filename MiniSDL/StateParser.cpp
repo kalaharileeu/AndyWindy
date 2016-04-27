@@ -34,7 +34,7 @@ void StateParser::parseTextures(std::vector<std::string> *textureids)
 		textureids->push_back(idattribute); // push the id into the list
 		TheTextureManager::Instance()->load(filenameattribute, idattribute, TheGame::Instance()->getdrawer());
 }
-
+//load the button objects in to vector
 void StateParser::parseObjects(std::vector<GameObject *> *gameobjects)
 {
     //int x, y, width, height, numFrames, callbackID, animSpeed;

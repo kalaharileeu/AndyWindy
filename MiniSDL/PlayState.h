@@ -27,6 +27,6 @@ private:
 	std::vector<GameObject*> playobjects;
 	CollisionManager CM;
 	Texter texterwriter;
-	bool textdonebool = false;
+	bool textdonebool;
 };
 

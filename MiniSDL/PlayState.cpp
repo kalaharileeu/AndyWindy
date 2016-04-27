@@ -24,7 +24,7 @@ PlayState::~PlayState()
 		playobjects.clear();
 	}
 	//CM = CollisionManager();
-}//delete the level pointer
+}
 /*
 Bullet handler should be updated here, check for escape key,
 check if player lives are enough to continue
@@ -39,17 +39,22 @@ void PlayState::update()
 		//while front() return a reference
 		if (playobjects.empty() == false)
 		{
+			//call update on the first object in the list
+			//to set of check for touch or click
 			playobjects.front()->update();
 			if (dynamic_cast<Number*>(playobjects.front())->Getiftouchedbool())
 			{
 				//Set the number pointer to NULL, //an wrap it here, the set to Nullptr
 				playobjects.front() = nullptr;
 				playobjects.erase(playobjects.begin());
+				//Update a redraw here
+				TheGame::Instance()->Setredrawbool(true);
 			}
 		}
 		else
 		{
 			//if the playobject are empty, return to menu state
+			TheGame::Instance()->Setredrawbool(true);
 			TheGame::Instance()->getstatemachine()->changeState(new MainMenuState());
 		}
 	}
@@ -57,6 +62,8 @@ void PlayState::update()
 
 void PlayState::draw()
 {
+	//textdonebool is true once the draw is complete, do not have to continuously draw
+	//nothing is moving at this stage
 	if (boolloadingcomplete)
 	{
 		//TheTextureManager::Instance()->draw("intruder", 60, 0, 38, 36, TheGame::Instance()->getdrawer(), SDL_FLIP_NONE);//test draw
@@ -69,22 +76,26 @@ void PlayState::draw()
 				playobjects[i]->draw();
 			}
 		}
-		if (textdonebool == false)
+		//Write some text with texter
+		if (!textdonebool)
 		{
+			//This should only called once
 			texterwriter = Texter(TheGame::Instance()->getdrawer());
-			textdonebool == true;
+			textdonebool = true;
 		}
+
 	}
 }
 //On enter prepare some variables for the level
 //player lives, load content get the level filesetc.
+//This is called by Statemaschine
 bool PlayState::onEnter()
 {
 	//Get the text ready, TTF_Font
 	//texterwriter = Texter(TheGame::Instance()->getdrawer());
-
 	std::vector<int> positions;
-	std::vector<std::string> counttextures = { "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten" };
+	std::string strArr[] = { "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten" };
+	std::vector<std::string> counttextures = { strArr, strArr + 10 };//intialize the vector with the array values
 	//Manualy load some content here like level etc.
 	//Register the image with the TextureManager
 	TextureManager::Instance()->load("Content/one.png","one", TheGame::Instance()->getdrawer());//load intruder
@@ -112,7 +123,7 @@ bool PlayState::onEnter()
 		playobjects.push_back(new Number(1, Vector2D(startpoint + 
 			((imagewidth + 10) * i), centerheight), imagewidth, imagewidth, counttextures[i], 1));
 	}
-
+	textdonebool = false;
 	boolloadingcomplete = true;
 	return true;
 }
@@ -122,6 +133,7 @@ bool PlayState::onExit()
 	//Below is the  class handling the text
 	texterwriter.clear();
 	textdonebool = false;//This si clearing say please write text
+	boolloadingcomplete = false;
 	// clean the game objects
 	if (!playobjects.empty())
 	{

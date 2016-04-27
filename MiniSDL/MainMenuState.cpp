@@ -11,10 +11,10 @@ const std::string MainMenuState::menuid = "MENU";
 void MainMenuState::update()
 {
 	//TODO:Remove this the space bar should not take you to play screen
-	if(TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_SPACE))
-	{
-		menutopplay();
-	}
+	//if(TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_SPACE))
+	//{
+	//	menutopplay();
+	//}
     if(!gameobjects.empty())
     {
 		for(int i = 0; i < gameobjects.size(); i++)
@@ -37,7 +37,7 @@ void MainMenuState::draw()
         }
     }
 }
-
+//on enter call the state parser to load the object/buttons
 bool MainMenuState::onEnter()
 {
     //The state parser for mainmenustate loads all the texture/objects for mainmenustate
@@ -61,7 +61,6 @@ bool MainMenuState::onEnter()
 bool MainMenuState::onExit()
 {
 	boolexiting = true;
-
     // clean the game objects
     if(boolloadingcomplete && !gameobjects.empty())
     {

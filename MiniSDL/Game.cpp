@@ -7,6 +7,7 @@ Game* Game::instance = 0;
 Game::Game() : mainwindow(0), maindrawer(0),
 	boolrunning(false),	statemachine(0)
 {
+	redraw = true;
 	// add some level files to an array
 	//levelfiles.push_back("Content/map1.tmx");
 	//m_levelFiles.push_back("assets/map2.tmx");
@@ -46,7 +47,6 @@ bool Game::init(const char * title, int xpos, int ypos, bool fullscreen)
 			std::cout << "Error getting the display mode - " << SDL_GetError() << "\n";
 			SDL_Log("Error getting the display mode: %s\n", SDL_GetError());
 		}
-
 
 		gamewidth = gScreenRect.w;
 		gameheight = gScreenRect.h;

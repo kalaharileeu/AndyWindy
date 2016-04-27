@@ -40,8 +40,6 @@ public:
 	//int GetTextureWidth(std::string id) const;
 	std::map<std::string, SDL_Texture*> getTextureMap() { return texturemap; }
 
-
-
 private:
 
 	TextureManager() {}
