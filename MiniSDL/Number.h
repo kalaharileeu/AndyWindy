@@ -24,10 +24,12 @@ public:
 		{
 			handlemouseinput();
 		}
-
 	}
 
-	void draw()	{ StaticObject::draw();	}
+	void draw()
+	{ 
+		StaticObject::draw();	
+	}
 
 	std::string type() {	return "Number"; }
 	//return the position of the object.(Some object feedback)
@@ -61,8 +63,7 @@ private:
 
 	void handletouchinput()
 	{
-		SDL_Log("Touched android !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-		//when toudhed just set the touched bool
+		//when touched just set the touched bool
 		//if it is a moving object, can cahnge the position for ex.
 		int touchX = InputHandler::Instance()->Gettouchposition()->getX();
 		int touchy = InputHandler::Instance()->Gettouchposition()->getY();
@@ -70,7 +71,6 @@ private:
 		if ((touchX > position.getX() && touchX < position.getX() + width) &&
 			(touchy > position.getY() && touchy < position.getY() + height))
 		{
-			SDL_Log("BAM !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 			touched = true;
 		}
 	}

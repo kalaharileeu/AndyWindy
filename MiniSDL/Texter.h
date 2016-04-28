@@ -7,70 +7,98 @@
 class Texter
 {
 public:
-	Texter() {}
-	Texter(SDL_Renderer* Drawer)
+	Texter() 
+	{
+
+	}
+	~Texter() {}
+
+	bool load(std::string text, std::string id, SDL_Renderer* drawer)
 	{
 		int v = TTF_Init();
-		if (v == -1) 
+		if (v == -1)
 		{
 			printf("TTF_Init: %s\n", TTF_GetError());
+			return false;
 		}
 		else
 		{
 			//this opens a font style and sets a size
-			TTF_Font* Sans = TTF_OpenFont("Content/Sans.ttf", 72);
+			Sans = TTF_OpenFont("Content/Sans.ttf", 72);
 			if (Sans == nullptr)
 			{
 				std::cout << "TTF_font issue - " << SDL_GetError() << "\n";
 			}
-			Message_rect.x = 0;  //controls the rect's x coordinate 
-			Message_rect.y = 0; // controls the rect's y coordinte
-			Message_rect.w = 1000; // controls the width of the rect
-			Message_rect.h = 100; // controls the height of the rect
-			SDL_Surface* tempsurface = nullptr;
-			// as TTF_RenderText_Solid could only be used on SDL_Surface then you have to create the surface first
-			tempsurface = TTF_RenderText_Solid(Sans, "put your text here !!!!!!!!!!!", Black);
+			SDL_Surface* tempsurface = TTF_RenderText_Solid(Sans, text.c_str(), Black);
+			//Checks. change 0 to nullptr
 			if (tempsurface == nullptr)
 			{
-				std::cout << "Error TTF_rendtext issue - " << SDL_GetError() << "\n";
+				std::cout << TTF_GetError();
+				return false;
 			}
-			//now you can convert it into a texture
-			SDL_Texture* message = SDL_CreateTextureFromSurface(Drawer, tempsurface);
+			//Create a texture from temporary surface
+			SDL_Texture* sdltexture = SDL_CreateTextureFromSurface(drawer, tempsurface);
 			//free he surface
 			SDL_FreeSurface(tempsurface);
 			tempsurface = nullptr;
-			//Do the business render
-			SDL_RenderCopy(Drawer, message, NULL, &Message_rect);
-			//DrawText(Drawer);
+			//Change 0 to nullptr
+			if (sdltexture != nullptr)
+			{
+				texturemap[id] = sdltexture;
+				return true;
+			}
+			return false;
 		}
 	}
 
-	~Texter(){}
-
 	void clear()
 	{
-		if (message != nullptr)
-		{
-			SDL_DestroyTexture(message);
-			message = nullptr;
-		}
-		//Sans is the font: TTF_Font
 		if(Sans != nullptr)
 		{
 			//Free global font
 			TTF_CloseFont(Sans);
 			Sans = nullptr;
 		}
+
+		for (std::map<std::string, SDL_Texture*>::iterator it = texturemap.begin(); it != texturemap.end(); it++)
+		{
+			SDL_DestroyTexture(it->second);
+			it->second = nullptr;
+			//texturemap.erase(it);
+		}
+		texturemap.clear();
 		TTF_Quit();
+	}
+
+	void draw(std::string id, int x, int y, SDL_Renderer* drawer)
+	{
+		SDL_Rect srcRect;
+		SDL_Rect destRect;
+		//TODO: Decide if querying the texture is best, rather than using width height
+		//Query the texture to get the height and the width
+		int w, h;
+		SDL_QueryTexture(texturemap[id], NULL, NULL, &w, &h);//Query
+
+		//srcRect.x = 0;
+		//srcRect.y = 0;
+		//srcRect.w = destRect.w = w;
+		//srcRect.h = destRect.h = h;
+		destRect.w = w;
+		destRect.h = h;
+		destRect.x = x;
+		destRect.y = y;
+		//Do the business render
+		//SDL_RenderCopy(drawer, message, NULL, &Message_rect);
+		SDL_RenderCopy(drawer, texturemap[id], NULL, &destRect);
 	}
 
 private:
 	//this opens a font style and sets a size
-	TTF_Font* Sans = nullptr;
-	SDL_Texture* message = nullptr;
+	TTF_Font* Sans;
+	SDL_Texture* message;
 	SDL_Color Black = { 0, 0, 0 };
 	// as TTF_RenderText_Solid could only be used on SDL_Surface then you have to create the surface first
-
+	std::map<std::string, SDL_Texture*> texturemap;
 	SDL_Rect Message_rect; //create a rect
 };
 

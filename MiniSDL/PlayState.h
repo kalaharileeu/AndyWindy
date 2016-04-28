@@ -26,7 +26,8 @@ private:
 	static const std::string playid;
 	std::vector<GameObject*> playobjects;
 	CollisionManager CM;
-	Texter texterwriter;
+	//Texter texterwriter;
+	Texter textmanager;
 	bool textdonebool;
 };
 

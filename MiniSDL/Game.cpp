@@ -53,14 +53,14 @@ bool Game::init(const char * title, int xpos, int ypos, bool fullscreen)
 
 		mainwindow = SDL_CreateWindow
 			(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, gScreenRect.w, gScreenRect.h, flags);
-		if (mainwindow != 0)//check window init success
+		if (mainwindow != nullptr)//check window init success
 		{
 					std::cout << "window vreation success\n";
 			maindrawer = SDL_CreateRenderer(mainwindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-			if (maindrawer != 0)
+			if (maindrawer != nullptr)
 			{
 				std::cout << "main drawer success/n";
-				SDL_SetRenderDrawColor(maindrawer, 129, 191, 212, 5);
+				SDL_SetRenderDrawColor(maindrawer, 255, 255, 255, 5);
 			}
 			else
 			{

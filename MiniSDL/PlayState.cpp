@@ -76,13 +76,14 @@ void PlayState::draw()
 				playobjects[i]->draw();
 			}
 		}
+		textmanager.draw("count10", 0, 0, TheGame::Instance()->getdrawer());
 		//Write some text with texter
-		if (!textdonebool)
-		{
-			//This should only called once
-			texterwriter = Texter(TheGame::Instance()->getdrawer());
-			textdonebool = true;
-		}
+		//if (!textdonebool)
+		//{
+		//	//This should only called once
+		//	texterwriter = Texter(TheGame::Instance()->getdrawer());
+		//	textdonebool = true;
+		//}
 
 	}
 }
@@ -93,11 +94,13 @@ bool PlayState::onEnter()
 {
 	//Get the text ready, TTF_Font
 	//texterwriter = Texter(TheGame::Instance()->getdrawer());
+	textmanager = Texter();
 	std::vector<int> positions;
 	std::string strArr[] = { "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten" };
 	std::vector<std::string> counttextures = { strArr, strArr + 10 };//intialize the vector with the array values
 	//Manualy load some content here like level etc.
 	//Register the image with the TextureManager
+	//load some play objects manually into PlayState
 	TextureManager::Instance()->load("Content/one.png","one", TheGame::Instance()->getdrawer());//load intruder
 	TextureManager::Instance()->load("Content/two.png", "two", TheGame::Instance()->getdrawer());//load intruder
 	TextureManager::Instance()->load("Content/three.png", "three", TheGame::Instance()->getdrawer());//load intruder
@@ -108,7 +111,8 @@ bool PlayState::onEnter()
 	TextureManager::Instance()->load("Content/eight.png", "eight", TheGame::Instance()->getdrawer());//load intruder
 	TextureManager::Instance()->load("Content/nine.png", "nine", TheGame::Instance()->getdrawer());//load intruder
 	TextureManager::Instance()->load("Content/ten.png", "ten", TheGame::Instance()->getdrawer());//load shield
-	//load some play objects manually into PlayState
+	//load some play test manually  PlayState
+	textmanager.load("Count from 0 to 10. Start from left to right.", "count10", TheGame::Instance()->getdrawer());
 	int imagewidth = TextureManager::Instance()->GetTextureDimensions("one").getX();
 	int imageheight = TextureManager::Instance()->GetTextureDimensions("one").getY();
 	int numberofitems = 10;
@@ -130,8 +134,10 @@ bool PlayState::onEnter()
 //Clear bullets here from BulletHandler and reset Inputhandler
 bool PlayState::onExit()
 {
+	TextureManager::Instance()->clearTextureMap();
 	//Below is the  class handling the text
-	texterwriter.clear();
+	//texterwriter.clear();
+	textmanager.clear();
 	textdonebool = false;//This si clearing say please write text
 	boolloadingcomplete = false;
 	// clean the game objects

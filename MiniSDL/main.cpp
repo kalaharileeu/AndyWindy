@@ -36,6 +36,7 @@ int main(int argc, char* argv[])
 
 			TheGame::Instance()->handleevents();
 			TheGame::Instance()->update();
+			//Check is a redrw is neccesary. Redrw will be trigger byobject updates
 			if (TheGame::Instance()->Getredrawbool())
 			{
 				TheGame::Instance()->draw();
