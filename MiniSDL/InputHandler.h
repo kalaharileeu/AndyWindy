@@ -89,10 +89,11 @@ private:
 	// mouse specific
 	std::vector<bool> m_mouseButtonStates;
 	Vector2D* m_mousePosition;
-	bool MouseMoved;
 	Vector2D* touchfingerposition;
 	Vector2D* liftfingerposition;
+	bool MouseMoved;
 	bool touched;
+	bool fingerupbool;
 
 	// singleton
 	static InputHandler* s_pInstance;

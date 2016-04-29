@@ -15,7 +15,7 @@ While the Game instance running is true the
 */
 Game* game = 0;
 ///variable to create the fixed frames per second
-const int FPS = 30; //Frames per second
+const int FPS = 15; //Frames per second
 const int DELAY_TIME = 1000 / FPS;//
 
 int main(int argc, char* argv[])

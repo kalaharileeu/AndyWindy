@@ -7,6 +7,7 @@ InputHandler::InputHandler() : m_keystates(0), m_bJoysticksInitialised(false),
 m_mousePosition(new Vector2D(0, 0)), 
 MouseMoved(false), 
 touchfingerposition(new Vector2D(0, 0)),
+liftfingerposition(new Vector2D(0, 0)),
 touched(false)
 {
 	// create button states for the mouse
@@ -19,7 +20,10 @@ touched(false)
 InputHandler::~InputHandler()
 {
 	// delete anything we created dynamically
-	delete m_keystates;
+	if (m_keystates != nullptr)
+	{
+		delete m_keystates;
+	}
 	delete m_mousePosition;
 	delete touchfingerposition;
 	delete liftfingerposition;
@@ -102,6 +106,9 @@ void InputHandler::reset()
 	m_mouseButtonStates[LEFT] = false;
 	m_mouseButtonStates[RIGHT] = false;
 	m_mouseButtonStates[MIDDLE] = false;
+	fingerupbool = false;
+	touched = false;
+	MouseMoved = false;
 }
 
 bool InputHandler::isKeyDown(SDL_Scancode key) const
@@ -186,6 +193,11 @@ void InputHandler::update()
 		touched = false;
 	}
 
+	if (event.type != SDL_FINGERUP)
+	{
+		fingerupbool = false;
+	}
+
 	while (SDL_PollEvent(&event))
 	{
 		switch (event.type)
@@ -233,7 +245,8 @@ void InputHandler::update()
 			break;
 			//Touch events
 		case SDL_FINGERUP:
-			onTouchFingerDown(event);
+			fingerupbool = true;
+			onTouchFingerUp(event);
 			break;
 			//Touch events
 		case SDL_FINGERMOTION:
@@ -264,7 +277,8 @@ void InputHandler::onTouchFingerDown(SDL_Event &event)
 //handle touch events
 void InputHandler::onTouchFingerUp(SDL_Event &event)
 {
-
+	liftfingerposition->setX(event.tfinger.x);
+	liftfingerposition->setY(event.tfinger.y);
 }
 //handle touch events
 void InputHandler::onTouchFingerMotion()

@@ -55,6 +55,8 @@ bool MainMenuState::onEnter()
     // set the callbacks for menu items
     setCallbacks(m_callbacks);
 	boolloadingcomplete = true;
+	//Request a redraw to draw the new state
+	TheGame::Instance()->Setredrawbool(true);
     return true;
 }
 
@@ -71,13 +73,11 @@ bool MainMenuState::onExit()
 			delete (*it);
 		}
 		gameobjects.clear();
-		////gameobjects.back()->clean();
-		//gameobjects.pop_back();
     }
-
     // reset the input handler
     TheInputHandler::Instance()->reset();
-
+	boolloadingcomplete = false;
+	boolexiting = true;
     std::cout << "exiting MenuState\n";
     return true;
 }

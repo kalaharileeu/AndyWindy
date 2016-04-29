@@ -54,7 +54,7 @@ void PlayState::update()
 		else
 		{
 			//if the playobject are empty, return to menu state
-			TheGame::Instance()->Setredrawbool(true);
+			//TheGame::Instance()->Setredrawbool(true);
 			TheGame::Instance()->getstatemachine()->changeState(new MainMenuState());
 		}
 	}
@@ -77,6 +77,7 @@ void PlayState::draw()
 			}
 		}
 		textmanager.draw("count10", 0, 0, TheGame::Instance()->getdrawer());
+		textmanager.draw("bluecircles", 0, 30, TheGame::Instance()->getdrawer());
 		//Write some text with texter
 		//if (!textdonebool)
 		//{
@@ -112,7 +113,8 @@ bool PlayState::onEnter()
 	TextureManager::Instance()->load("Content/nine.png", "nine", TheGame::Instance()->getdrawer());//load intruder
 	TextureManager::Instance()->load("Content/ten.png", "ten", TheGame::Instance()->getdrawer());//load shield
 	//load some play test manually  PlayState
-	textmanager.load("Count from 0 to 10. Start from left to right.", "count10", TheGame::Instance()->getdrawer());
+	textmanager.load("Count from 0 to 10.", "count10", TheGame::Instance()->getdrawer());
+	textmanager.load("Touch the blue circles.", "bluecircles", TheGame::Instance()->getdrawer());
 	int imagewidth = TextureManager::Instance()->GetTextureDimensions("one").getX();
 	int imageheight = TextureManager::Instance()->GetTextureDimensions("one").getY();
 	int numberofitems = 10;
@@ -129,17 +131,18 @@ bool PlayState::onEnter()
 	}
 	textdonebool = false;
 	boolloadingcomplete = true;
+	//Request a redraw to draw the new state
+	TheGame::Instance()->Setredrawbool(true);
 	return true;
 }
 //Clear bullets here from BulletHandler and reset Inputhandler
 bool PlayState::onExit()
 {
+	// reset the input handler
+	TheInputHandler::Instance()->reset();
 	TextureManager::Instance()->clearTextureMap();
 	//Below is the  class handling the text
-	//texterwriter.clear();
 	textmanager.clear();
-	textdonebool = false;//This si clearing say please write text
-	boolloadingcomplete = false;
 	// clean the game objects
 	if (!playobjects.empty())
 	{
@@ -150,6 +153,8 @@ bool PlayState::onExit()
 		}
 		playobjects.clear();
 	}
+	textdonebool = false;//This is clearing say please write text
+	boolloadingcomplete = false;
 	boolexiting = true;
 	std::cout << "exiting PlayState\n";
 	return true;

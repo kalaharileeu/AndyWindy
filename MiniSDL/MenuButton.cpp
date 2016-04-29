@@ -44,7 +44,7 @@ void MenuButton::update()
             currentframe = MOUSE_OVER;
         }
 		//Set Game to redraw the update
-		TheGame::Instance()->Setredrawbool(true);
+		//TheGame::Instance()->Setredrawbool(true);
     }
     else
     {

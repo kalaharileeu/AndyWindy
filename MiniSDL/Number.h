@@ -11,7 +11,7 @@ public:
 		touched = false;
 	}
 
-	~Number() { std::cout << "Number detroyed"; }
+	~Number() { }
 
 	void update()
 	{
