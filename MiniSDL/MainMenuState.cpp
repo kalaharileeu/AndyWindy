@@ -10,7 +10,6 @@ const std::string MainMenuState::menuid = "MENU";
 
 void MainMenuState::update()
 {
-	//TODO:Remove this the space bar should not take you to play screen
 	//if(TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_SPACE))
 	//{
 	//	menutopplay();
@@ -112,7 +111,10 @@ void MainMenuState::menutopplay()
 //callbacks linked to buttons
 void MainMenuState::exitfromMenu()
 {
+	SDL_Log("exit game!!!!!!!!!!!!!!!!!!!!!!!!!!!!1");
+#if !defined ( ANDROID )
 	TheGame::Instance()->quit();
+#endif
 }
 // end callbacks
 

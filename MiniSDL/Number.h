@@ -15,15 +15,28 @@ public:
 
 	void update()
 	{
+#if defined( ANDROID )
 		//StaticObject::update(); Does nothing empty
 		if (InputHandler::Instance()->Gettouchstate())
 		{ 
-			handletouchinput();
+			//when touched just set the touched bool
+			//if it is a moving object, can cahnge the position for ex.
+			int touchX = InputHandler::Instance()->Gettouchposition()->getX();
+			int touchy = InputHandler::Instance()->Gettouchposition()->getY();
+
+			if ((touchX > position.getX() && touchX < position.getX() + width) &&
+				(touchy > position.getY() && touchy < position.getY() + height))
+			{
+				touched = true;
+			}
 		}
+#endif
+#if !defined( ANDROID )
 		if (InputHandler::Instance()->getMouseButtonState(0))
 		{
 			handlemouseinput();
 		}
+#endif
 	}
 
 	void draw()
@@ -61,19 +74,6 @@ private:
 		}
 	}
 
-	void handletouchinput()
-	{
-		//when touched just set the touched bool
-		//if it is a moving object, can cahnge the position for ex.
-		int touchX = InputHandler::Instance()->Gettouchposition()->getX();
-		int touchy = InputHandler::Instance()->Gettouchposition()->getY();
-
-		if ((touchX > position.getX() && touchX < position.getX() + width) &&
-			(touchy > position.getY() && touchy < position.getY() + height))
-		{
-			touched = true;
-		}
-	}
 	bool touched;
 };
 

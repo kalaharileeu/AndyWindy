@@ -15,16 +15,6 @@ public:
 		return instance;
 	}
 //********Get the boundaries of the game********
-	//int Getxaxmax()
-	//{
-	//	//SDL_GetWindowSize(TheGame::Instance()->getWindow(), &gamewidth, NULL);
-	//	return TheGame::Instance()->getGameWidth();
-	//}
-	//int Getyaxmax()
-	//{
-	//	//SDL_GetWindowSize(TheGame::Instance()->getWindow(), NULL, &gameheight);
-	//	return TheGame::Instance()->getGameHeight();
-	//}
 
 	int Getxaxmin()
 	{

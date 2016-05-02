@@ -106,7 +106,7 @@ void InputHandler::reset()
 	m_mouseButtonStates[LEFT] = false;
 	m_mouseButtonStates[RIGHT] = false;
 	m_mouseButtonStates[MIDDLE] = false;
-	fingerupbool = false;
+	released = false;
 	touched = false;
 	MouseMoved = false;
 }
@@ -174,9 +174,16 @@ Vector2D* InputHandler::getMousePosition() const
 	return m_mousePosition;
 }
 
-Vector2D* InputHandler::Gettouchposition() const
+Vector2D* InputHandler::Gettouchposition()
 {
+	touched = false;
 	return touchfingerposition;
+}
+
+Vector2D* InputHandler::Getreleaseposition()
+{
+	released = false;
+	return liftfingerposition;
 }
 
 void InputHandler::update()
@@ -195,7 +202,7 @@ void InputHandler::update()
 
 	if (event.type != SDL_FINGERUP)
 	{
-		fingerupbool = false;
+		released = false;
 	}
 
 	while (SDL_PollEvent(&event))
@@ -205,7 +212,7 @@ void InputHandler::update()
 		case SDL_QUIT:
 			TheGame::Instance()->quit();
 			break;
-
+#if !defined( ANDROID ) 
 		case SDL_JOYAXISMOTION:
 			onJoystickAxisMove(event);
 			break;
@@ -238,14 +245,13 @@ void InputHandler::update()
 		case SDL_KEYUP:
 			onKeyUp();
 			break;
+#endif
 			//Touch events
 		case SDL_FINGERDOWN:
-			touched = true;
 			onTouchFingerDown(event);
 			break;
 			//Touch events
 		case SDL_FINGERUP:
-			fingerupbool = true;
 			onTouchFingerUp(event);
 			break;
 			//Touch events
@@ -271,14 +277,16 @@ void InputHandler::onKeyUp()
 //handle touch events
 void InputHandler::onTouchFingerDown(SDL_Event &event)
 {
-	touchfingerposition->setX(event.tfinger.x);
-	touchfingerposition->setY(event.tfinger.y);
+	touched = true;
+	touchfingerposition->setX(event.tfinger.x * Game::Instance()->getGameWidth());
+	touchfingerposition->setY(event.tfinger.y * Game::Instance()->getGameHeight());
 }
 //handle touch events
 void InputHandler::onTouchFingerUp(SDL_Event &event)
 {
-	liftfingerposition->setX(event.tfinger.x);
-	liftfingerposition->setY(event.tfinger.y);
+	released = true;
+	liftfingerposition->setX(event.tfinger.x * Game::Instance()->getGameWidth());
+	liftfingerposition->setY(event.tfinger.y * Game::Instance()->getGameHeight());
 }
 //handle touch events
 void InputHandler::onTouchFingerMotion()

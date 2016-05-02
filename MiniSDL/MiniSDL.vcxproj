@@ -147,6 +147,7 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="GeneralParameters.h" />
+    <ClInclude Include="GeneralNumber.h" />
     <ClInclude Include="InputHandler.h" />
     <ClInclude Include="Intruder.h" />
     <ClInclude Include="Log.h" />

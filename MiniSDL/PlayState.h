@@ -25,7 +25,8 @@ private:
 	//const: has to initialised outside of the class, done it in .cpp file 
 	static const std::string playid;
 	std::vector<GameObject*> playobjects;
-	CollisionManager CM;
+	std::vector<GameObject*> numberobjects;
+	//CollisionManager CM;
 	//Texter texterwriter;
 	Texter textmanager;
 	bool textdonebool;

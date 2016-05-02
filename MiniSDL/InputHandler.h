@@ -50,8 +50,10 @@ public:
 	Vector2D* getMousePosition() const;
 	bool getMouseMoveState() { return MouseMoved; }
 	//Gets the touch position 
-	Vector2D* Gettouchposition() const;
+	Vector2D* Gettouchposition();
+	Vector2D* Getreleaseposition();
 	bool Gettouchstate() { return touched; }
+	bool Getreleasestate() { return released; }
 
 private:
 	InputHandler();
@@ -93,7 +95,7 @@ private:
 	Vector2D* liftfingerposition;
 	bool MouseMoved;
 	bool touched;
-	bool fingerupbool;
+	bool released;
 
 	// singleton
 	static InputHandler* s_pInstance;
