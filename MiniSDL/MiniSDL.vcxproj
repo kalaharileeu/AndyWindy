@@ -125,6 +125,7 @@
   <ItemGroup>
     <ClCompile Include="AnimatedGraphics.cpp" />
     <ClCompile Include="CollisionManager.cpp" />
+    <ClCompile Include="DoneState.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GeneralParameters.cpp" />
     <ClCompile Include="InputHandler.cpp" />
@@ -143,6 +144,7 @@
     <ClInclude Include="AnimatedGraphics.h" />
     <ClInclude Include="collision.h" />
     <ClInclude Include="CollisionManager.h" />
+    <ClInclude Include="DoneState.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameState.h" />

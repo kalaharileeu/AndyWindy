@@ -3,6 +3,7 @@
 #include "SDL.h"
 #include "SDL_ttf.h"
 #include <iostream>
+#include "Vector2D.h"
 
 class Texter
 {
@@ -72,17 +73,13 @@ public:
 
 	void draw(std::string id, int x, int y, SDL_Renderer* drawer)
 	{
-		SDL_Rect srcRect;
+		//SDL_Rect srcRect;
 		SDL_Rect destRect;
 		//TODO: Decide if querying the texture is best, rather than using width height
 		//Query the texture to get the height and the width
 		int w, h;
 		SDL_QueryTexture(texturemap[id], NULL, NULL, &w, &h);//Query
 
-		//srcRect.x = 0;
-		//srcRect.y = 0;
-		//srcRect.w = destRect.w = w;
-		//srcRect.h = destRect.h = h;
 		destRect.w = w;
 		destRect.h = h;
 		destRect.x = x;
@@ -90,6 +87,24 @@ public:
 		//Do the business render
 		//SDL_RenderCopy(drawer, message, NULL, &Message_rect);
 		SDL_RenderCopy(drawer, texturemap[id], NULL, &destRect);
+	}
+
+	//find the texture dinesions and returns them in a Vector2D
+	Vector2D GetTextureDimensions(std::string id)
+	{
+		Vector2D dimensions(0, 0);
+		if (texturemap.find(id) != texturemap.end())
+		{
+			int w, h = 0;
+			SDL_QueryTexture(texturemap[id], NULL, NULL, &w, &h);//Query
+			dimensions.setX(w);
+			dimensions.setY(h);
+		}
+		else
+		{
+			std::cout << "texture not found in the map" << std::endl;
+		}
+		return dimensions;
 	}
 
 private:
@@ -101,54 +116,3 @@ private:
 	std::map<std::string, SDL_Texture*> texturemap;
 	SDL_Rect Message_rect; //create a rect
 };
-
-//static void WriteText(SDL_Renderer* Drawer, SDL_Surface* Textsurface)
-//{
-//
-//	TTF_Font* Sans = TTF_OpenFont("Sans.ttf", 24); //this opens a font style and sets a size
-//
-//	SDL_Color Black = { 0, 0, 0 };  // this is the color in rgb format, maxing out all would give you the color white, and it will be your text's color
-//	// as TTF_RenderText_Solid could only be used on SDL_Surface then you have to create the surface first
-//	SDL_Surface* surfaceMessage = TTF_RenderText_Solid(Sans, "put your text here", Black);
-//
-//	SDL_Texture* Message = SDL_CreateTextureFromSurface(Drawer, surfaceMessage); //now you can convert it into a texture
-//
-//	SDL_Rect Message_rect; //create a rect
-//	Message_rect.x = 0;  //controls the rect's x coordinate 
-//	Message_rect.y = 0; // controls the rect's y coordinte
-//	Message_rect.w = 100; // controls the width of the rect
-//	Message_rect.h = 100; // controls the height of the rect
-//
-////Mind you that (0,0) is on the top left of the window/screen, 
-////think a rect as the text's box, that way it would be very simple to understance
-////Now since it's a texture, you have to put RenderCopy in your game loop area,
-////the area where the whole code executes
-////you put the renderer's name first, the Message, the crop size(you can ignore this if you 
-////don't want to dabble with cropping), 
-////and the rect which is the size and coordinate of your texture
-//
-//	SDL_RenderCopy(Drawer, Message, NULL, &Message_rect);
-//}
-
-/*Cleaning up down here
-void close()
-{
-	//Free loaded images
-	gTextTexture.free();
-
-	//Free global font
-	TTF_CloseFont(gFont);
-	gFont = NULL;
-
-	//Destroy window    
-	SDL_DestroyRenderer(gRenderer);
-	SDL_DestroyWindow(gWindow);
-	gWindow = NULL;
-	gRenderer = NULL;
-
-	//Quit SDL subsystems
-	TTF_Quit();
-	IMG_Quit();
-	SDL_Quit();
-}
-*/

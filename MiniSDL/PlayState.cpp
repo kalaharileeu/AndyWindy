@@ -7,7 +7,8 @@ inherit from GameState, public
 #include "Number.h"
 #include "GeneralNumber.h"
 #include "Vector2D.h"
-#include "MainMenuState.h"
+//#include "MainMenuState.h"
+#include "DoneState.h"
 #include <stdlib.h>
 #include <iostream>
 
@@ -36,8 +37,6 @@ PlayState::~PlayState()
 	}
 }
 /*
-Bullet handler should be updated here, check for escape key,
-check if player lives are enough to continue
 update level
 */
 void PlayState::update()
@@ -55,6 +54,7 @@ void PlayState::update()
 			if (dynamic_cast<Number*>(playobjects.front())->Getiftouchedbool())
 			{
 				//Set the number pointer to NULL, //an wrap it here, the set to Nullptr
+				delete playobjects.front();
 				playobjects.front() = nullptr;
 				playobjects.erase(playobjects.begin());
 				//Update a redraw here
@@ -65,7 +65,7 @@ void PlayState::update()
 		{
 			//if the playobject are empty, return to menu state
 			//TheGame::Instance()->Setredrawbool(true);
-			TheGame::Instance()->getstatemachine()->changeState(new MainMenuState());
+			TheGame::Instance()->getstatemachine()->changeState(new DoneState());
 		}
 	}
 }
@@ -88,12 +88,15 @@ void PlayState::draw()
 		}
 		//subtract the number of playobjects left to the numbe of numbers
 		int i = (numberobjects.size() - 1) - playobjects.size();
-		if ((i < numberobjects.size()) && (i > -1))
+		if ((i < numberobjects.size() - 1) && (i > -1))
 		{
 			dynamic_cast<GeneralNumber*>(numberobjects[i])->draw();
 		}
-		textmanager.draw("count10", 0, 0, TheGame::Instance()->getdrawer());
-		textmanager.draw("bluecircles", 0, 60, TheGame::Instance()->getdrawer());
+
+		int xposition = ((TheGame::Instance()->getGameWidth() - textmanager->GetTextureDimensions("count10").getX()) / 2);
+		textmanager->draw("count10", xposition, 0, TheGame::Instance()->getdrawer());
+		xposition = ((TheGame::Instance()->getGameWidth() - textmanager->GetTextureDimensions("bluecircles").getX()) / 2);
+		textmanager->draw("bluecircles", xposition, 60, TheGame::Instance()->getdrawer());
 	}
 }
 //On enter prepare some variables for the level
@@ -103,7 +106,7 @@ bool PlayState::onEnter()
 {
 	//Get the text ready, TTF_Font
 	//texterwriter = Texter(TheGame::Instance()->getdrawer());
-	textmanager = Texter();
+	textmanager = new Texter();
 	std::vector<int> positions;
 	std::string strArr[] = { "bigone", "bigtwo", "bigthree", "bigfour",
 		"bigfive", "bigsix", "bigseven", "bigeight", "bignine", "bigzero" };
@@ -124,9 +127,10 @@ bool PlayState::onEnter()
 	TextureManager::Instance()->load("Content/bignine.png", "bignine", TheGame::Instance()->getdrawer());//load intruder
 	TextureManager::Instance()->load("Content/bigzero.png", "bigtzero", TheGame::Instance()->getdrawer());//load shield
 	//load some play test manually  PlayState
-	textmanager.load("Count the blue squares.", "count10", TheGame::Instance()->getdrawer());
-	textmanager.load("From left to right.", "bluecircles", TheGame::Instance()->getdrawer());
+	textmanager->load("Count the blue squares.", "count10", TheGame::Instance()->getdrawer());
+	textmanager->load("From left to right!", "bluecircles", TheGame::Instance()->getdrawer());
 	//TODO: fix this: bit not correct way. Get the dimensions from the texture
+	//*************************This is all to do with spacing the squares**********************
 	//Get texture heights
 	int imagewidth = TextureManager::Instance()->GetTextureDimensions("bluesquare").getX();
 	int imageheight = TextureManager::Instance()->GetTextureDimensions("bluesquare").getY();
@@ -134,14 +138,15 @@ bool PlayState::onEnter()
 	int numberimageheight = TheTextureManager::Instance()->GetTextureDimensions("bigone").getY();
 	//number of squares
 	int numberofitems = 10;
+	int gamewidth = TheGame::Instance()->getGameWidth();
 	//****Horizontal spacing*****
-	int centerwidth = TheGame::Instance()->getGameWidth() / 2;
-	int spacing = 20;
+	int centerwidth = gamewidth / 2;
+	int spacing = (gamewidth - (numberofitems * imagewidth)) / (numberofitems + 1);
 	//******Horizontal spacing end****** 
 	//*****vertical spacing****
 	int centerheight = TheGame::Instance()->getGameHeight() / 2;
 	int verticalposition = centerheight + (imageheight * 2);
-	int numberverticalposition = verticalposition - numberimageheight - 30;
+	int numberverticalposition = verticalposition - numberimageheight - 50;
 	//*****vertical spaces end***
 	//The start point of items placement
 	int startpoint = centerwidth - ((numberofitems / 2) * (imagewidth + spacing));
@@ -149,11 +154,11 @@ bool PlayState::onEnter()
 	for (int i = 0; i < 10; i++)
 	{
 		playobjects.push_back(new Number(1, Vector2D(startpoint + 
-			((imagewidth + 10) * i), verticalposition), imagewidth, imageheight, "bluesquare", 1));
+			((imagewidth + spacing) * i), verticalposition), imagewidth, imageheight, "bluesquare", 1));
 	}
 	for (int i = 0; i < 10; i++)
 	{
-		numberobjects.push_back(new GeneralNumber(1, Vector2D(startpoint - (numberimagewidth / 2)
+		numberobjects.push_back(new GeneralNumber(1, Vector2D(centerwidth - (numberimagewidth / 2)
 			, numberverticalposition), numberimagewidth, numberimageheight, counttextures[i], 1));
 	}
 	//This is clearing say please write text
@@ -170,7 +175,8 @@ bool PlayState::onExit()
 	TheInputHandler::Instance()->reset();
 	TextureManager::Instance()->clearTextureMap();
 	//Below is the  class handling the text
-	textmanager.clear();
+	textmanager->clear();
+	delete textmanager;
 	// clean the game objects
 	if (!playobjects.empty())
 	{
@@ -181,15 +187,24 @@ bool PlayState::onExit()
 		}
 		playobjects.clear();
 	}
-	if (!numberobjects.empty())
+	if (numberobjects.empty() == false)
 	{
-		//delete all the game objects
-		for (std::vector<GameObject*>::iterator it = numberobjects.begin(); it != numberobjects.end(); ++it)
+		for (int i = 0; i < numberobjects.size(); i++)
 		{
-			delete (*it);
+			//numberobjects[i]->clean();
+			delete numberobjects[i];
 		}
 		numberobjects.clear();
 	}
+//	if (!numberobjects.empty())
+//	{
+		//delete all the game objects
+//		for (std::vector<GameObject*>::iterator it = numberobjects.begin(); it != numberobjects.end(); ++it)
+//		{
+//			delete (*it);
+	///	}
+	//	numberobjects.clear();
+	//}
 	//This is clearing say please write text
 	textdonebool = false;
 	boolloadingcomplete = false;

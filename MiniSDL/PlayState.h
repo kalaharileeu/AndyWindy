@@ -2,9 +2,9 @@
 //BulletHandler, InputManager, playstate also draw the lives in used
 #pragma once
 #include "GameState.h"
-#include "CollisionManager.h"
 #include "Texter.h"
 
+class Texter;
 class GameObject;
 class SDLGameObject;
 class Level;
@@ -26,9 +26,7 @@ private:
 	static const std::string playid;
 	std::vector<GameObject*> playobjects;
 	std::vector<GameObject*> numberobjects;
-	//CollisionManager CM;
-	//Texter texterwriter;
-	Texter textmanager;
+	Texter* textmanager;
 	bool textdonebool;
 };
 
