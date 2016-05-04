@@ -60,7 +60,6 @@ void StateMachine::changeState(GameState *state)
 		{
 			return; // do nothing
 		}
-
 		gamestate.back()->onExit();
 		gamestate.pop_back();
 	}

@@ -7,7 +7,7 @@ inherit from GameState, public
 #include "Number.h"
 #include "GeneralNumber.h"
 #include "Vector2D.h"
-//#include "MainMenuState.h"
+#include "MainMenuState.h"
 #include "DoneState.h"
 #include <stdlib.h>
 #include <iostream>
@@ -25,16 +25,6 @@ PlayState::~PlayState()
 		}
 		playobjects.clear();
 	}
-
-	if (numberobjects.empty() == false)
-	{
-		for (int i = 0; i < numberobjects.size(); i++)
-		{
-			//numberobjects[i]->clean();
-			delete numberobjects[i];
-		}
-		numberobjects.clear();
-	}
 }
 /*
 update level
@@ -50,7 +40,8 @@ void PlayState::update()
 		{
 			//call update on the first object in the list
 			//to set of check for touch or click
-			dynamic_cast<Number*>(playobjects.front())->update();
+			//dynamic_cast<Number*>(playobjects.front())->update();
+			playobjects.front()->update();
 			if (dynamic_cast<Number*>(playobjects.front())->Getiftouchedbool())
 			{
 				//Set the number pointer to NULL, //an wrap it here, the set to Nullptr
@@ -58,6 +49,7 @@ void PlayState::update()
 				playobjects.front() = nullptr;
 				playobjects.erase(playobjects.begin());
 				//Update a redraw here
+				counter++;
 				TheGame::Instance()->Setredrawbool(true);
 			}
 		}
@@ -76,9 +68,6 @@ void PlayState::draw()
 	//nothing is moving at this stage
 	if (boolloadingcomplete)
 	{
-		//TheTextureManager::Instance()->draw("intruder", 60, 0, 38, 36, TheGame::Instance()->getdrawer(), SDL_FLIP_NONE);//test draw
-		//TheTextureManager::Instance()->drawFrame("intruder", 200, 100, 38, 36, 0, 0, TheGame::Instance()->getdrawer(), 0.0, 255);//test draw
-		//BulletHandler::Instance()->drawBullets();
 		if (playobjects.empty() == false)
 		{
 			for (int i = 0; i < playobjects.size(); i++)
@@ -87,16 +76,21 @@ void PlayState::draw()
 			}
 		}
 		//subtract the number of playobjects left to the numbe of numbers
-		int i = (numberobjects.size() - 1) - playobjects.size();
-		if ((i < numberobjects.size() - 1) && (i > -1))
-		{
-			dynamic_cast<GeneralNumber*>(numberobjects[i])->draw();
-		}
+		//int i = numberobjects.size() - playobjects.size();
+		if (counter == 1){ one->draw();}
+		if (counter == 2) { two->draw(); }
+		if (counter == 3) { three->draw(); }
+		if (counter == 4) { four->draw(); }
+		if (counter == 5) { five->draw(); }
+		if (counter == 6) { six->draw(); }
+		if (counter == 7) { seven->draw(); }
+		if (counter == 8) { eight->draw(); }
+		if (counter == 9) { nine->draw(); }
 
-		int xposition = ((TheGame::Instance()->getGameWidth() - textmanager->GetTextureDimensions("count10").getX()) / 2);
-		textmanager->draw("count10", xposition, 0, TheGame::Instance()->getdrawer());
-		xposition = ((TheGame::Instance()->getGameWidth() - textmanager->GetTextureDimensions("bluecircles").getX()) / 2);
-		textmanager->draw("bluecircles", xposition, 60, TheGame::Instance()->getdrawer());
+		int xposition = ((TheGame::Instance()->getGameWidth() - textmanager.GetTextureDimensions("count10").getX()) / 2);
+		textmanager.draw("count10", xposition, 0, TheGame::Instance()->getdrawer());
+		xposition = ((TheGame::Instance()->getGameWidth() - textmanager.GetTextureDimensions("bluecircles").getX()) / 2);
+		textmanager.draw("bluecircles", xposition, 60, TheGame::Instance()->getdrawer());
 	}
 }
 //On enter prepare some variables for the level
@@ -106,36 +100,33 @@ bool PlayState::onEnter()
 {
 	//Get the text ready, TTF_Font
 	//texterwriter = Texter(TheGame::Instance()->getdrawer());
-	textmanager = new Texter();
-	std::vector<int> positions;
-	std::string strArr[] = { "bigone", "bigtwo", "bigthree", "bigfour",
-		"bigfive", "bigsix", "bigseven", "bigeight", "bignine", "bigzero" };
-	std::vector<std::string> counttextures = { strArr, strArr + 10 };//intialize the vector with the array values
+	textmanager = Texter();
+	counter = 0;
 	//Manualy load some content here like level etc.
 	//Register the image with the TextureManager
 	//load some play objects manually into PlayState
 	TextureManager::Instance()->load("Content/bluesquare.png","bluesquare", TheGame::Instance()->getdrawer());//load intruder
 	//Just letters
-	TextureManager::Instance()->load("Content/bigone.png", "bigone", TheGame::Instance()->getdrawer());//load intruder
-	TextureManager::Instance()->load("Content/bigtwo.png", "bigtwo", TheGame::Instance()->getdrawer());//load intruder
-	TextureManager::Instance()->load("Content/bigthree.png", "bigthree", TheGame::Instance()->getdrawer());//load intruder
-	TextureManager::Instance()->load("Content/bigfour.png", "bigfour", TheGame::Instance()->getdrawer());//load intruder
-	TextureManager::Instance()->load("Content/bigfive.png", "bigfive", TheGame::Instance()->getdrawer());//load intruder
-	TextureManager::Instance()->load("Content/bigsix.png", "bigsix", TheGame::Instance()->getdrawer());//load intruder
-	TextureManager::Instance()->load("Content/bigseven.png", "bigseven", TheGame::Instance()->getdrawer());//load intruder
-	TextureManager::Instance()->load("Content/bigeight.png", "bigeight", TheGame::Instance()->getdrawer());//load intruder
-	TextureManager::Instance()->load("Content/bignine.png", "bignine", TheGame::Instance()->getdrawer());//load intruder
-	TextureManager::Instance()->load("Content/bigzero.png", "bigtzero", TheGame::Instance()->getdrawer());//load shield
+	TextureManager::Instance()->load("Content/bigone.png", "One", TheGame::Instance()->getdrawer());//load intruder
+	TextureManager::Instance()->load("Content/bigtwo.png", "Two", TheGame::Instance()->getdrawer());//load intruder
+	TextureManager::Instance()->load("Content/bigthree.png", "Three", TheGame::Instance()->getdrawer());//load intruder
+	TextureManager::Instance()->load("Content/bigfour.png", "Four", TheGame::Instance()->getdrawer());//load intruder
+	TextureManager::Instance()->load("Content/bigfive.png", "Five", TheGame::Instance()->getdrawer());//load intruder
+	TextureManager::Instance()->load("Content/bigsix.png", "Six", TheGame::Instance()->getdrawer());//load intruder
+	TextureManager::Instance()->load("Content/bigseven.png", "Seven", TheGame::Instance()->getdrawer());//load intruder
+	TextureManager::Instance()->load("Content/bigeight.png", "Eight", TheGame::Instance()->getdrawer());//load intruder
+	TextureManager::Instance()->load("Content/bignine.png", "Nine", TheGame::Instance()->getdrawer());//load intruder
+	//TextureManager::Instance()->load("Content/bigzero.png", "bigtzero", TheGame::Instance()->getdrawer());//load shield
 	//load some play test manually  PlayState
-	textmanager->load("Count the blue squares.", "count10", TheGame::Instance()->getdrawer());
-	textmanager->load("From left to right!", "bluecircles", TheGame::Instance()->getdrawer());
+	textmanager.load("Count the blue squares.", "count10", TheGame::Instance()->getdrawer());
+	textmanager.load("From left to right!", "bluecircles", TheGame::Instance()->getdrawer());
 	//TODO: fix this: bit not correct way. Get the dimensions from the texture
 	//*************************This is all to do with spacing the squares**********************
 	//Get texture heights
 	int imagewidth = TextureManager::Instance()->GetTextureDimensions("bluesquare").getX();
 	int imageheight = TextureManager::Instance()->GetTextureDimensions("bluesquare").getY();
-	int numberimagewidth = TheTextureManager::Instance()->GetTextureDimensions("bigone").getX();
-	int numberimageheight = TheTextureManager::Instance()->GetTextureDimensions("bigone").getY();
+	int numberimagewidth = TheTextureManager::Instance()->GetTextureDimensions("One").getX();
+	int numberimageheight = TheTextureManager::Instance()->GetTextureDimensions("One").getY();
 	//number of squares
 	int numberofitems = 10;
 	int gamewidth = TheGame::Instance()->getGameWidth();
@@ -153,14 +144,26 @@ bool PlayState::onEnter()
 	//add 10 intruders to the gameobject list
 	for (int i = 0; i < 10; i++)
 	{
-		playobjects.push_back(new Number(1, Vector2D(startpoint + 
-			((imagewidth + spacing) * i), verticalposition), imagewidth, imageheight, "bluesquare", 1));
+		playobjects.push_back(new Number(1, Vector2D(startpoint + ((imagewidth + spacing) * i), verticalposition), imagewidth, imageheight, "bluesquare", 1));
 	}
-	for (int i = 0; i < 10; i++)
-	{
-		numberobjects.push_back(new GeneralNumber(1, Vector2D(centerwidth - (numberimagewidth / 2)
-			, numberverticalposition), numberimagewidth, numberimageheight, counttextures[i], 1));
-	}
+	one = new Number(1, Vector2D(centerwidth - (numberimagewidth / 2), numberverticalposition), numberimagewidth, numberimageheight, "One", 1);
+	two = new Number(1, Vector2D(centerwidth - (numberimagewidth / 2), numberverticalposition), numberimagewidth, numberimageheight, "Two", 1);
+	three = new Number(1, Vector2D(centerwidth - (numberimagewidth / 2), numberverticalposition), numberimagewidth, numberimageheight, "Three", 1);
+	four = new Number(1, Vector2D(centerwidth - (numberimagewidth / 2), numberverticalposition), numberimagewidth, numberimageheight, "Four", 1);
+	five = new Number(1, Vector2D(centerwidth - (numberimagewidth / 2), numberverticalposition), numberimagewidth, numberimageheight, "Five", 1);
+	six = new Number(1, Vector2D(centerwidth - (numberimagewidth / 2), numberverticalposition), numberimagewidth, numberimageheight, "Six", 1);
+	seven = new Number(1, Vector2D(centerwidth - (numberimagewidth / 2), numberverticalposition), numberimagewidth, numberimageheight, "Seven", 1);
+	eight = new Number(1, Vector2D(centerwidth - (numberimagewidth / 2), numberverticalposition), numberimagewidth, numberimageheight, "Eight", 1);
+	nine = new Number(1, Vector2D(centerwidth - (numberimagewidth / 2), numberverticalposition), numberimagewidth, numberimageheight, "Nine", 1);
+	//numberobjects.push_back(new GeneralNumber(1, Vector2D(centerwidth - (numberimagewidth / 2), numberverticalposition), numberimagewidth, numberimageheight, "One", 1));
+	//numberobjects.push_back(new GeneralNumber(1, Vector2D(centerwidth - (numberimagewidth / 2), numberverticalposition), numberimagewidth, numberimageheight, "Two", 1));
+	//numberobjects.push_back(new GeneralNumber(1, Vector2D(centerwidth - (numberimagewidth / 2), numberverticalposition), numberimagewidth, numberimageheight, "Three", 1));
+	//numberobjects.push_back(new GeneralNumber(1, Vector2D(centerwidth - (numberimagewidth / 2), numberverticalposition), numberimagewidth, numberimageheight, "Four", 1));
+	//numberobjects.push_back(new GeneralNumber(1, Vector2D(centerwidth - (numberimagewidth / 2), numberverticalposition), numberimagewidth, numberimageheight, "Five", 1));
+	//numberobjects.push_back(new GeneralNumber(1, Vector2D(centerwidth - (numberimagewidth / 2), numberverticalposition), numberimagewidth, numberimageheight, "Six", 1));
+	//numberobjects.push_back(new GeneralNumber(1, Vector2D(centerwidth - (numberimagewidth / 2), numberverticalposition), numberimagewidth, numberimageheight, "Seven", 1));
+	//numberobjects.push_back(new GeneralNumber(1, Vector2D(centerwidth - (numberimagewidth / 2), numberverticalposition), numberimagewidth, numberimageheight, "Eight", 1));
+	//numberobjects.push_back(new GeneralNumber(1, Vector2D(centerwidth - (numberimagewidth / 2), numberverticalposition), numberimagewidth, numberimageheight, "Nine", 1));
 	//This is clearing say please write text
 	textdonebool = false;
 	boolloadingcomplete = true;
@@ -175,36 +178,39 @@ bool PlayState::onExit()
 	TheInputHandler::Instance()->reset();
 	TextureManager::Instance()->clearTextureMap();
 	//Below is the  class handling the text
-	textmanager->clear();
-	delete textmanager;
-	// clean the game objects
-	if (!playobjects.empty())
+	textmanager.clear();
+
+	delete one;
+	one = nullptr;
+	delete two;
+	two = nullptr;
+	delete three;
+	three = nullptr;
+	delete four;
+	four = nullptr;
+	delete five;
+	five = nullptr;
+	delete six;
+	six = nullptr;
+	delete seven;
+	seven = nullptr;
+	delete eight;
+	eight = nullptr;
+	delete nine;
+	nine = nullptr;
+
+	if (playobjects.empty() == false)
 	{
-		//delete all the game objects
-		for (std::vector<GameObject*>::iterator it = playobjects.begin(); it != playobjects.end(); ++it)
+		for (int i = 0; i < playobjects.size(); i++)
 		{
-			delete (*it);
+			if (playobjects[i] != nullptr)
+			{
+				delete playobjects[i];
+				playobjects[i] = nullptr;
+			}
 		}
 		playobjects.clear();
 	}
-	if (numberobjects.empty() == false)
-	{
-		for (int i = 0; i < numberobjects.size(); i++)
-		{
-			//numberobjects[i]->clean();
-			delete numberobjects[i];
-		}
-		numberobjects.clear();
-	}
-//	if (!numberobjects.empty())
-//	{
-		//delete all the game objects
-//		for (std::vector<GameObject*>::iterator it = numberobjects.begin(); it != numberobjects.end(); ++it)
-//		{
-//			delete (*it);
-	///	}
-	//	numberobjects.clear();
-	//}
 	//This is clearing say please write text
 	textdonebool = false;
 	boolloadingcomplete = false;

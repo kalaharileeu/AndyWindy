@@ -90,7 +90,7 @@ Vector2D TextureManager::GetTextureDimensions(std::string id)
 	}
 	else
 	{
-		std::cout << "texture not found in the map" << std::endl;
+		std::cout << "texture not found in the map" << id << std::endl;
 	}
 	return dimensions;
 }

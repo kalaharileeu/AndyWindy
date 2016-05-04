@@ -10,10 +10,6 @@ const std::string MainMenuState::menuid = "MENU";
 
 void MainMenuState::update()
 {
-	//if(TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_SPACE))
-	//{
-	//	menutopplay();
-	//}
     if(!gameobjects.empty())
     {
 		for(int i = 0; i < gameobjects.size(); i++)

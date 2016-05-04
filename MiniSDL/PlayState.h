@@ -6,8 +6,8 @@
 
 class Texter;
 class GameObject;
-class SDLGameObject;
-class Level;
+//class SDLGameObject;
+//class Level;
 //public inheritance with GameState: important
 class PlayState : public GameState
 {
@@ -25,8 +25,18 @@ private:
 	//const: has to initialised outside of the class, done it in .cpp file 
 	static const std::string playid;
 	std::vector<GameObject*> playobjects;
-	std::vector<GameObject*> numberobjects;
-	Texter* textmanager;
+	//std::vector<GameObject*> numberobjects;
+	int counter;
+	GameObject* one;
+	GameObject* two;
+	GameObject* three;
+	GameObject* four;
+	GameObject* five;
+	GameObject* six;
+	GameObject* seven;
+	GameObject* eight;
+	GameObject* nine;
+	Texter textmanager;
 	bool textdonebool;
 };
 
