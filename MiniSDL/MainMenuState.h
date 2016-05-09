@@ -19,7 +19,8 @@ class MainMenuState : public MenuState
 		//vector of GameObject* to store our menu items:
         std::vector<GameObject*> gameobjects;//vector of GameObject* to store our menu items:
 		// call back functions for menu items
-		//functions as static; this is because our callback function pointers will only support static functions
+		//functions as static; this is because our callback 
+		//function pointers will only support static functions
         static void menutopplay();
         static void exitfromMenu();
 };

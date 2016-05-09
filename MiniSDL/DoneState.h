@@ -7,6 +7,7 @@ class GameObject;
 class DoneState : public GameState
 {
 public:
+	DoneState(std::string drawvalue);
 	//virtual member is a member function that can be redefined in a derived class
 	virtual ~DoneState();
 	virtual void update();
@@ -14,7 +15,6 @@ public:
 	virtual bool onEnter();
 	virtual bool onExit();
 	virtual std::string getStateID() const { return doneid; }
-
 private:
 	//only one copy of this maintained for all objects
 	//do not have to refer to object to refer to static member
@@ -24,5 +24,7 @@ private:
 	//CollisionManager CM;
 	Texter* textmanagerdone;
 	bool textdonebool;
+	//This is the number to draw
+	std::string numbertodraw;
 };
 

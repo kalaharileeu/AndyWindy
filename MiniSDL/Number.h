@@ -58,6 +58,8 @@ public:
 			return false;
 	}
 
+	void Settextureid(std::string value) { textureid = value; }
+
 private:
 
 	void handlemouseinput()

@@ -110,7 +110,6 @@ public:
 private:
 	//this opens a font style and sets a size
 	TTF_Font* Sans;
-	SDL_Texture* message;
 	SDL_Color Black = { 0, 0, 0 };
 	// as TTF_RenderText_Solid could only be used on SDL_Surface then you have to create the surface first
 	std::map<std::string, SDL_Texture*> texturemap;

@@ -6,7 +6,7 @@ TextureManager* TextureManager::instance = 0;
 
 bool TextureManager::load(std::string fileName, std::string id, SDL_Renderer* pRenderer)
 {
-
+	//if(texturemap.find(id))
 	SDL_Surface* tempsurface = IMG_Load(fileName.c_str());
 	//Checks. change 0 to nullptr
 	if (tempsurface == nullptr)
@@ -98,13 +98,16 @@ Vector2D TextureManager::GetTextureDimensions(std::string id)
 
 void TextureManager::clearTextureMap()
 {
-	for (std::map<std::string, SDL_Texture*>::iterator it = texturemap.begin();	it != texturemap.end(); it++)
+	if (!texturemap.empty())
 	{
-		SDL_DestroyTexture(it->second);
-		it->second = nullptr;
-		//texturemap.erase(it);
+		for (std::map<std::string, SDL_Texture*>::iterator it = texturemap.begin(); it != texturemap.end(); it++)
+		{
+			SDL_DestroyTexture(it->second);
+			it->second = nullptr;
+			//texturemap.erase(it);
+		}
+		texturemap.clear();
 	}
-	texturemap.clear();
 }
 
 void TextureManager::clearFromTextureMap(std::string id)

@@ -6,9 +6,7 @@
 
 class Texter;
 class GameObject;
-//class SDLGameObject;
-//class Level;
-//public inheritance with GameState: important
+
 class PlayState : public GameState
 {
 public:
@@ -19,14 +17,13 @@ public:
 	virtual bool onEnter();
 	virtual bool onExit();
 	virtual std::string getStateID() const { return playid; }
-private:
-	//only one copy of this maintained for all objects
-	//do not have to refer to object to refer to static member
-	//const: has to initialised outside of the class, done it in .cpp file 
-	static const std::string playid;
+protected:
+	void setup();
 	std::vector<GameObject*> playobjects;
 	//std::vector<GameObject*> numberobjects;
 	int counter;
+	//bool to check any more blue squares
+	bool donesearching;
 	GameObject* one;
 	GameObject* two;
 	GameObject* three;
@@ -36,7 +33,16 @@ private:
 	GameObject* seven;
 	GameObject* eight;
 	GameObject* nine;
+	//this write the screen text
 	Texter textmanager;
 	bool textdonebool;
+
+private:
+	//only one copy of this maintained for all objects
+	//do not have to refer to object to refer to static member
+	//const: has to initialised outside of the class, done it in .cpp file 
+	static const std::string playid;
+
+
 };
 

@@ -22,8 +22,5 @@ public:
 	std::string type() { return "GeneralShape"; }
 	//return the position of the object.(Some object feedback)
 	Vector2D Getposition() { return StaticObject::Getposition(); }
-
-private:
-
 };
 

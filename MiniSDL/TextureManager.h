@@ -43,12 +43,8 @@ public:
 private:
 
 	TextureManager() {}
-	~TextureManager() {}
-
-	TextureManager(const TextureManager&);
-	//TextureManager& operator=(const TextureManager&);
+	~TextureManager() { clearTextureMap(); }
 	std::map<std::string, SDL_Texture*> texturemap;
-
 	static TextureManager* instance;
 };
 

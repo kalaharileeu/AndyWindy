@@ -1,11 +1,14 @@
 #include "DoneState.h"
-//#include "Number.h"
 #include "GeneralNumber.h"
 #include "Game.h"
-#include "MainMenuState.h"
-//#include "Vector2D.h"
+#include "YelloBlue.h"
 
 const std::string DoneState::doneid = "DONEONE";
+
+DoneState::DoneState(std::string drawvalue)
+{
+	numbertodraw = drawvalue;
+}
 
 DoneState::~DoneState()
 {
@@ -19,10 +22,7 @@ DoneState::~DoneState()
 		numberobjects.clear();
 	}
 }
-
-/*
-update state
-*/
+/*update state*/
 void DoneState::update()
 {
 	bool touched = false;
@@ -47,7 +47,7 @@ void DoneState::update()
 	}
 	if (touched == true)
 	{
-		TheGame::Instance()->getstatemachine()->changeState(new MainMenuState());
+		TheGame::Instance()->getstatemachine()->changeState(new YelloBlue());
 	}
 }
 
@@ -61,9 +61,9 @@ void DoneState::draw()
 		{
 			numberobjects[i]->draw();
 		}
-
-		int xposition = ((TheGame::Instance()->getGameWidth() - textmanagerdone->GetTextureDimensions("welldone").getX()) / 2);
-		textmanagerdone->draw("welldone", xposition, 0, TheGame::Instance()->getdrawer());
+		//numbertodraw must tie up with texturemanager
+		int xposition = ((TheGame::Instance()->getGameWidth() - textmanagerdone->GetTextureDimensions(numbertodraw).getX()) / 2);
+		textmanagerdone->draw(numbertodraw, xposition, 0, TheGame::Instance()->getdrawer());
 		//Request a redraw to draw the new state
 		TheGame::Instance()->Setredrawbool(true);
 	}
@@ -75,23 +75,12 @@ bool DoneState::onEnter()
 {
 	////Get the text ready, TTF_Font
 	textmanagerdone = new Texter();
-
-	//std::vector<int> positions;
-	//std::string strArr[] = { "bigone", "bigzero" };
-	//load the characters into the string vector
-	//std::vector<std::string> counttextures = { strArr, strArr + 2 };
-	//intialize the vector with the array values
-	//Manualy load some content here like level etc.
-	//Register the image with the TextureManager
-	//load some play objects manually into PlayState
-	TextureManager::Instance()->load("Content/bigone.png", "one", TheGame::Instance()->getdrawer());//load intruder
-	TextureManager::Instance()->load("Content/bigzero.png", "zero", TheGame::Instance()->getdrawer());//load intruder
-	textmanagerdone->load("Ten.", "welldone", TheGame::Instance()->getdrawer());
+	textmanagerdone->load(numbertodraw, numbertodraw, TheGame::Instance()->getdrawer());
 
 	int gamewidth = TheGame::Instance()->getGameWidth();
 	/*************Spacing down here************/
-	int numberimagewidth = TheTextureManager::Instance()->GetTextureDimensions("one").getX();
-	int numberimageheight = TheTextureManager::Instance()->GetTextureDimensions("zero").getY();
+	int numberimagewidth = TheTextureManager::Instance()->GetTextureDimensions("One").getX();
+	int numberimageheight = TheTextureManager::Instance()->GetTextureDimensions("One").getY();
 	//******Horizontal spacing end****** 
 	//*****vertical spacing****
 	int centerheight = TheGame::Instance()->getGameHeight() / 2;
@@ -99,12 +88,21 @@ bool DoneState::onEnter()
 	int numberverticalposition = verticalposition - numberimageheight - 50;
 	//****Horizontal spacing*****
 	int centerwidth = gamewidth / 2;
-
 	//used for loop in playstate to do this
-	numberobjects.push_back(new GeneralNumber(1, Vector2D(centerwidth - numberimagewidth, numberverticalposition),
-		numberimagewidth, numberimageheight, "one", 1));
-	numberobjects.push_back(new GeneralNumber(1, Vector2D(centerwidth, numberverticalposition),
-		numberimagewidth, numberimageheight, "zero", 1));
+	//Load up the numberobjects.
+	if (numbertodraw == "ten")
+	{
+		numberobjects.push_back(new GeneralNumber(1, Vector2D(centerwidth - numberimagewidth, numberverticalposition),
+			numberimagewidth, numberimageheight, "One", 1));
+		numberobjects.push_back(new GeneralNumber(1, Vector2D(centerwidth, numberverticalposition),
+			numberimagewidth, numberimageheight, "Zero", 1));
+	}
+	if (numbertodraw == "five")
+	{
+		numberobjects.push_back(new GeneralNumber(1, Vector2D(centerwidth - numberimagewidth, numberverticalposition),
+			numberimagewidth, numberimageheight, "Five", 1));
+	}
+
 	//This is clearing say please write text
 	textdonebool = false;
 	boolloadingcomplete = true;
@@ -118,7 +116,7 @@ bool DoneState::onExit()
 {
 	// reset the input handler
 	TheInputHandler::Instance()->reset();
-	TextureManager::Instance()->clearTextureMap();
+	//TextureManager::Instance()->clearTextureMap();
 	//Below is the  class handling the text
 	textmanagerdone->clear();
 	delete textmanagerdone;

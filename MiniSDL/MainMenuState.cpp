@@ -57,7 +57,7 @@ bool MainMenuState::onEnter()
 
 bool MainMenuState::onExit()
 {
-	TextureManager::Instance()->clearTextureMap();
+	//TextureManager::Instance()->clearTextureMap();
 	boolexiting = true;
     // clean the game objects
     if(boolloadingcomplete && !gameobjects.empty())

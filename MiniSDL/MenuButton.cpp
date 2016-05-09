@@ -39,7 +39,6 @@ void MenuButton::update()
 			{
 				m_callback();
 			}
-
 			released = false;
 		}
 		else if (!TheInputHandler::Instance()->getMouseButtonState(LEFT))
@@ -57,64 +56,20 @@ void MenuButton::update()
 #endif
 //#if defined( ANDROID )
 
-		//int touchX = InputHandler::Instance()->Gettouchposition()->getX();
-		//int touchy = InputHandler::Instance()->Gettouchposition()->getY();
-
-		//if ((touchX > position.getX() && touchX < position.getX() + width) &&
-		//	(touchy > position.getY() && touchy < position.getY() + height))
-		//{
-
-		//	currentframe = CLICKED;
-		//	//false: it has not beed released
-		//	//released = false;
-		//	TheGame::Instance()->Setredrawbool(true);
-		//}
-
-
 		int touchX = InputHandler::Instance()->Getreleaseposition()->getX();
 		int touchy = InputHandler::Instance()->Getreleaseposition()->getY();
-		//if (touchX > position.getX())
-		//{
-		//	SDL_Log("step1");
-		//}
-		//if (touchX < position.getX() + width)
-		//{
-		//	SDL_Log("step2");
-		//}
-		//if (touchy > position.getY())
-		//{
-		//	SDL_Log("step3");
-		//}
-		//if (touchy < position.getY() + height)
-		//{
-		//	SDL_Log("step4");
-		//}
 
 		if ((touchX > position.getX() && touchX < position.getX() + width) &&
 			(touchy > position.getY() && touchy < position.getY() + height))
 		{
 			SDL_Log("released on target !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-			////released = true;
-			//currentframe = MOUSE_OVER;
-			//TheGame::Instance()->Setredrawbool(true);
 			if (m_callback != 0)
 			{
 				m_callback();
 			}
 
 		}
-		//#endif
-		//}
-		//else
-		//{
-		//	released = true;
-		//	//This is to reset the released in input manager to false
-		//	touchX = InputHandler::Instance()->Getreleaseposition()->getX();
-		//}
-	}
-
-
-
+}
 //void MenuButton::clean()
 //{
 //	StaticObject::clean();

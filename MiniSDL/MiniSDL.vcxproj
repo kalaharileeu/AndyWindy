@@ -139,19 +139,18 @@
     <ClCompile Include="StateParser.cpp" />
     <ClCompile Include="StaticObject.cpp" />
     <ClCompile Include="TextureManager.cpp" />
+    <ClCompile Include="YelloBlue.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnimatedGraphics.h" />
-    <ClInclude Include="collision.h" />
-    <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="DoneState.h" />
+    <ClInclude Include="Exit.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="GeneralParameters.h" />
     <ClInclude Include="GeneralNumber.h" />
     <ClInclude Include="InputHandler.h" />
-    <ClInclude Include="Intruder.h" />
     <ClInclude Include="Log.h" />
     <ClInclude Include="MainMenuState.h" />
     <ClInclude Include="MenuButton.h" />
@@ -160,13 +159,13 @@
     <ClInclude Include="Number.h" />
     <ClInclude Include="ObjectFactory.h" />
     <ClInclude Include="PlayState.h" />
-    <ClInclude Include="Shield.h" />
     <ClInclude Include="StateMachine.h" />
     <ClInclude Include="StateParser.h" />
     <ClInclude Include="StaticObject.h" />
     <ClInclude Include="Texter.h" />
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="Vector2D.h" />
+    <ClInclude Include="YelloBlue.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

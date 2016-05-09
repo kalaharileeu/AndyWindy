@@ -5,7 +5,7 @@
 Game* Game::instance = 0;
 
 Game::Game() : mainwindow(0), maindrawer(0),
-	boolrunning(false),	statemachine(0)
+boolrunning(false), statemachine(0)
 {
 	redraw = true;
 	// add some level files to an array
@@ -50,12 +50,16 @@ bool Game::init(const char * title, int xpos, int ypos, bool fullscreen)
 
 		gamewidth = gScreenRect.w;
 		gameheight = gScreenRect.h;
+		//added the below to try and solve the color issue on my galaxy S3
+		SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 8);
+		SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 8);
+		SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, 8);
 
 		mainwindow = SDL_CreateWindow
 			(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, gScreenRect.w, gScreenRect.h, flags);
 		if (mainwindow != nullptr)//check window init success
 		{
-					std::cout << "window vreation success\n";
+			std::cout << "window vreation success\n";
 			maindrawer = SDL_CreateRenderer(mainwindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 			if (maindrawer != nullptr)
 			{
@@ -81,10 +85,24 @@ bool Game::init(const char * title, int xpos, int ypos, bool fullscreen)
 	}
 	//load some sound effect here
 	//register some GameObjsect here
+	//Register the image with the TextureManager
+	TextureManager::Instance()->load("Content/bluesquare.png", "bluesquare", TheGame::Instance()->getdrawer());
+	TextureManager::Instance()->load("Content/redsquare.png", "redsquare", TheGame::Instance()->getdrawer());
+	TextureManager::Instance()->load("Content/yellowsquare.png", "yellowsquare", TheGame::Instance()->getdrawer());
+	TextureManager::Instance()->load("Content/bigone.png", "One", TheGame::Instance()->getdrawer());
+	TextureManager::Instance()->load("Content/bigtwo.png", "Two", TheGame::Instance()->getdrawer());
+	TextureManager::Instance()->load("Content/bigthree.png", "Three", TheGame::Instance()->getdrawer());
+	TextureManager::Instance()->load("Content/bigfour.png", "Four", TheGame::Instance()->getdrawer());
+	TextureManager::Instance()->load("Content/bigfive.png", "Five", TheGame::Instance()->getdrawer());
+	TextureManager::Instance()->load("Content/bigsix.png", "Six", TheGame::Instance()->getdrawer());
+	TextureManager::Instance()->load("Content/bigseven.png", "Seven", TheGame::Instance()->getdrawer());
+	TextureManager::Instance()->load("Content/bigeight.png", "Eight", TheGame::Instance()->getdrawer());
+	TextureManager::Instance()->load("Content/bignine.png", "Nine", TheGame::Instance()->getdrawer());
+	TextureManager::Instance()->load("Content/bigzero.png", "Zero", TheGame::Instance()->getdrawer());
+	TextureManager::Instance()->load("Content/exit.png", "Exit", TheGame::Instance()->getdrawer());
 	/*change the state tells statemachine a new state is coming
 	statemachine will call on enter for that state*/
 	//Can start immediately with new Playstate(), I want to start with menustate
-	//statemachine->changeState(new PlayState());
 	// start the menu state
 	statemachine = new StateMachine();
 	statemachine->changeState(new MainMenuState());

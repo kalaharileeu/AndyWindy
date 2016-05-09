@@ -17,8 +17,8 @@ public:
 	virtual void Setcollisiontrue();
 	//Get
 	std::string Gettextureid() { return textureid; }
-
 protected:
+
 	/*constructor is protected so that it can be accessed
 	from derived class*/
 	StaticObject(int ms, Vector2D pos, int w, int h, std::string id, int nf);
