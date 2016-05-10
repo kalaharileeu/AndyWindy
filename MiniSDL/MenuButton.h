@@ -1,5 +1,4 @@
-#ifndef MENUBUTTON_H
-#define MENUBUTTON_H
+#pragma once
 
 #include "StaticObject.h"//Stationary object
 #include "ObjectFactory.h"
@@ -32,12 +31,3 @@ private:
     int callbackid;
     void (*m_callback)();
 };
-
-//class MenuButtonCreator : public BaseCreator
-//{
-//    GameObject* createGameObject() const
-//    {
-//        return new MenuButton();
-//    }
-//};
-#endif // MENUBUTTON_H

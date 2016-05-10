@@ -1,8 +1,6 @@
 #pragma once
 #include "GameObject.h"
-//#include <SDL.h>
 #include "Game.h"
-//#include <string>
 
 class StaticObject : public GameObject
 {

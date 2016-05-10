@@ -33,6 +33,8 @@ protected:
 	GameObject* seven;
 	GameObject* eight;
 	GameObject* nine;
+	//used to move back to main menu
+	GameObject* goback;
 	//this write the screen text
 	Texter textmanager;
 	bool textdonebool;

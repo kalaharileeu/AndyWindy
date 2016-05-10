@@ -176,13 +176,13 @@ Vector2D* InputHandler::getMousePosition() const
 
 Vector2D* InputHandler::Gettouchposition()
 {
-	touched = false;
+	//touched = false;
 	return touchfingerposition;
 }
 
 Vector2D* InputHandler::Getreleaseposition()
 {
-	released = false;
+	//released = false;
 	return liftfingerposition;
 }
 

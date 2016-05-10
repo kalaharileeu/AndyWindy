@@ -99,7 +99,7 @@ bool Game::init(const char * title, int xpos, int ypos, bool fullscreen)
 	TextureManager::Instance()->load("Content/bigeight.png", "Eight", TheGame::Instance()->getdrawer());
 	TextureManager::Instance()->load("Content/bignine.png", "Nine", TheGame::Instance()->getdrawer());
 	TextureManager::Instance()->load("Content/bigzero.png", "Zero", TheGame::Instance()->getdrawer());
-	TextureManager::Instance()->load("Content/exit.png", "Exit", TheGame::Instance()->getdrawer());
+	TextureManager::Instance()->load("Content/exit.png", "exit", TheGame::Instance()->getdrawer());
 	/*change the state tells statemachine a new state is coming
 	statemachine will call on enter for that state*/
 	//Can start immediately with new Playstate(), I want to start with menustate

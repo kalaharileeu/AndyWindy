@@ -1,10 +1,9 @@
-/*
-inherit from GameState, public
-*/
+/* inherit from GameState, public*/
 #include "PlayState.h"
 #include "Game.h"
 #include "TextureManager.h"
 #include "Number.h"
+#include "Goback.h"
 #include "GeneralNumber.h"
 #include "Vector2D.h"
 #include "MainMenuState.h"
@@ -32,18 +31,23 @@ void PlayState::update()
 {
 	if (boolloadingcomplete && !boolexiting)
 	{
+		//update go back to check if user want to go back to main menu
+		goback->update();
+		if (dynamic_cast<Goback*>(goback)->Getiftouchedbool())
+		{
+			TheGame::Instance()->getstatemachine()->changeState(new MainMenuState());
+		}
 		//check if a number was touched
 		//begin() returns an iterator that can be used to iterate through the collection,
 		//while front() return a reference
 		if (donesearching == false)
 		{
-			//call update on the first object in the list
-			//to set of check for touch or click
 			for (int i = 0; i < playobjects.size(); i++)
 			{
 
 				if (dynamic_cast<StaticObject*>(playobjects[i])->Gettextureid() == "bluesquare")
 				{
+					//call update to check for user interaction
 					(playobjects[i])->update();
 					if (dynamic_cast<Number*>(playobjects[i])->Getiftouchedbool())
 					{
@@ -80,6 +84,8 @@ void PlayState::draw()
 	//nothing is moving at this stage
 	if (boolloadingcomplete)
 	{
+		//draw the go back to main menu button
+		goback->draw();
 		if (playobjects.empty() == false)
 		{
 			for (int i = 0; i < playobjects.size(); i++)
@@ -114,7 +120,6 @@ bool PlayState::onEnter()
 	//Load text here
 	textmanager.load("Count the blue squares.", "count10", TheGame::Instance()->getdrawer());
 	textmanager.load("From left to right!", "bluecircles", TheGame::Instance()->getdrawer());
-
 	int imagewidth = TextureManager::Instance()->GetTextureDimensions("bluesquare").getX();
 	int imageheight = TextureManager::Instance()->GetTextureDimensions("bluesquare").getY();
 	//number of squares
@@ -134,11 +139,8 @@ bool PlayState::onEnter()
 		playobjects.push_back(new Number(1, Vector2D(startpoint + ((imagewidth + spacing) * i),
 			verticalposition), imagewidth, imageheight, "bluesquare", 1));
 	}
-	////no more blue squares to look for
-	//donesearching = false;
-	////This is clearing say please write text
-	//textdonebool = false;
-
+	//EXIT:insert the exit byutton, same width and height as bluesquare
+	goback = new Goback(1, Vector2D(0, 0), imagewidth, imageheight, "exit", 1);
 	////Request a redraw to draw the new state
 	//TheGame::Instance()->Setredrawbool(true);
 	boolloadingcomplete = true;
@@ -149,12 +151,16 @@ bool PlayState::onEnter()
 //Clear bullets here from BulletHandler and reset Inputhandler
 bool PlayState::onExit()
 {
-	// reset the input handler
-	TheInputHandler::Instance()->reset();
-	//TextureManager::Instance()->clearTextureMap();
-	//Below is the  class handling the text
-	textmanager.clear();
-	donesearching = false;
+	if (goback != nullptr)
+	{
+		delete goback;
+		goback = nullptr;
+	}
+	//TheInputHandler::Instance()->reset();
+	////TextureManager::Instance()->clearTextureMap();
+	////Below is the  class handling the text
+	//textmanager.clear();
+	//donesearching = false;
 	delete one;
 	one = nullptr;
 	delete two;
@@ -173,7 +179,11 @@ bool PlayState::onExit()
 	eight = nullptr;
 	delete nine;
 	nine = nullptr;
-
+	TheInputHandler::Instance()->reset();
+	//TextureManager::Instance()->clearTextureMap();
+	//Below is the  class handling the text
+	textmanager.clear();
+	donesearching = false;
 	if (playobjects.empty() == false)
 	{
 		for (int i = 0; i < playobjects.size(); i++)
@@ -209,6 +219,8 @@ void PlayState::setup()
 	//Get texture heights
 	int imagewidth = TextureManager::Instance()->GetTextureDimensions("bluesquare").getX();
 	int imageheight = TextureManager::Instance()->GetTextureDimensions("bluesquare").getY();
+	//EXIT:insert the exit byutton, same width and height as bluesquare
+	goback = new Goback(1, Vector2D(0, 0), imagewidth, imageheight, "exit", 1);
 	int numberimagewidth = TheTextureManager::Instance()->GetTextureDimensions("One").getX();
 	int numberimageheight = TheTextureManager::Instance()->GetTextureDimensions("One").getY();
 	//number of squares
@@ -223,14 +235,6 @@ void PlayState::setup()
 	int verticalposition = centerheight + (imageheight * 2);
 	int numberverticalposition = verticalposition - numberimageheight - 50;
 	//*****vertical spaces end***
-	//The start point of items placement
-//	int startpoint = centerwidth - ((numberofitems / 2) * (imagewidth + spacing));
-	//add 10 intruders to the gameobject list
-	//for (int i = 0; i < 10; i++)
-	//{
-	//	playobjects.push_back(new Number(1, Vector2D(startpoint + ((imagewidth + spacing) * i),
-	//		verticalposition), imagewidth, imageheight, "bluesquare", 1));
-	//}
 	one = new Number(1, Vector2D(centerwidth - (numberimagewidth / 2), numberverticalposition), numberimagewidth, numberimageheight, "One", 1);
 	two = new Number(1, Vector2D(centerwidth - (numberimagewidth / 2), numberverticalposition), numberimagewidth, numberimageheight, "Two", 1);
 	three = new Number(1, Vector2D(centerwidth - (numberimagewidth / 2), numberverticalposition), numberimagewidth, numberimageheight, "Three", 1);

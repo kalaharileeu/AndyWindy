@@ -1,5 +1,6 @@
 #pragma once
 #include "StaticObject.h"
+//#include "InputHandler.h"
 
 class Number :	public StaticObject
 {
@@ -9,23 +10,26 @@ public:
 		: StaticObject(ms, pos, w, h, id, nf)
 	{
 		touched = false;
+		touchX = -1;
+		touchY = -1;
 	}
 
 	~Number() { }
 
-	void update()
+	virtual void update()
 	{
 #if defined( ANDROID )
 		//StaticObject::update(); Does nothing empty
-		if (InputHandler::Instance()->Gettouchstate())
-		{ 
-			//when touched just set the touched bool
-			//if it is a moving object, can cahnge the position for ex.
-			int touchX = InputHandler::Instance()->Gettouchposition()->getX();
-			int touchy = InputHandler::Instance()->Gettouchposition()->getY();
+		int tempX = InputHandler::Instance()->Gettouchposition()->getX();
+		int tempY = InputHandler::Instance()->Gettouchposition()->getY();
+		//if there is a change then check for touch collision
+		if ((touchX != tempX) || (touchY != tempY))
+		{
+			touchX = tempX;
+			touchY = tempY;
 
 			if ((touchX > position.getX() && touchX < position.getX() + width) &&
-				(touchy > position.getY() && touchy < position.getY() + height))
+				(touchY > position.getY() && touchY < position.getY() + height))
 			{
 				touched = true;
 			}
@@ -39,12 +43,12 @@ public:
 #endif
 	}
 
-	void draw()
+	virtual void draw()
 	{ 
 		StaticObject::draw();	
 	}
 
-	std::string type() {	return "Number"; }
+	virtual std::string type() { return "Number"; }
 	//return the position of the object.(Some object feedback)
 	Vector2D Getposition() {	return StaticObject::Getposition();	}
 	bool Getiftouchedbool() 
@@ -61,21 +65,22 @@ public:
 	void Settextureid(std::string value) { textureid = value; }
 
 private:
-
 	void handlemouseinput()
 	{
 		//when toudhed just set the touched bool
 		//if it is a moving object, can cahnge the position for ex.
-		int touchX = InputHandler::Instance()->getMousePosition()->getX();
-		int touchy = InputHandler::Instance()->getMousePosition()->getY();
+		int X = InputHandler::Instance()->getMousePosition()->getX();
+		int Y = InputHandler::Instance()->getMousePosition()->getY();
 
-		if ((touchX > position.getX() && touchX < position.getX() + width) &&
-			(touchy > position.getY() && touchy < position.getY() + height))
+		if ((X > position.getX() && X < position.getX() + width) &&
+			(Y > position.getY() && Y < position.getY() + height))
 		{
 			touched = true;
 		}
 	}
 
 	bool touched;
+	int touchX;
+	int touchY;
 };
 

@@ -144,12 +144,12 @@
   <ItemGroup>
     <ClInclude Include="AnimatedGraphics.h" />
     <ClInclude Include="DoneState.h" />
-    <ClInclude Include="Exit.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="GeneralParameters.h" />
     <ClInclude Include="GeneralNumber.h" />
+    <ClInclude Include="Goback.h" />
     <ClInclude Include="InputHandler.h" />
     <ClInclude Include="Log.h" />
     <ClInclude Include="MainMenuState.h" />
