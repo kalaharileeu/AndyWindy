@@ -140,6 +140,12 @@
     <ClInclude Include="Goback.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="RedYellowBlue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Multiplecolorsix.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

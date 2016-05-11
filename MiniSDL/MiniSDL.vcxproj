@@ -156,9 +156,11 @@
     <ClInclude Include="MenuButton.h" />
     <ClInclude Include="MenuState.h" />
     <ClInclude Include="MovingObject.h" />
+    <ClInclude Include="Multiplecolorsix.h" />
     <ClInclude Include="Number.h" />
     <ClInclude Include="ObjectFactory.h" />
     <ClInclude Include="PlayState.h" />
+    <ClInclude Include="RedYellowBlue.h" />
     <ClInclude Include="StateMachine.h" />
     <ClInclude Include="StateParser.h" />
     <ClInclude Include="StaticObject.h" />

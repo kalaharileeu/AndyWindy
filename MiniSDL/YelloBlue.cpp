@@ -10,16 +10,6 @@ YelloBlue::~YelloBlue()
 	//PlayState::~PlayState();
 }
 
-void YelloBlue::Update()
-{
-	PlayState::update();
-}
-
-void YelloBlue::draw()
-{
-	PlayState::draw();
-}
-
 bool YelloBlue::onEnter()
 {
 	PlayState::setup();
@@ -60,10 +50,3 @@ bool YelloBlue::onEnter()
 	boolloadingcomplete = true;
 	return true;
 }
-
-bool YelloBlue::onExit()
-{
-	PlayState::onExit();
-	return true;
-}
-

@@ -2,6 +2,9 @@
 #include "GeneralNumber.h"
 #include "Game.h"
 #include "YelloBlue.h"
+#include "RedYellowBlue.h"
+#include "MainMenuState.h"
+#include "Multiplecolorsix.h"
 
 const std::string DoneState::doneid = "DONEONE";
 
@@ -45,9 +48,25 @@ void DoneState::update()
 		}
 #endif
 	}
+	//This is to sequence the playstate loads
 	if (touched == true)
 	{
-		TheGame::Instance()->getstatemachine()->changeState(new YelloBlue());
+		if (numbertodraw == "ten")
+		{
+			TheGame::Instance()->getstatemachine()->changeState(new YelloBlue());
+		}
+		if (numbertodraw == "five")
+		{
+			TheGame::Instance()->getstatemachine()->changeState(new RedYelloBlue());
+		}
+		if (numbertodraw == "three")
+		{
+			TheGame::Instance()->getstatemachine()->changeState(new Multisix());
+		}
+		if (numbertodraw == "six")
+		{
+			TheGame::Instance()->getstatemachine()->changeState(new MainMenuState());
+		}
 	}
 }
 
@@ -101,6 +120,16 @@ bool DoneState::onEnter()
 	{
 		numberobjects.push_back(new GeneralNumber(1, Vector2D(centerwidth - numberimagewidth, numberverticalposition),
 			numberimagewidth, numberimageheight, "Five", 1));
+	}
+	if (numbertodraw == "three")
+	{
+		numberobjects.push_back(new GeneralNumber(1, Vector2D(centerwidth - numberimagewidth, numberverticalposition),
+			numberimagewidth, numberimageheight, "Three", 1));
+	}
+	if (numbertodraw == "six")
+	{
+		numberobjects.push_back(new GeneralNumber(1, Vector2D(centerwidth - numberimagewidth, numberverticalposition),
+			numberimagewidth, numberimageheight, "Six", 1));
 	}
 
 	//This is clearing say please write text

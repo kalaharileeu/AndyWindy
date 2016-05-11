@@ -51,7 +51,8 @@ void PlayState::update()
 					(playobjects[i])->update();
 					if (dynamic_cast<Number*>(playobjects[i])->Getiftouchedbool())
 					{
-						dynamic_cast<Number*>(playobjects[i])->Settextureid("yellowsquare");
+						//if blue square touched make it green
+						dynamic_cast<Number*>(playobjects[i])->Settextureid("greensquare");
 						counter++;//counter used in number display
 						TheGame::Instance()->Setredrawbool(true);
 					}
@@ -73,6 +74,14 @@ void PlayState::update()
 			else if (counter == 5)
 			{
 				TheGame::Instance()->getstatemachine()->changeState(new DoneState("five"));
+			}
+			else if (counter == 3)
+			{
+				TheGame::Instance()->getstatemachine()->changeState(new DoneState("three"));
+			}
+			else if (counter == 6)
+			{
+				TheGame::Instance()->getstatemachine()->changeState(new DoneState("six"));
 			}
 		}
 	}

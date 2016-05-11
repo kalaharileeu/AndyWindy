@@ -89,6 +89,7 @@ bool Game::init(const char * title, int xpos, int ypos, bool fullscreen)
 	TextureManager::Instance()->load("Content/bluesquare.png", "bluesquare", TheGame::Instance()->getdrawer());
 	TextureManager::Instance()->load("Content/redsquare.png", "redsquare", TheGame::Instance()->getdrawer());
 	TextureManager::Instance()->load("Content/yellowsquare.png", "yellowsquare", TheGame::Instance()->getdrawer());
+	TextureManager::Instance()->load("Content/greensquare.png", "greensquare", TheGame::Instance()->getdrawer());
 	TextureManager::Instance()->load("Content/bigone.png", "One", TheGame::Instance()->getdrawer());
 	TextureManager::Instance()->load("Content/bigtwo.png", "Two", TheGame::Instance()->getdrawer());
 	TextureManager::Instance()->load("Content/bigthree.png", "Three", TheGame::Instance()->getdrawer());
