@@ -242,7 +242,7 @@ void PlayState::setup()
 	//*****vertical spacing****
 	int centerheight = TheGame::Instance()->getGameHeight() / 2;
 	int verticalposition = centerheight + (imageheight * 2);
-	int numberverticalposition = verticalposition - numberimageheight - 50;
+	int numberverticalposition = verticalposition - numberimageheight - 150;
 	//*****vertical spaces end***
 	one = new Number(1, Vector2D(centerwidth - (numberimagewidth / 2), numberverticalposition), numberimagewidth, numberimageheight, "One", 1);
 	two = new Number(1, Vector2D(centerwidth - (numberimagewidth / 2), numberverticalposition), numberimagewidth, numberimageheight, "Two", 1);

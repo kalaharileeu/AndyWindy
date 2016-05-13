@@ -20,12 +20,19 @@ public:
     int getCallbackID() { return callbackid; }
 
 private:
-    enum button_state
-    {
-        MOUSE_OUT = 0,
-        MOUSE_OVER = 1,
-        CLICKED = 2
-    };
+	//below for button animation
+    //enum button_state
+    //{
+    //    MOUSE_OUT = 0,
+    //    MOUSE_OVER = 1,
+    //    CLICKED = 2
+    //};
+	enum button_state
+	{
+		MOUSE_OUT = 0,
+		MOUSE_OVER = 0,
+		CLICKED = 0
+	};
 
     bool released;
     int callbackid;

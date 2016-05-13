@@ -94,6 +94,7 @@ bool DoneState::onEnter()
 {
 	////Get the text ready, TTF_Font
 	textmanagerdone = new Texter();
+	//number to draw comes from construction of the oject
 	textmanagerdone->load(numbertodraw, numbertodraw, TheGame::Instance()->getdrawer());
 
 	int gamewidth = TheGame::Instance()->getGameWidth();
@@ -118,17 +119,17 @@ bool DoneState::onEnter()
 	}
 	if (numbertodraw == "five")
 	{
-		numberobjects.push_back(new GeneralNumber(1, Vector2D(centerwidth - numberimagewidth, numberverticalposition),
+		numberobjects.push_back(new GeneralNumber(1, Vector2D(centerwidth - (numberimagewidth/2), numberverticalposition),
 			numberimagewidth, numberimageheight, "Five", 1));
 	}
 	if (numbertodraw == "three")
 	{
-		numberobjects.push_back(new GeneralNumber(1, Vector2D(centerwidth - numberimagewidth, numberverticalposition),
+		numberobjects.push_back(new GeneralNumber(1, Vector2D(centerwidth - (numberimagewidth / 2), numberverticalposition),
 			numberimagewidth, numberimageheight, "Three", 1));
 	}
 	if (numbertodraw == "six")
 	{
-		numberobjects.push_back(new GeneralNumber(1, Vector2D(centerwidth - numberimagewidth, numberverticalposition),
+		numberobjects.push_back(new GeneralNumber(1, Vector2D(centerwidth - (numberimagewidth / 2), numberverticalposition),
 			numberimagewidth, numberimageheight, "Six", 1));
 	}
 

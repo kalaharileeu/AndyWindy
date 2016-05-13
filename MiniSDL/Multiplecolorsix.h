@@ -17,7 +17,7 @@ public:
 
 		int imagewidth = TextureManager::Instance()->GetTextureDimensions("bluesquare").getX();
 		int imageheight = TextureManager::Instance()->GetTextureDimensions("bluesquare").getY();
-		//number of squares
+		//number of squares horizontally
 		int numberofitems = 10;
 		int gamewidth = TheGame::Instance()->getGameWidth();
 		//****Horizontal spacing*****
@@ -31,23 +31,23 @@ public:
 		int startpoint = centerwidth - ((numberofitems / 2) * (imagewidth));
 		int verticalposition = centerheight + (imageheight * 2);
 		//add 20 playobject "Number" to the gameobject list
-		for (int i = 0; i < 10; i++)
+		for (int i = 0; i < 20; i++)
 		{
 			//There should be 6 blue squares
-			if ((i + 1) < 7)
+			if ((i + 1) % 3 == 0)
 			{
-				playobjects.push_back(new Number(1, Vector2D(startpoint + ((imagewidth) * i),
-					verticalposition), imagewidth, imageheight, "bluesquare", 1));
+				playobjects.push_back(new Number(1, Vector2D(startpoint + ((imagewidth) * (i % 10)),
+					verticalposition + (imageheight * (i / numberofitems)) ), imagewidth, imageheight, "bluesquare", 1));
 			}
-			else if ((i + 1) % 5 == 0)
+			else if ((i + 1) % 2 == 0)
 			{
-				playobjects.push_back(new Number(1, Vector2D(startpoint + ((imagewidth) * i),
-					verticalposition), imagewidth, imageheight, "yellowsquare", 1));
+				playobjects.push_back(new Number(1, Vector2D(startpoint + ((imagewidth) * (i % 10)),
+					verticalposition + (imageheight * (i / numberofitems))), imagewidth, imageheight, "yellowsquare", 1));
 			}
 			else
 			{
-				playobjects.push_back(new Number(1, Vector2D(startpoint + ((imagewidth) * i),
-					verticalposition), imagewidth, imageheight, "redsquare", 1));
+				playobjects.push_back(new Number(1, Vector2D(startpoint + ((imagewidth) * (i % 10)),
+					verticalposition + (imageheight * (i / numberofitems))), imagewidth, imageheight, "redsquare", 1));
 			}
 		}
 

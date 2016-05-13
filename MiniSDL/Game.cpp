@@ -64,7 +64,7 @@ bool Game::init(const char * title, int xpos, int ypos, bool fullscreen)
 			if (maindrawer != nullptr)
 			{
 				std::cout << "main drawer success/n";
-				SDL_SetRenderDrawColor(maindrawer, 255, 255, 255, 5);
+				SDL_SetRenderDrawColor(maindrawer, 237, 255, 206, 5);
 			}
 			else
 			{
