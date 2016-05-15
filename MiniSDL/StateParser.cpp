@@ -45,12 +45,13 @@ void StateParser::parseObjects(std::vector<GameObject *> *gameobjects)
 {
     //int x, y, width, height, numFrames, callbackID, animSpeed;
     //string textureID;
-	//gameobjects->load(std::unique_ptr<LoaderParams>(new LoaderParams(x, y, width, height, textureID, numFrames, callbackID, animSpeed)));
-	//int x, int y, int width, int height, std::string textureID, int numFrames, animationspeed if needed
+	//gameobjects->load(std::unique_ptr<LoaderParams>(new LoaderParams
+	//(x, y, width, height, textureID, numFrames, callbackID, animSpeed)));
+	//int x, int y, int width, int height, std::string textureID, int numFrames, callback id
 	gameobjects->push_back(new MenuButton(0, Vector2D((TheGame::Instance()->getGameWidth() / 2 - 200), 20),
 		400, 100, "count", 0, 1));
 	gameobjects->push_back(new MenuButton(0, Vector2D(TheGame::Instance()->getGameWidth() / 2 - 200, 140),
-		400, 100, "exitbutton", 0, 1));
+		400, 100, "exitbutton", 0, 2));
 	gameobjects->push_back(new MenuButton(0, Vector2D(TheGame::Instance()->getGameWidth() / 2 - 200, 260),
-		400, 100, "addbutton", 0, 1));
+		400, 100, "addbutton", 0, 3));
 }

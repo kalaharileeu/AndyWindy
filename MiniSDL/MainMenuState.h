@@ -23,5 +23,6 @@ class MainMenuState : public MenuState
 		//function pointers will only support static functions
         static void menutopplay();
         static void exitfromMenu();
+		static void menutopdraw();
 };
 #endif // MAINMENUSTATE_H

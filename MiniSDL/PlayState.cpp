@@ -104,20 +104,69 @@ void PlayState::draw()
 		}
 		//subtract the number of playobjects left to the numbe of numbers
 		//int i = numberobjects.size() - playobjects.size();
-		if (counter == 1){ one->draw();}
-		if (counter == 2) { two->draw(); }
-		if (counter == 3) { three->draw(); }
-		if (counter == 4) { four->draw(); }
-		if (counter == 5) { five->draw(); }
-		if (counter == 6) { six->draw(); }
-		if (counter == 7) { seven->draw(); }
-		if (counter == 8) { eight->draw(); }
-		if (counter == 9) { nine->draw(); }
+		if (counter == 0)
+		{
+			int xposition = ((TheGame::Instance()->getGameWidth() - textmanager.GetTextureDimensions("count10").getX()) / 2);
+			textmanager.draw("count10", xposition, 0, TheGame::Instance()->getdrawer());
+			xposition = ((TheGame::Instance()->getGameWidth() - textmanager.GetTextureDimensions("bluecircles").getX()) / 2);
+			textmanager.draw("bluecircles", xposition, 60, TheGame::Instance()->getdrawer());
+		}
+		else if (counter == 1)
+		{ 
+			one->draw();
+			int x = ((TheGame::Instance()->getGameWidth() - textmanager.GetTextureDimensions("one").getX()) / 2);
+			textmanager.draw("one", x, 0, TheGame::Instance()->getdrawer());
+		}
+		else if (counter == 2) 
+		{ 
+			two->draw(); 
+			int x = ((TheGame::Instance()->getGameWidth() - textmanager.GetTextureDimensions("two").getX()) / 2);
+			textmanager.draw("two", x, 0, TheGame::Instance()->getdrawer());
+		}
+		else if (counter == 3) 
+		{ 
+			three->draw(); 
+			int x = ((TheGame::Instance()->getGameWidth() - textmanager.GetTextureDimensions("three").getX()) / 2);
+			textmanager.draw("three", x, 0, TheGame::Instance()->getdrawer());
 
-		int xposition = ((TheGame::Instance()->getGameWidth() - textmanager.GetTextureDimensions("count10").getX()) / 2);
-		textmanager.draw("count10", xposition, 0, TheGame::Instance()->getdrawer());
-		xposition = ((TheGame::Instance()->getGameWidth() - textmanager.GetTextureDimensions("bluecircles").getX()) / 2);
-		textmanager.draw("bluecircles", xposition, 60, TheGame::Instance()->getdrawer());
+		}
+		else if (counter == 4)
+		{ 
+			four->draw();
+			int x = ((TheGame::Instance()->getGameWidth() - textmanager.GetTextureDimensions("four").getX()) / 2);
+			textmanager.draw("four", x, 0, TheGame::Instance()->getdrawer());
+		}
+		else if (counter == 5)
+		{ 
+			five->draw();
+			int x = ((TheGame::Instance()->getGameWidth() - textmanager.GetTextureDimensions("five").getX()) / 2);
+			textmanager.draw("five", x, 0, TheGame::Instance()->getdrawer());
+		}
+		else if (counter == 6)
+		{ 
+			six->draw();
+			int x = ((TheGame::Instance()->getGameWidth() - textmanager.GetTextureDimensions("six").getX()) / 2);
+			textmanager.draw("six", x, 0, TheGame::Instance()->getdrawer());
+		}
+		else if (counter == 7)
+		{ 
+			seven->draw();
+			int x = ((TheGame::Instance()->getGameWidth() - textmanager.GetTextureDimensions("seven").getX()) / 2);
+			textmanager.draw("seven", x, 0, TheGame::Instance()->getdrawer());
+		}
+		else if (counter == 8)
+		{ 
+			eight->draw();
+			int x = ((TheGame::Instance()->getGameWidth() - textmanager.GetTextureDimensions("eight").getX()) / 2);
+			textmanager.draw("eight", x, 0, TheGame::Instance()->getdrawer());
+		}
+		else if (counter == 9)
+		{ 
+			nine->draw();
+			int x = ((TheGame::Instance()->getGameWidth() - textmanager.GetTextureDimensions("nine").getX()) / 2);
+			textmanager.draw("nine", x, 0, TheGame::Instance()->getdrawer());
+		}
+
 	}
 }
 //On enter prepare some variables for the level
@@ -220,6 +269,16 @@ void PlayState::setup()
 	//Get the text ready, TTF_Font
 	//texterwriter = Texter(TheGame::Instance()->getdrawer());
 	textmanager = Texter();
+	textmanager.load("one", "one", TheGame::Instance()->getdrawer());
+	textmanager.load("two", "two", TheGame::Instance()->getdrawer());
+	textmanager.load("three", "three", TheGame::Instance()->getdrawer());
+	textmanager.load("four", "four", TheGame::Instance()->getdrawer());
+	textmanager.load("five", "five", TheGame::Instance()->getdrawer());
+	textmanager.load("six", "six", TheGame::Instance()->getdrawer());
+	textmanager.load("seven", "seven", TheGame::Instance()->getdrawer());
+	textmanager.load("eight", "eight", TheGame::Instance()->getdrawer());
+	textmanager.load("nine", "nine", TheGame::Instance()->getdrawer());
+	textmanager.load("ten", "ten", TheGame::Instance()->getdrawer());
 	counter = 0;
 	//textmanager.load("Count the blue squares.", "count10", TheGame::Instance()->getdrawer());
 	//textmanager.load("From left to right!", "bluecircles", TheGame::Instance()->getdrawer());
