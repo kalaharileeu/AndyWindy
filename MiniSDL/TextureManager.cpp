@@ -46,6 +46,29 @@ void TextureManager::draw(std::string id, int x, int y,
 
 	SDL_RenderCopyEx(pRenderer, texturemap[id], &srcRect, &destRect, 0, 0, flip);
 }
+//zoom in out
+void TextureManager::drawzoom(std::string id, int x, int y,
+	int width, int height, SDL_Renderer* pRenderer, float zoom)
+{
+	SDL_Rect srcRect;
+	SDL_Rect destRect;
+	//TODO: Decide if querying the texture is best, rather than using width height
+	//Query the texture to get the height and the width
+	int w, h;
+	SDL_QueryTexture(texturemap[id], NULL, NULL, &w, &h);//Query
+
+	srcRect.x = 0;
+	srcRect.y = 0;
+	srcRect.w = w;
+	srcRect.h = h;
+	//destination rect need to be zoomed
+	destRect.w = w * zoom;
+	destRect.h = h * zoom;
+	destRect.x = x - ((w * zoom)/2);
+	destRect.y = y - ((h * zoom)/2);
+
+	SDL_RenderCopyEx(pRenderer, texturemap[id], &srcRect, &destRect, 0, 0, SDL_FLIP_NONE);
+}
 
 void TextureManager::drawFrame(std::string id, int x, int y, int width, int height,
 	int currentRow, int currentFrame, SDL_Renderer *pRenderer, double angle, int alpha, SDL_RendererFlip flip)

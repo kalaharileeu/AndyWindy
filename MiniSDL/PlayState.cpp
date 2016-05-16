@@ -44,7 +44,7 @@ void PlayState::update()
 		{
 			for (int i = 0; i < playobjects.size(); i++)
 			{
-
+				//if it is a blue square then continue
 				if (dynamic_cast<StaticObject*>(playobjects[i])->Gettextureid() == "bluesquare")
 				{
 					//call update to check for user interaction
@@ -204,9 +204,7 @@ bool PlayState::onEnter()
 	boolloadingcomplete = true;
 	return true;
 }
-
-
-//Clear bullets here from BulletHandler and reset Inputhandler
+//Clear and reset everything
 bool PlayState::onExit()
 {
 	if (goback != nullptr)
@@ -255,10 +253,9 @@ bool PlayState::onExit()
 		playobjects.clear();
 	}
 	//This is clearing say please write text
-	textdonebool = false;
+	textdonebool = false;//TODO://seems like I do not hneed this
 	boolloadingcomplete = false;
 	boolexiting = true;
-	std::cout << "exiting PlayState\n";
 	return true;
 }
 //setup on enter

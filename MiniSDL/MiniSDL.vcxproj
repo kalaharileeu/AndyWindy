@@ -133,6 +133,7 @@
     <ClCompile Include="MainMenuState.cpp" />
     <ClCompile Include="MenuButton.cpp" />
     <ClCompile Include="MovingObject.cpp" />
+    <ClCompile Include="NumberDraw.cpp" />
     <ClCompile Include="ObjectFactory.cpp" />
     <ClCompile Include="PlayState.cpp" />
     <ClCompile Include="StateMachine.cpp" />
@@ -158,6 +159,7 @@
     <ClInclude Include="MovingObject.h" />
     <ClInclude Include="Multiplecolorsix.h" />
     <ClInclude Include="Number.h" />
+    <ClInclude Include="NumberDraw.h" />
     <ClInclude Include="ObjectFactory.h" />
     <ClInclude Include="PlayState.h" />
     <ClInclude Include="RedYellowBlue.h" />

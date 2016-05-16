@@ -1,5 +1,6 @@
 #pragma once
 #include "StaticObject.h"
+#include "Vector2D.h"
 //#include "InputHandler.h"
 
 class Number :	public StaticObject
@@ -45,7 +46,13 @@ public:
 
 	virtual void draw()
 	{ 
-		StaticObject::draw();	
+		StaticObject::draw();
+	}
+
+	void drawzoom()
+	{
+		TextureManager::Instance()->drawzoom("One", (Uint32)position.getX(), (Uint32)position.getY(),
+			width, height, TheGame::Instance()->getdrawer(), 2.5);
 	}
 
 	virtual std::string type() { return "Number"; }
@@ -64,6 +71,12 @@ public:
 
 	void Settextureid(std::string value) { textureid = value; }
 
+	void Getposition(int &xpos, int &ypos) const
+	{
+		xpos = touchX;
+		ypos = touchY;
+	}
+
 private:
 	void handlemouseinput()
 	{
@@ -75,6 +88,8 @@ private:
 		if ((X > position.getX() && X < position.getX() + width) &&
 			(Y > position.getY() && Y < position.getY() + height))
 		{
+			touchX = X;
+			touchY = Y;
 			touched = true;
 		}
 	}

@@ -1,5 +1,6 @@
 ///The Playstate will be the center point to call all the control operations
 //BulletHandler, InputManager, playstate also draw the lives in used
+//But more simplistic in this application
 #pragma once
 #include "GameState.h"
 #include "Texter.h"

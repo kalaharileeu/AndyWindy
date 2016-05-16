@@ -5,7 +5,7 @@
 #include "PlayState.h"
 #include "InputHandler.h"
 #include "StateParser.h"
-#include "YelloBlue.h"
+#include "NumberDraw.h"
 
 const std::string MainMenuState::menuid = "MENU";
 
@@ -118,7 +118,7 @@ void MainMenuState::exitfromMenu()
 void MainMenuState::menutopdraw()
 {
 	//change to playstate
-	TheGame::Instance()->getstatemachine()->changeState(new YelloBlue());
+	TheGame::Instance()->getstatemachine()->changeState(new NumberDraw());
 }
 // end callbacks
 
