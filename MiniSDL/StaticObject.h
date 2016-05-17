@@ -7,6 +7,7 @@ class StaticObject : public GameObject
 public:
 	~StaticObject();
 	virtual void draw();
+	virtual void drawzoom(float zoom);
 	virtual void update();
 	virtual void collision();
 	virtual std::string type() { return textureid; }

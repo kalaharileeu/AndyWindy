@@ -1,7 +1,7 @@
 #pragma once
 #include "StaticObject.h"
 #include "Vector2D.h"
-//#include "InputHandler.h"
+
 
 class Number :	public StaticObject
 {
@@ -44,17 +44,6 @@ public:
 #endif
 	}
 
-	virtual void draw()
-	{ 
-		StaticObject::draw();
-	}
-
-	void drawzoom()
-	{
-		TextureManager::Instance()->drawzoom("One", (Uint32)position.getX(), (Uint32)position.getY(),
-			width, height, TheGame::Instance()->getdrawer(), 2.5);
-	}
-
 	virtual std::string type() { return "Number"; }
 	//return the position of the object.(Some object feedback)
 	Vector2D Getposition() {	return StaticObject::Getposition();	}
@@ -82,15 +71,22 @@ private:
 	{
 		//when toudhed just set the touched bool
 		//if it is a moving object, can cahnge the position for ex.
-		int X = InputHandler::Instance()->getMousePosition()->getX();
-		int Y = InputHandler::Instance()->getMousePosition()->getY();
-
-		if ((X > position.getX() && X < position.getX() + width) &&
-			(Y > position.getY() && Y < position.getY() + height))
+		int tempX = InputHandler::Instance()->getMousePosition()->getX();
+		int tempY = InputHandler::Instance()->getMousePosition()->getY();
+		std::cout << "Here" << std::endl;
+		//if there is a change then check for touch collision
+		if ((touchX != tempX) || (touchY != tempY))
 		{
-			touchX = X;
-			touchY = Y;
-			touched = true;
+			//if the values are different then change
+			touchX = tempX;
+			touchY = tempY;
+
+			if ((tempX > position.getX() && tempX < position.getX() + width) &&
+				(tempY > position.getY() && tempY < position.getY() + height))
+			{
+				std::cout << "Here2" << std::endl;
+				touched = true;
+			}
 		}
 	}
 

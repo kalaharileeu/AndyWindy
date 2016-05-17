@@ -35,6 +35,7 @@ void PlayState::update()
 		goback->update();
 		if (dynamic_cast<Goback*>(goback)->Getiftouchedbool())
 		{
+
 			TheGame::Instance()->getstatemachine()->changeState(new MainMenuState());
 		}
 		//check if a number was touched

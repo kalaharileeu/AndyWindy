@@ -39,10 +39,12 @@ void TextureManager::draw(std::string id, int x, int y,
 
 	srcRect.x = 0;
 	srcRect.y = 0;
-	srcRect.w = destRect.w = w;
-	srcRect.h = destRect.h = h;
-	destRect.x = x;
-	destRect.y = y;
+	srcRect.w = w;
+	srcRect.h = h;
+	destRect.w = width;//if zoomed then zoomed value
+	destRect.h = height;//if zommed then zoomed value
+	destRect.x = x;//if zommed then zoomed value
+	destRect.y = y;//if zommed then zoomed value
 
 	SDL_RenderCopyEx(pRenderer, texturemap[id], &srcRect, &destRect, 0, 0, flip);
 }

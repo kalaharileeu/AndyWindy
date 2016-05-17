@@ -1,7 +1,7 @@
-#include "ObjectFactory.h"
-ObjectFactory::ObjectFactory()
-{
-}
-ObjectFactory::~ObjectFactory()
-{
-}
+//#include "ObjectFactory.h"
+//ObjectFactory::ObjectFactory()
+//{
+//}
+//ObjectFactory::~ObjectFactory()
+//{
+//}

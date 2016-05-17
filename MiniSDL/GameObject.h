@@ -28,6 +28,7 @@ public:
 	//virtual void load(std::unique_ptr<LoaderParams> const &pParams) = 0;
 	// draw the object
 	virtual void draw() = 0;
+	virtual void drawzoom(float zoom) = 0;
 	// do update stuff
 	virtual void update() = 0;
 	// remove anything that needs to be deleted
@@ -69,5 +70,6 @@ protected:
 	double angle;
 	// blending
 	int alpha;
+	float zoom;
 };
 

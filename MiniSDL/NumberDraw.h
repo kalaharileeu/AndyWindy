@@ -2,6 +2,7 @@
 //draw letters with finger when touch or mouse click
 #pragma once
 #include "GameState.h"
+#include "Vector2D.h"
 //#include "Texter.h"
 
 //class Texter;
@@ -26,6 +27,8 @@ protected:
 	//do not have to refer to object to refer to static member
 	//const: has to initialised outside of the class, done it in .cpp file 
 	static const std::string stateid;
-
+private:
+	int xstart, ystart;
+	std::vector<Vector2D> drawcoord;
 };
 
