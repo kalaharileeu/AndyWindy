@@ -52,8 +52,10 @@ public:
 	//Gets the touch position 
 	Vector2D* Gettouchposition();
 	Vector2D* Getreleaseposition();
+	Vector2D* Getfingerdragpos() { return fingerdragpos; }
 	bool Gettouchstate() { return touched; }
 	bool Getreleasestate() { return released; }
+	bool Getfingmotionstate() { return fingermotion; }
 
 private:
 	InputHandler();
@@ -91,11 +93,13 @@ private:
 	// mouse specific
 	std::vector<bool> m_mouseButtonStates;
 	Vector2D* m_mousePosition;
+	Vector2D* fingerdragpos;
 	Vector2D* touchfingerposition;
 	Vector2D* liftfingerposition;
 	bool MouseMoved;
 	bool touched;
 	bool released;
+	bool fingermotion;
 
 	// singleton
 	static InputHandler* s_pInstance;

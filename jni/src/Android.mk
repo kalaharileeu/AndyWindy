@@ -58,7 +58,8 @@ LOCAL_SRC_FILES += \
 	../../MiniSDL/StaticObject.cpp \
 	../../MiniSDL/AnimatedGraphics.cpp \
 	../../MiniSDL/DoneState.cpp \
-	../../MiniSDL/YelloBlue.cpp
+	../../MiniSDL/YelloBlue.cpp \
+	../../MiniSDL/NumberDraw.cpp \
 #Cornel add SDL2 libraries and external libraries
 LOCAL_SHARED_LIBRARIES := SDL2 SDL2_image SDL2_ttf
 #LOCAL_STATIC_LIBRARIES += FreeImage

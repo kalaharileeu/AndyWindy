@@ -66,6 +66,29 @@ public:
 		ypos = touchY;
 	}
 
+#if defined( ANDROID )
+	void updatefingermotion()
+	{
+		if (InputHandler::Instance()->Getfingmotionstate())
+		{
+			//StaticObject::update(); Does nothing empty
+			int tempX = InputHandler::Instance()->Getfingerdragpos()->getX();
+			int tempY = InputHandler::Instance()->Getfingerdragpos()->getY();
+			//if there is a change then check for touch collision
+			if ((touchX != tempX) || (touchY != tempY))
+			{
+				touchX = tempX;
+				touchY = tempY;
+
+				if ((touchX > position.getX() && touchX < position.getX() + width) &&
+					(touchY > position.getY() && touchY < position.getY() + height))
+				{
+					touched = true;
+				}
+			}
+		}
+	}
+#endif
 private:
 	void handlemouseinput()
 	{
@@ -73,7 +96,6 @@ private:
 		//if it is a moving object, can cahnge the position for ex.
 		int tempX = InputHandler::Instance()->getMousePosition()->getX();
 		int tempY = InputHandler::Instance()->getMousePosition()->getY();
-		std::cout << "Here" << std::endl;
 		//if there is a change then check for touch collision
 		if ((touchX != tempX) || (touchY != tempY))
 		{
@@ -84,7 +106,6 @@ private:
 			if ((tempX > position.getX() && tempX < position.getX() + width) &&
 				(tempY > position.getY() && tempY < position.getY() + height))
 			{
-				std::cout << "Here2" << std::endl;
 				touched = true;
 			}
 		}

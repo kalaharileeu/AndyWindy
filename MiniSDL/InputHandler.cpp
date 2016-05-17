@@ -8,6 +8,7 @@ m_mousePosition(new Vector2D(0, 0)),
 MouseMoved(false), 
 touchfingerposition(new Vector2D(0, 0)),
 liftfingerposition(new Vector2D(0, 0)),
+fingerdragpos(new Vector2D(0, 0)),
 touched(false)
 {
 	// create button states for the mouse
@@ -27,6 +28,7 @@ InputHandler::~InputHandler()
 	delete m_mousePosition;
 	delete touchfingerposition;
 	delete liftfingerposition;
+	delete fingerdragpos;
 	// clear our arrays
 	m_joystickValues.clear();
 	m_joysticks.clear();
@@ -285,13 +287,16 @@ void InputHandler::onTouchFingerDown(SDL_Event &event)
 void InputHandler::onTouchFingerUp(SDL_Event &event)
 {
 	released = true;
+	fingermotion = false;
 	liftfingerposition->setX(event.tfinger.x * Game::Instance()->getGameWidth());
 	liftfingerposition->setY(event.tfinger.y * Game::Instance()->getGameHeight());
 }
 //handle touch events
 void InputHandler::onTouchFingerMotion()
 {
-
+	fingermotion = true;
+	fingerdragpos->setX(event.tfinger.x * Game::Instance()->getGameWidth());
+	fingerdragpos->setY(event.tfinger.y * Game::Instance()->getGameHeight());
 }
 
 void InputHandler::onMouseMove(SDL_Event &event)
