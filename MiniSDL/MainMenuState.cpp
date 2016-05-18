@@ -49,6 +49,7 @@ bool MainMenuState::onEnter()
     m_callbacks.push_back(menutopplay);
     m_callbacks.push_back(exitfromMenu);
 	m_callbacks.push_back(menutopdraw);
+	m_callbacks.push_back(menutopdraw);
     // set the callbacks for menu items
     setCallbacks(m_callbacks);
 	boolloadingcomplete = true;

@@ -81,8 +81,8 @@ void DoneState::draw()
 			numberobjects[i]->draw();
 		}
 		//numbertodraw must tie up with texturemanager
-		int xposition = ((TheGame::Instance()->getGameWidth() - textmanagerdone->GetTextureDimensions(numbertodraw).getX()) / 2);
-		textmanagerdone->draw(numbertodraw, xposition, 0, TheGame::Instance()->getdrawer());
+		int xposition = ((TheGame::Instance()->getGameWidth() - textmanager.GetTextureDimensions(numbertodraw).getX()) / 2);
+		textmanager.draw(numbertodraw, xposition, 0, TheGame::Instance()->getdrawer());
 		//Request a redraw to draw the new state
 		TheGame::Instance()->Setredrawbool(true);
 	}
@@ -93,9 +93,9 @@ void DoneState::draw()
 bool DoneState::onEnter()
 {
 	////Get the text ready, TTF_Font
-	textmanagerdone = new Texter();
+	textmanager = Texter();
 	//number to draw comes from construction of the oject
-	textmanagerdone->load(numbertodraw, numbertodraw, TheGame::Instance()->getdrawer());
+	textmanager.load(numbertodraw, numbertodraw, TheGame::Instance()->getdrawer());
 
 	int gamewidth = TheGame::Instance()->getGameWidth();
 	/*************Spacing down here************/
@@ -148,8 +148,8 @@ bool DoneState::onExit()
 	TheInputHandler::Instance()->reset();
 	//TextureManager::Instance()->clearTextureMap();
 	//Below is the  class handling the text
-	textmanagerdone->clear();
-	delete textmanagerdone;
+	//textmanagerdone->clear();
+	//delete textmanagerdone;
 	if (numberobjects.empty() == false)
 	{
 		for (int i = 0; i < numberobjects.size(); i++)

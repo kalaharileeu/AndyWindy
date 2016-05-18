@@ -1,7 +1,7 @@
 #pragma once
 #include "GameState.h"
 
-class Texter;
+//class Texter;
 class GameObject;
 //public inheritance with GameState: important
 class DoneState : public GameState
@@ -22,7 +22,7 @@ private:
 	static const std::string doneid;
 	std::vector<GameObject*> numberobjects;
 	//CollisionManager CM;
-	Texter* textmanagerdone;
+	//Texter* textmanagerdone;
 	bool textdonebool;
 	//This is the number to draw
 	std::string numbertodraw;

@@ -3,9 +3,7 @@
 //But more simplistic in this application
 #pragma once
 #include "GameState.h"
-#include "Texter.h"
 
-class Texter;
 class GameObject;
 
 class PlayState : public GameState
@@ -37,7 +35,7 @@ protected:
 	//used to move back to main menu
 	GameObject* goback;
 	//this write the screen text
-	Texter textmanager;
+	//Texter textmanager;
 	bool textdonebool;
 
 private:

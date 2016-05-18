@@ -39,6 +39,11 @@ void StateParser::parseTextures(std::vector<std::string> *textureids)
 		//add the id to the list so that it can be retrieved
 		textureids->push_back(idattribute); // push the id into the list
 		TheTextureManager::Instance()->load("Content/Menu/add.png", "addbutton", TheGame::Instance()->getdrawer());
+		//add the add button
+		idattribute = "drawbutton";
+		//add the id to the list so that it can be retrieved
+		textureids->push_back(idattribute); // push the id into the list
+		TheTextureManager::Instance()->load("Content/Menu/draw.png", "drawbutton", TheGame::Instance()->getdrawer());
 }
 //load the button objects in to vector
 void StateParser::parseObjects(std::vector<GameObject *> *gameobjects)
@@ -54,4 +59,6 @@ void StateParser::parseObjects(std::vector<GameObject *> *gameobjects)
 		400, 100, "exitbutton", 0, 2));
 	gameobjects->push_back(new MenuButton(0, Vector2D(TheGame::Instance()->getGameWidth() / 2 - 200, 260),
 		400, 100, "addbutton", 0, 3));
+	gameobjects->push_back(new MenuButton(0, Vector2D(TheGame::Instance()->getGameWidth() / 2 - 200, 380),
+		400, 100, "drawbutton", 0, 3));
 }

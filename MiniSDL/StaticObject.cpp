@@ -38,7 +38,7 @@ void StaticObject::drawzoom(float newzoom)
 		}
 	}
 	//below are the zoomed values
-	TextureManager::Instance()->draw("One", (Uint32)position.getX(), (Uint32)position.getY(),
+	TextureManager::Instance()->draw(textureid, (Uint32)position.getX(), (Uint32)position.getY(),
 		width, height, TheGame::Instance()->getdrawer(), SDL_FLIP_NONE);
 }
 // apply velocity to current position

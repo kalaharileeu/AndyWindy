@@ -1,6 +1,9 @@
 #pragma once
 #include <string>
 #include <vector>
+#include <map>
+#include "Texter.h"
+
 /*
 There are a few possible states for the game/program for instance playstate, pause state, menustate etc.
 FSM(Finite State Machine), machine can exist in a finite number of states, can exist in only one state
@@ -26,6 +29,7 @@ protected:
 	{}
 	bool boolloadingcomplete;
 	bool boolexiting;
+	Texter textmanager;
 	//list of texture IDs to each state so that we can clear all of the textures that were loaded for that state
 	std::vector<std::string> textureidlist;
 };

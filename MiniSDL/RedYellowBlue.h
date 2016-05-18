@@ -7,7 +7,7 @@ class RedYelloBlue : public PlayState
 {
 public:
 
-	bool onEnter()
+	bool onEnter() override
 	{
 		PlayState::setup();
 		//Load text here

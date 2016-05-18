@@ -22,6 +22,7 @@ protected:
 	//this write the screen text
 	//Texter numberdrawtester;
 	GameObject* goback;
+	GameObject* goforward;
 	std::vector<GameObject*> playobjects;
 	//only one copy of this maintained for all objects
 	//do not have to refer to object to refer to static member
@@ -30,5 +31,7 @@ protected:
 private:
 	int xstart, ystart;
 	std::vector<Vector2D> drawcoord;
+	std::vector<std::string> numbertostring;
+	int counter;
 };
 

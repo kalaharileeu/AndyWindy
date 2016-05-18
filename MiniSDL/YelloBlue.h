@@ -4,7 +4,7 @@ class YelloBlue : public PlayState
 {
 public:
 	~YelloBlue();
-	bool onEnter();
+	bool onEnter() override;
 	std::string getStateID() const { return yellowblueplayid; }
 private:
 	static const std::string yellowblueplayid;

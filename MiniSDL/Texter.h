@@ -1,5 +1,5 @@
 #pragma once
-#include "Game.h"
+//#include "Game.h"
 #include "SDL.h"
 #include "SDL_ttf.h"
 #include <iostream>
@@ -8,11 +8,24 @@
 class Texter
 {
 public:
-	Texter() 
+	~Texter()
 	{
+		if (Sans != nullptr)
+		{
+			//Free global font
+			TTF_CloseFont(Sans);
+			Sans = nullptr;
+		}
 
+		for (std::map<std::string, SDL_Texture*>::iterator it = texturemap.begin(); it != texturemap.end(); it++)
+		{
+			SDL_DestroyTexture(it->second);
+			it->second = nullptr;
+			//texturemap.erase(it);
+		}
+		texturemap.clear();
+		TTF_Quit();
 	}
-	~Texter() {}
 
 	bool load(std::string text, std::string id, SDL_Renderer* drawer)
 	{

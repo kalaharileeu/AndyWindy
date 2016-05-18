@@ -35,8 +35,8 @@ void PlayState::update()
 		goback->update();
 		if (dynamic_cast<Goback*>(goback)->Getiftouchedbool())
 		{
-
 			TheGame::Instance()->getstatemachine()->changeState(new MainMenuState());
+			return;//This return very importent, gave me lots of headaches without
 		}
 		//check if a number was touched
 		//begin() returns an iterator that can be used to iterate through the collection,
@@ -71,18 +71,22 @@ void PlayState::update()
 			if (counter == 10)
 			{
 				TheGame::Instance()->getstatemachine()->changeState(new DoneState("ten"));
+				return;
 			}
 			else if (counter == 5)
 			{
 				TheGame::Instance()->getstatemachine()->changeState(new DoneState("five"));
+				return;
 			}
 			else if (counter == 3)
 			{
 				TheGame::Instance()->getstatemachine()->changeState(new DoneState("three"));
+				return;
 			}
 			else if (counter == 6)
 			{
 				TheGame::Instance()->getstatemachine()->changeState(new DoneState("six"));
+				return;
 			}
 		}
 	}
@@ -175,6 +179,7 @@ void PlayState::draw()
 //This is called by Statemaschine
 bool PlayState::onEnter()
 {
+	std::cout << "load playstate on enter" << std::endl;
 	setup();
 	//Load text here
 	textmanager.load("Count the blue squares.", "count10", TheGame::Instance()->getdrawer());
@@ -208,13 +213,14 @@ bool PlayState::onEnter()
 //Clear and reset everything
 bool PlayState::onExit()
 {
+	std::cout << "load playstate on exit" << std::endl;
 	if (goback != nullptr)
 	{
 		delete goback;
 		goback = nullptr;
 	}
 	//TheInputHandler::Instance()->reset();
-	////TextureManager::Instance()->clearTextureMap();
+	//TextureManager::Instance()->clearTextureMap();
 	////Below is the  class handling the text
 	//textmanager.clear();
 	//donesearching = false;
