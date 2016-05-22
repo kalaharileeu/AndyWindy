@@ -3,9 +3,7 @@
 #pragma once
 #include "GameState.h"
 #include "Vector2D.h"
-//#include "Texter.h"
 
-//class Texter;
 class GameObject;
 
 class NumberDraw : public GameState
@@ -20,7 +18,6 @@ public:
 protected:
 	void setup();
 	//this write the screen text
-	//Texter numberdrawtester;
 	GameObject* goback;
 	GameObject* goforward;
 	std::vector<GameObject*> playobjects;

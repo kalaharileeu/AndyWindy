@@ -32,8 +32,8 @@ public:
 
 
 	// init joysticks
-	void initialiseJoysticks();
-	bool joysticksInitialised() const { return m_bJoysticksInitialised; }
+	//void initialiseJoysticks();
+	//bool joysticksInitialised() const { return m_bJoysticksInitialised; }
 	void reset();
 
 	// update and clean the input handler
@@ -41,10 +41,10 @@ public:
 	void clean();
 	// keyboard events
 	bool isKeyDown(SDL_Scancode key) const;
-	// joystick events
-	int getAxisX(int joy, int stick) const;
-	int getAxisY(int joy, int stick) const;
-	bool getButtonState(int joy, int buttonNumber) const;
+	//// joystick events
+	//int getAxisX(int joy, int stick) const;
+	//int getAxisY(int joy, int stick) const;
+	//bool getButtonState(int joy, int buttonNumber) const;
 	// mouse events
 	bool getMouseButtonState(int buttonNumber) const;
 	Vector2D* getMousePosition() const;
@@ -56,11 +56,15 @@ public:
 	bool Gettouchstate() { return touched; }
 	bool Getreleasestate() { return released; }
 	bool Getfingmotionstate() { return fingermotion; }
+	std::string happystring(int x);
 
 private:
+	std::string happy;
 	InputHandler();
 	~InputHandler();
 	SDL_Event event;
+	SDL_Event oldevent;
+
 	InputHandler(const InputHandler&);
 	//InputHandler& operator=(const InputHandler&);
 	// private functions to handle different event types
@@ -75,20 +79,20 @@ private:
 	void onMouseMove(SDL_Event& event);
 	void onMouseButtonDown(SDL_Event& event);
 	void onMouseButtonUp(SDL_Event& event);
-	// handle joysticks events
-	void onJoystickAxisMove(SDL_Event& event);
-	void onJoystickButtonDown(SDL_Event& event);
-	void onJoystickButtonUp(SDL_Event& event);
+	//// handle joysticks events
+	//void onJoystickAxisMove(SDL_Event& event);
+	//void onJoystickButtonDown(SDL_Event& event);
+	//void onJoystickButtonUp(SDL_Event& event);
 	// member variables
 	// keyboard specific
 	const Uint8* m_keystates;
 
 	// joystick specific
-	std::vector<std::pair<Vector2D*, Vector2D*> > m_joystickValues;
-	std::vector<SDL_Joystick*> m_joysticks;
-	std::vector<std::vector<bool> > m_buttonStates;
+	//std::vector<std::pair<Vector2D*, Vector2D*> > m_joystickValues;
+	//std::vector<SDL_Joystick*> m_joysticks;
+	//std::vector<std::vector<bool> > m_buttonStates;
 	bool m_bJoysticksInitialised;
-	static const int m_joystickDeadZone = 10000;
+	//static const int m_joystickDeadZone = 10000;
 
 	// mouse specific
 	std::vector<bool> m_mouseButtonStates;

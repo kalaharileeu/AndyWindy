@@ -9,7 +9,7 @@ class MenuButton : public StaticObject
 public:
 
 	MenuButton(int ms, Vector2D pos, int w, int h, std::string id, int nf, int callbid);
-    ~MenuButton(){ std::cout << "Menubutton destroyed";  }
+    ~MenuButton(){ }
 	//not using load - dependency injection
     //virtual void load(std::unique_ptr<LoaderParams> const &pParams);
     void draw();
@@ -37,4 +37,6 @@ private:
     bool released;
     int callbackid;
     void (*m_callback)();
+	int touchX;
+	int touchY;
 };

@@ -67,6 +67,7 @@ public:
 	}
 
 #if defined( ANDROID )
+	//this is for motion
 	void updatefingermotion()
 	{
 		if (InputHandler::Instance()->Getfingmotionstate())

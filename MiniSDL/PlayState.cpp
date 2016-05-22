@@ -10,6 +10,7 @@
 #include "DoneState.h"
 #include <stdlib.h>
 #include <iostream>
+#include "Texter.h"
 
 const std::string PlayState::playid = "PLAY";
 
@@ -111,65 +112,64 @@ void PlayState::draw()
 		//int i = numberobjects.size() - playobjects.size();
 		if (counter == 0)
 		{
-			int xposition = ((TheGame::Instance()->getGameWidth() - textmanager.GetTextureDimensions("count10").getX()) / 2);
-			textmanager.draw("count10", xposition, 0, TheGame::Instance()->getdrawer());
-			xposition = ((TheGame::Instance()->getGameWidth() - textmanager.GetTextureDimensions("bluecircles").getX()) / 2);
-			textmanager.draw("bluecircles", xposition, 60, TheGame::Instance()->getdrawer());
+			int xposition = ((TheGame::Instance()->getGameWidth() - Texter::Instance()->GetTextureDimensions("count10").getX()) / 2);
+			Texter::Instance()->draw("count10", xposition, 0, TheGame::Instance()->getdrawer());
+			xposition = ((TheGame::Instance()->getGameWidth() - Texter::Instance()->GetTextureDimensions("bluecircles").getX()) / 2);
+			Texter::Instance()->draw("bluecircles", xposition, 60, TheGame::Instance()->getdrawer());
 		}
 		else if (counter == 1)
 		{ 
 			one->draw();
-			int x = ((TheGame::Instance()->getGameWidth() - textmanager.GetTextureDimensions("one").getX()) / 2);
-			textmanager.draw("one", x, 0, TheGame::Instance()->getdrawer());
+			int x = ((TheGame::Instance()->getGameWidth() - Texter::Instance()->GetTextureDimensions("one").getX()) / 2);
+			Texter::Instance()->draw("one", x, 0, TheGame::Instance()->getdrawer());
 		}
 		else if (counter == 2) 
 		{ 
 			two->draw(); 
-			int x = ((TheGame::Instance()->getGameWidth() - textmanager.GetTextureDimensions("two").getX()) / 2);
-			textmanager.draw("two", x, 0, TheGame::Instance()->getdrawer());
+			int x = ((TheGame::Instance()->getGameWidth() - Texter::Instance()->GetTextureDimensions("two").getX()) / 2);
+			Texter::Instance()->draw("two", x, 0, TheGame::Instance()->getdrawer());
 		}
 		else if (counter == 3) 
 		{ 
 			three->draw(); 
-			int x = ((TheGame::Instance()->getGameWidth() - textmanager.GetTextureDimensions("three").getX()) / 2);
-			textmanager.draw("three", x, 0, TheGame::Instance()->getdrawer());
-
+			int x = ((TheGame::Instance()->getGameWidth() - Texter::Instance()->GetTextureDimensions("three").getX()) / 2);
+			Texter::Instance()->draw("three", x, 0, TheGame::Instance()->getdrawer());
 		}
 		else if (counter == 4)
 		{ 
 			four->draw();
-			int x = ((TheGame::Instance()->getGameWidth() - textmanager.GetTextureDimensions("four").getX()) / 2);
-			textmanager.draw("four", x, 0, TheGame::Instance()->getdrawer());
+			int x = ((TheGame::Instance()->getGameWidth() - Texter::Instance()->GetTextureDimensions("four").getX()) / 2);
+			Texter::Instance()->draw("four", x, 0, TheGame::Instance()->getdrawer());
 		}
 		else if (counter == 5)
 		{ 
 			five->draw();
-			int x = ((TheGame::Instance()->getGameWidth() - textmanager.GetTextureDimensions("five").getX()) / 2);
-			textmanager.draw("five", x, 0, TheGame::Instance()->getdrawer());
+			int x = ((TheGame::Instance()->getGameWidth() - Texter::Instance()->GetTextureDimensions("five").getX()) / 2);
+			Texter::Instance()->draw("five", x, 0, TheGame::Instance()->getdrawer());
 		}
 		else if (counter == 6)
 		{ 
 			six->draw();
-			int x = ((TheGame::Instance()->getGameWidth() - textmanager.GetTextureDimensions("six").getX()) / 2);
-			textmanager.draw("six", x, 0, TheGame::Instance()->getdrawer());
+			int x = ((TheGame::Instance()->getGameWidth() - Texter::Instance()->GetTextureDimensions("six").getX()) / 2);
+			Texter::Instance()->draw("six", x, 0, TheGame::Instance()->getdrawer());
 		}
 		else if (counter == 7)
 		{ 
 			seven->draw();
-			int x = ((TheGame::Instance()->getGameWidth() - textmanager.GetTextureDimensions("seven").getX()) / 2);
-			textmanager.draw("seven", x, 0, TheGame::Instance()->getdrawer());
+			int x = ((TheGame::Instance()->getGameWidth() - Texter::Instance()->GetTextureDimensions("seven").getX()) / 2);
+			Texter::Instance()->draw("seven", x, 0, TheGame::Instance()->getdrawer());
 		}
 		else if (counter == 8)
 		{ 
 			eight->draw();
-			int x = ((TheGame::Instance()->getGameWidth() - textmanager.GetTextureDimensions("eight").getX()) / 2);
-			textmanager.draw("eight", x, 0, TheGame::Instance()->getdrawer());
+			int x = ((TheGame::Instance()->getGameWidth() - Texter::Instance()->GetTextureDimensions("eight").getX()) / 2);
+			Texter::Instance()->draw("eight", x, 0, TheGame::Instance()->getdrawer());
 		}
 		else if (counter == 9)
 		{ 
 			nine->draw();
-			int x = ((TheGame::Instance()->getGameWidth() - textmanager.GetTextureDimensions("nine").getX()) / 2);
-			textmanager.draw("nine", x, 0, TheGame::Instance()->getdrawer());
+			int x = ((TheGame::Instance()->getGameWidth() - Texter::Instance()->GetTextureDimensions("nine").getX()) / 2);
+			Texter::Instance()->draw("nine", x, 0, TheGame::Instance()->getdrawer());
 		}
 
 	}
@@ -179,11 +179,8 @@ void PlayState::draw()
 //This is called by Statemaschine
 bool PlayState::onEnter()
 {
-	std::cout << "load playstate on enter" << std::endl;
 	setup();
 	//Load text here
-	textmanager.load("Count the blue squares.", "count10", TheGame::Instance()->getdrawer());
-	textmanager.load("From left to right!", "bluecircles", TheGame::Instance()->getdrawer());
 	int imagewidth = TextureManager::Instance()->GetTextureDimensions("bluesquare").getX();
 	int imageheight = TextureManager::Instance()->GetTextureDimensions("bluesquare").getY();
 	//number of squares
@@ -213,14 +210,12 @@ bool PlayState::onEnter()
 //Clear and reset everything
 bool PlayState::onExit()
 {
-	std::cout << "load playstate on exit" << std::endl;
+	std::cout << "playstateaOnExit";
 	if (goback != nullptr)
 	{
 		delete goback;
 		goback = nullptr;
 	}
-	//TheInputHandler::Instance()->reset();
-	//TextureManager::Instance()->clearTextureMap();
 	////Below is the  class handling the text
 	//textmanager.clear();
 	//donesearching = false;
@@ -245,7 +240,7 @@ bool PlayState::onExit()
 	TheInputHandler::Instance()->reset();
 	//TextureManager::Instance()->clearTextureMap();
 	//Below is the  class handling the text
-	textmanager.clear();
+
 	donesearching = false;
 	if (playobjects.empty() == false)
 	{
@@ -271,18 +266,7 @@ void PlayState::setup()
 	//no more blue squares to look for
 	donesearching = false;
 	//Get the text ready, TTF_Font
-	//texterwriter = Texter(TheGame::Instance()->getdrawer());
-	textmanager = Texter();
-	textmanager.load("one", "one", TheGame::Instance()->getdrawer());
-	textmanager.load("two", "two", TheGame::Instance()->getdrawer());
-	textmanager.load("three", "three", TheGame::Instance()->getdrawer());
-	textmanager.load("four", "four", TheGame::Instance()->getdrawer());
-	textmanager.load("five", "five", TheGame::Instance()->getdrawer());
-	textmanager.load("six", "six", TheGame::Instance()->getdrawer());
-	textmanager.load("seven", "seven", TheGame::Instance()->getdrawer());
-	textmanager.load("eight", "eight", TheGame::Instance()->getdrawer());
-	textmanager.load("nine", "nine", TheGame::Instance()->getdrawer());
-	textmanager.load("ten", "ten", TheGame::Instance()->getdrawer());
+
 	counter = 0;
 	//textmanager.load("Count the blue squares.", "count10", TheGame::Instance()->getdrawer());
 	//textmanager.load("From left to right!", "bluecircles", TheGame::Instance()->getdrawer());

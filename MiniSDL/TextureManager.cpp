@@ -23,7 +23,6 @@ bool TextureManager::load(std::string fileName, std::string id, SDL_Renderer* pR
 		texturemap[id] = sdltexture;
 		return true;
 	}
-
 	return false;
 }
 
@@ -137,7 +136,15 @@ void TextureManager::clearTextureMap()
 
 void TextureManager::clearFromTextureMap(std::string id)
 {
-	//this is probably not good enough to delete the pointer
-	//not using at this stage
-	texturemap.erase(id);
+
+	if (texturemap.find(id) != texturemap.end())
+	{
+		SDL_DestroyTexture(texturemap[id]);
+		texturemap[id] = nullptr;
+		texturemap.erase(id);
+	}
+	else
+	{
+		std::cout << "texture not found to delete" << id << std::endl;
+	}
 }

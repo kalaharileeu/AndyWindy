@@ -62,6 +62,10 @@ bool MainMenuState::onExit()
 {
 	//TextureManager::Instance()->clearTextureMap();
 	boolexiting = true;
+	TheTextureManager::Instance()->clearFromTextureMap("count");
+	TheTextureManager::Instance()->clearFromTextureMap("exitbutton");
+	TheTextureManager::Instance()->clearFromTextureMap("addbutton");
+	TheTextureManager::Instance()->clearFromTextureMap("drawbutton");
     // clean the game objects
     if(boolloadingcomplete && !gameobjects.empty())
     {
@@ -74,6 +78,7 @@ bool MainMenuState::onExit()
     }
     // reset the input handler
     TheInputHandler::Instance()->reset();
+
 	boolloadingcomplete = false;
 	boolexiting = true;
     std::cout << "exiting MenuState\n";
@@ -110,10 +115,9 @@ void MainMenuState::menutopplay()
 //callbacks linked to buttons
 void MainMenuState::exitfromMenu()
 {
-	SDL_Log("exit game!!!!!!!!!!!!!!!!!!!!!!!!!!!!1");
-#if !defined ( ANDROID )
+//#if !defined ( ANDROID )
 	TheGame::Instance()->quit();
-#endif
+//#endif
 }
 // Callbacks linked to buttons
 void MainMenuState::menutopdraw()

@@ -33,6 +33,7 @@ void StateMachine::draw()
 to initialise the state. Loading content etc.*/
 void StateMachine::pushState(GameState *state)
 {
+	std::cout << "popstate ";
 	gamestate.push_back(state);
 	gamestate.back()->onEnter();
 }
@@ -43,6 +44,7 @@ void StateMachine::popState()
 {
 	if (!gamestate.empty())
 	{
+		std::cout << "popstate ";
 		gamestate.back()->onExit();
 		gamestate.pop_back();
 	}
@@ -62,6 +64,7 @@ void StateMachine::changeState(GameState *state)
 		}
 		gamestate.back()->onExit();
 		gamestate.pop_back();
+		std::cout << "popstate ";
 	}
 	// initialise it
 	state->onEnter();

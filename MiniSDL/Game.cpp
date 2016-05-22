@@ -1,6 +1,7 @@
 #include "Game.h"
 #include "PlayState.h"
 #include "MainMenuState.h"
+#include "Texter.h"
 
 Game* Game::instance = 0;
 
@@ -83,10 +84,17 @@ bool Game::init(const char * title, int xpos, int ypos, bool fullscreen)
 		std::cout << "window init failed\n";
 		return false;
 	}
+	////Initialize SDL_ttf
+	//if (TTF_Init() == -1)
+	//{
+	//	std::cout << "TTF_Init: %s\n", TTF_GetError();
+	//	std::cout << "TTF_init crap out";
+	//	return false;
+	//}
 	//load some sound effect here
 	//register some GameObjsect here
 	//Register the image with the TextureManager
-	TextureManager::Instance()->load("Content/bluesquare.png", "bluesquare", TheGame::Instance()->getdrawer());
+	TextureManager::Instance()->load("Content/bluesquare2.png", "bluesquare", TheGame::Instance()->getdrawer());
 	TextureManager::Instance()->load("Content/redsquare.png", "redsquare", TheGame::Instance()->getdrawer());
 	TextureManager::Instance()->load("Content/yellowsquare.png", "yellowsquare", TheGame::Instance()->getdrawer());
 	TextureManager::Instance()->load("Content/greensquare.png", "greensquare", TheGame::Instance()->getdrawer());
@@ -103,6 +111,18 @@ bool Game::init(const char * title, int xpos, int ypos, bool fullscreen)
 	TextureManager::Instance()->load("Content/exit.png", "exit", TheGame::Instance()->getdrawer());
 	TextureManager::Instance()->load("Content/next.png", "next", TheGame::Instance()->getdrawer());
 	TextureManager::Instance()->load("Content/star.png", "star", TheGame::Instance()->getdrawer());
+	Texter::Instance()->load("one", "one", TheGame::Instance()->getdrawer());
+	Texter::Instance()->load("two", "two", TheGame::Instance()->getdrawer());
+	Texter::Instance()->load("three", "three", TheGame::Instance()->getdrawer());
+	Texter::Instance()->load("four", "four", TheGame::Instance()->getdrawer());
+	Texter::Instance()->load("five", "five", TheGame::Instance()->getdrawer());
+	Texter::Instance()->load("six", "six", TheGame::Instance()->getdrawer());
+	Texter::Instance()->load("seven", "seven", TheGame::Instance()->getdrawer());
+	Texter::Instance()->load("eight", "eight", TheGame::Instance()->getdrawer());
+	Texter::Instance()->load("nine", "nine", TheGame::Instance()->getdrawer());
+	Texter::Instance()->load("ten", "ten", TheGame::Instance()->getdrawer());
+	Texter::Instance()->load("Count the blue squares.", "count10", TheGame::Instance()->getdrawer());
+	Texter::Instance()->load("From left to right!", "bluecircles", TheGame::Instance()->getdrawer());
 	/*change the state tells statemachine a new state is coming
 	statemachine will call on enter for that state*/
 	//Can start immediately with new Playstate(), I want to start with menustate
@@ -137,9 +157,11 @@ void Game::handleevents()
 */
 void Game::clean()
 {
+	Texter::Instance()->destroy();
+	SDL_Delay(5000);
 	std::cout << "cleaning game\n";
 	TheInputHandler::Instance()->clean();
-	statemachine->clean();//Does nothing at this stage
+	statemachine->clean();
 	statemachine = 0;
 	//delete m_pStateMachine;
 	TextureManager::Instance()->clearTextureMap();
@@ -148,6 +170,9 @@ void Game::clean()
 	SDL_DestroyRenderer(maindrawer);
 	//TTF_Quit();
 	//IMG_Quit();
+	SDL_Delay(5000);
 	SDL_Quit();
+
+	//std::terminate();
 
 }

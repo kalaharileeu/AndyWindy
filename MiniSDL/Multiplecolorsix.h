@@ -11,8 +11,8 @@ public:
 	{
 		PlayState::setup();
 		//Load text here
-		textmanager.load("Count the blue squares.", "count10", TheGame::Instance()->getdrawer());
-		textmanager.load("From left to right!", "bluecircles", TheGame::Instance()->getdrawer());
+//		textmanager.load("Count the blue squares.", "count10", TheGame::Instance()->getdrawer());
+//		textmanager.load("From left to right!", "bluecircles", TheGame::Instance()->getdrawer());
 
 		int imagewidth = TextureManager::Instance()->GetTextureDimensions("bluesquare").getX();
 		int imageheight = TextureManager::Instance()->GetTextureDimensions("bluesquare").getY();

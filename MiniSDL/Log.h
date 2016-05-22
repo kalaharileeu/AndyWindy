@@ -1,6 +1,6 @@
 
 #pragma once
-
+///SDL_Log("exit game!!!!!!!!!!!!!!!!!!!!!!!!!!!!1");
 #if defined( ANDROID )
 #  include <android/log.h>
 #  define LOGI(...) ((void)__android_log_print(ANDROID_LOG_INFO, "NDKApp", __VA_ARGS__))

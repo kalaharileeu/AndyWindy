@@ -130,11 +130,13 @@ bool NumberDraw::onExit()
 	boolexiting = true;
 	if (goback != nullptr)
 	{
+		std::cout << "clear ";
 		delete goback;
 		goback = nullptr;
 	}
 	if (goforward != nullptr)
 	{
+		std::cout << "clear ";
 		delete goforward;
 		goforward = nullptr;
 	}
@@ -144,6 +146,7 @@ bool NumberDraw::onExit()
 		{
 			if (playobjects[i] != nullptr)
 			{
+				std::cout << "clear ";
 				delete playobjects[i];
 				playobjects[i] = nullptr;
 			}

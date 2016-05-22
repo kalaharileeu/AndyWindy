@@ -5,6 +5,7 @@
 #include "RedYellowBlue.h"
 #include "MainMenuState.h"
 #include "Multiplecolorsix.h"
+#include "Texter.h"
 
 const std::string DoneState::doneid = "DONEONE";
 
@@ -81,8 +82,8 @@ void DoneState::draw()
 			numberobjects[i]->draw();
 		}
 		//numbertodraw must tie up with texturemanager
-		int xposition = ((TheGame::Instance()->getGameWidth() - textmanager.GetTextureDimensions(numbertodraw).getX()) / 2);
-		textmanager.draw(numbertodraw, xposition, 0, TheGame::Instance()->getdrawer());
+		int xposition = ((TheGame::Instance()->getGameWidth() - Texter::Instance()->GetTextureDimensions(numbertodraw).getX()) / 2);
+		Texter::Instance()->draw(numbertodraw, xposition, 0, TheGame::Instance()->getdrawer());
 		//Request a redraw to draw the new state
 		TheGame::Instance()->Setredrawbool(true);
 	}
@@ -93,9 +94,8 @@ void DoneState::draw()
 bool DoneState::onEnter()
 {
 	////Get the text ready, TTF_Font
-	textmanager = Texter();
 	//number to draw comes from construction of the oject
-	textmanager.load(numbertodraw, numbertodraw, TheGame::Instance()->getdrawer());
+	//textmanager.load(numbertodraw, numbertodraw, TheGame::Instance()->getdrawer());
 
 	int gamewidth = TheGame::Instance()->getGameWidth();
 	/*************Spacing down here************/
@@ -162,6 +162,5 @@ bool DoneState::onExit()
 	textdonebool = false;
 	boolloadingcomplete = false;
 	boolexiting = true;
-	std::cout << "exiting Donestate\n";
 	return true;
 }

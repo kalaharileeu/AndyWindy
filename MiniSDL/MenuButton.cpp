@@ -8,6 +8,8 @@ MenuButton::MenuButton(int ms, Vector2D pos, int w, int h, std::string id, int n
 	m_callback = 0;
 	released = true;
 	callbackid = callbid;
+	touchX = -1;
+	touchY = -1;
 }
 //Not using dependency injection
 //void MenuButton::load(std::unique_ptr<LoaderParams> const &pParams)
@@ -54,21 +56,28 @@ void MenuButton::update()
 		currentframe = MOUSE_OUT;
 	}
 #endif
-//#if defined( ANDROID )
-
-		int touchX = InputHandler::Instance()->Getreleaseposition()->getX();
-		int touchy = InputHandler::Instance()->Getreleaseposition()->getY();
+#if defined( ANDROID )
+	int tempX = InputHandler::Instance()->Gettouchposition()->getX();
+	int tempY = InputHandler::Instance()->Gettouchposition()->getY();
+		//int touchX = InputHandler::Instance()->Getreleaseposition()->getX();
+		//int touchy = InputHandler::Instance()->Getreleaseposition()->getY();
+	if ((touchX != tempX) || (touchY != tempY))
+	{
+		touchX = tempX;
+		touchY = tempY;
 
 		if ((touchX > position.getX() && touchX < position.getX() + width) &&
-			(touchy > position.getY() && touchy < position.getY() + height))
+			(touchY > position.getY() && touchY < position.getY() + height))
 		{
-			SDL_Log("released on target !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 			if (m_callback != 0)
 			{
+				SDL_Log("exit game???????????????????????????????????????????????????????????????????1");
 				m_callback();
+				m_callback = 0;
 			}
-
 		}
+	}
+#endif
 }
 //void MenuButton::clean()
 //{
