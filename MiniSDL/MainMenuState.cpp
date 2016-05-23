@@ -78,10 +78,9 @@ bool MainMenuState::onExit()
     }
     // reset the input handler
     TheInputHandler::Instance()->reset();
-
 	boolloadingcomplete = false;
 	boolexiting = true;
-    std::cout << "exiting MenuState\n";
+    //std::cout << "exiting MenuState\n";
     return true;
 }
 //pass in a vector of local functions to use in call back
@@ -102,6 +101,7 @@ void MainMenuState::setCallbacks(const std::vector<Callback>& callbacks)
 				//pass the callback function to the button, based on 
 				//the call back number you get from the button
                 button->setCallback(callbacks[button->getCallbackID()]);
+				button = nullptr;//added this
             }
         }
     }

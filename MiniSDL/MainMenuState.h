@@ -1,5 +1,4 @@
-#ifndef MAINMENUSTATE_H
-#define MAINMENUSTATE_H
+#pragma once
 #include <vector>
 #include "MenuState.h"
 #include "GameObject.h"
@@ -26,4 +25,3 @@ class MainMenuState : public MenuState
 		static void menutopdraw();
 		static void menutosum();
 };
-#endif // MAINMENUSTATE_H

@@ -3,7 +3,16 @@
 #include "MainMenuState.h"
 #include "InputHandler.h"
 #include <stdlib.h>//absolute value
+
 const std::string NumberDraw::stateid = "DRAWNUMBER";
+
+NumberDraw::NumberDraw()
+{
+	goback = nullptr;
+	goforward = nullptr;
+	boolloadingcomplete = false;
+	boolexiting = false;
+}
 
 NumberDraw::~NumberDraw()
 {
@@ -19,6 +28,11 @@ NumberDraw::~NumberDraw()
 	{
 		delete goback;
 		goback = nullptr;
+	}
+	if (goforward != nullptr)
+	{
+		delete goforward;
+		goforward = nullptr;
 	}
 }
 
@@ -114,8 +128,6 @@ bool NumberDraw::onEnter()
 	xstart, ystart, tempx, tempy = -1;
 	//Do general setup
 	setup();
-	boolloadingcomplete = true;
-	boolexiting = false;
 	//Doing all these push backs to keep the compiler happy
 	//will get a better way
 	numbertostring.push_back("Zero");
@@ -129,36 +141,40 @@ bool NumberDraw::onEnter()
 	numbertostring.push_back("Eight");
 	numbertostring.push_back("Nine");
 	TheGame::Instance()->Setredrawbool(true);
+	boolloadingcomplete = true;
+	boolexiting = false;
 	return true;
 }
 //Clear/reset verything
 bool NumberDraw::onExit()
 {
-	boolloadingcomplete = false;
-	boolexiting = true;
-	if (goback != nullptr)
+	if (boolloadingcomplete == true)
 	{
-		delete goback;
-		goback = nullptr;
-	}
-	if (goforward != nullptr)
-	{
-		delete goforward;
-		goforward = nullptr;
-	}
-	if (playobjects.empty() == false)
-	{
-		for (int i = 0; i < playobjects.size(); i++)
+		boolexiting = true;
+		if (goback != nullptr)
 		{
-			if (playobjects[i] != nullptr)
-			{
-				delete playobjects[i];
-				playobjects[i] = nullptr;
-			}
+			delete goback;
+			goback = nullptr;
 		}
-		playobjects.clear();
+		if (goforward != nullptr)
+		{
+			delete goforward;
+			goforward = nullptr;
+		}
+		if (playobjects.empty() == false)
+		{
+			for (int i = 0; i < playobjects.size(); i++)
+			{
+				if (playobjects[i] != nullptr)
+				{
+					delete playobjects[i];
+					playobjects[i] = nullptr;
+				}
+			}
+			playobjects.clear();
+		}
+		TheGame::Instance()->Setredrawbool(true);
 	}
-	TheGame::Instance()->Setredrawbool(true);
 	return true;
 }
 

@@ -1,16 +1,12 @@
-//number draw is a gamestate loaded when draw button is presses
-//draw letters with finger when touch or mouse click
 #pragma once
+#include "GameObject.h"
 #include "GameState.h"
-#include "Vector2D.h"
 
-class GameObject;
-
-class NumberDraw : public GameState
+class SumState : public GameState
 {
 public:
-	NumberDraw();
-	~NumberDraw();
+	SumState();
+	~SumState();
 	virtual void update();
 	virtual void draw();
 	virtual bool onEnter();
@@ -25,13 +21,6 @@ protected:
 	//only one copy of this maintained for all objects
 	//do not have to refer to object to refer to static member
 	//const: has to initialised outside of the class, done it in .cpp file 
-private:
 	static const std::string stateid;
-	int xstart, ystart;
-	std::vector<Vector2D> drawcoord;
-	std::vector<std::string> numbertostring;
-	int counter;
-	int tempx;
-	int tempy;
 };
 
