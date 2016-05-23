@@ -2,6 +2,7 @@
 #include "PlayState.h"
 #include "MainMenuState.h"
 #include "Texter.h"
+#include "SDL_image.h"
 
 Game* Game::instance = 0;
 
@@ -98,16 +99,16 @@ bool Game::init(const char * title, int xpos, int ypos, bool fullscreen)
 	TextureManager::Instance()->load("Content/redsquare.png", "redsquare", TheGame::Instance()->getdrawer());
 	TextureManager::Instance()->load("Content/yellowsquare.png", "yellowsquare", TheGame::Instance()->getdrawer());
 	TextureManager::Instance()->load("Content/greensquare.png", "greensquare", TheGame::Instance()->getdrawer());
-	TextureManager::Instance()->load("Content/bigone.png", "One", TheGame::Instance()->getdrawer());
-	TextureManager::Instance()->load("Content/bigtwo.png", "Two", TheGame::Instance()->getdrawer());
-	TextureManager::Instance()->load("Content/bigthree.png", "Three", TheGame::Instance()->getdrawer());
-	TextureManager::Instance()->load("Content/bigfour.png", "Four", TheGame::Instance()->getdrawer());
-	TextureManager::Instance()->load("Content/bigfive.png", "Five", TheGame::Instance()->getdrawer());
-	TextureManager::Instance()->load("Content/bigsix.png", "Six", TheGame::Instance()->getdrawer());
-	TextureManager::Instance()->load("Content/bigseven.png", "Seven", TheGame::Instance()->getdrawer());
-	TextureManager::Instance()->load("Content/bigeight.png", "Eight", TheGame::Instance()->getdrawer());
-	TextureManager::Instance()->load("Content/bignine.png", "Nine", TheGame::Instance()->getdrawer());
-	TextureManager::Instance()->load("Content/bigzero.png", "Zero", TheGame::Instance()->getdrawer());
+	TextureManager::Instance()->load("Content/onec.png", "One", TheGame::Instance()->getdrawer());
+	TextureManager::Instance()->load("Content/twoc.png", "Two", TheGame::Instance()->getdrawer());
+	TextureManager::Instance()->load("Content/threec.png", "Three", TheGame::Instance()->getdrawer());
+	TextureManager::Instance()->load("Content/fourc.png", "Four", TheGame::Instance()->getdrawer());
+	TextureManager::Instance()->load("Content/fivec.png", "Five", TheGame::Instance()->getdrawer());
+	TextureManager::Instance()->load("Content/sixc.png", "Six", TheGame::Instance()->getdrawer());
+	TextureManager::Instance()->load("Content/sevenc.png", "Seven", TheGame::Instance()->getdrawer());
+	TextureManager::Instance()->load("Content/eightc.png", "Eight", TheGame::Instance()->getdrawer());
+	TextureManager::Instance()->load("Content/ninec.png", "Nine", TheGame::Instance()->getdrawer());
+	TextureManager::Instance()->load("Content/zeroc.png", "Zero", TheGame::Instance()->getdrawer());
 	TextureManager::Instance()->load("Content/exit.png", "exit", TheGame::Instance()->getdrawer());
 	TextureManager::Instance()->load("Content/next.png", "next", TheGame::Instance()->getdrawer());
 	TextureManager::Instance()->load("Content/star.png", "star", TheGame::Instance()->getdrawer());
@@ -158,21 +159,19 @@ void Game::handleevents()
 void Game::clean()
 {
 	Texter::Instance()->destroy();
-	SDL_Delay(5000);
 	std::cout << "cleaning game\n";
-	TheInputHandler::Instance()->clean();
+	TheInputHandler::Instance()->destroy();
+	//clean state machine
 	statemachine->clean();
-	statemachine = 0;
-	//delete m_pStateMachine;
-	TextureManager::Instance()->clearTextureMap();
+	delete statemachine;
+	statemachine = nullptr;
+	//Destroy texturemanager
+	TextureManager::Instance()->destroy();
+	GP::Instance()->destroy();
 	//Close and destroy window
 	SDL_DestroyWindow(mainwindow);
 	SDL_DestroyRenderer(maindrawer);
-	//TTF_Quit();
-	//IMG_Quit();
-	SDL_Delay(5000);
+	//TTF_Quit();//TFF_quit in texter
+	IMG_Quit();
 	SDL_Quit();
-
-	//std::terminate();
-
 }

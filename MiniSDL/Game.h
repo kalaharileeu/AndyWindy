@@ -23,6 +23,12 @@ public:
 		return instance;
 	}
 
+	static void destroy()
+	{
+		delete instance;
+		instance = nullptr;
+	}
+
 	bool init(const char* title, int xpos, int ypos, bool fullscreen);
 	void draw();
 	void update();

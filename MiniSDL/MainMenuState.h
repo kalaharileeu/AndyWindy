@@ -24,5 +24,6 @@ class MainMenuState : public MenuState
         static void menutopplay();
         static void exitfromMenu();
 		static void menutopdraw();
+		static void menutosum();
 };
 #endif // MAINMENUSTATE_H

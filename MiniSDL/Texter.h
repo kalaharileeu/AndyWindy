@@ -5,7 +5,7 @@
 #include <iostream>
 #include "Vector2D.h"
 #include <map>
-
+//Singleton
 class Texter
 {
 public:
@@ -17,6 +17,18 @@ public:
 			return instance;
 		}
 		return instance;
+	}
+
+	~Texter()
+	{
+		for (std::map<std::string, SDL_Texture*>::iterator it = texturemap.begin(); it != texturemap.end(); it++)
+		{
+			SDL_DestroyTexture(it->second);
+			it->second = nullptr;
+		}
+		texturemap.clear();
+		clearfont();
+		TTF_Quit();
 	}
 
 	static void destroy()
@@ -103,20 +115,6 @@ public:
 		return dimensions;
 	}
 
-	~Texter()
-	{
-		std::cout << "Texter destroyed !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << std::endl;
-		for (std::map<std::string, SDL_Texture*>::iterator it = texturemap.begin(); it != texturemap.end(); it++)
-		{
-			std::cout << "cleartexter ";
-			SDL_DestroyTexture(it->second);
-			it->second = nullptr;
-		}
-		texturemap.clear();
-		clearfont();
-		TTF_Quit();
-	}
-
 private:
 	Texter()
 	{
@@ -137,7 +135,6 @@ private:
 	{
 		if (Sans != nullptr)
 		{
-			std::cout << "clearfont  !!@@";
 			//Free global font
 			TTF_CloseFont(Sans);
 			Sans = nullptr;

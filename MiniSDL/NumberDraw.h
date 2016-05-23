@@ -30,5 +30,7 @@ private:
 	std::vector<Vector2D> drawcoord;
 	std::vector<std::string> numbertostring;
 	int counter;
+	int tempx;
+	int tempy;
 };
 

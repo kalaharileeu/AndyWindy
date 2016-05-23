@@ -1,7 +1,6 @@
 #pragma once
 
 #include "StaticObject.h"//Stationary object
-#include "ObjectFactory.h"
 #include "InputHandler.h"
 
 class MenuButton : public StaticObject
@@ -9,7 +8,9 @@ class MenuButton : public StaticObject
 public:
 
 	MenuButton(int ms, Vector2D pos, int w, int h, std::string id, int nf, int callbid);
-    ~MenuButton(){ }
+    ~MenuButton()
+	{
+	}
 	//not using load - dependency injection
     //virtual void load(std::unique_ptr<LoaderParams> const &pParams);
     void draw();

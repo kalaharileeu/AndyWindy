@@ -23,11 +23,9 @@ int main(int argc, char* argv[])
 	Uint32 frameStart, frameTime;
 	//    AllocConsole();//To view cout remove
 	//    freopen("CON", "w", stdout);//To view cout remove
-	std::cout << "game init attempt...\n";
 	//Make fullscreen true here for Android  to cover the whole surface
 	if (TheGame::Instance()->init("WrapperIntruder", 100, 100, false))
 	{
-		std::cout << "game init success!\n";
 		//Move draw out of the main loop and just use redraw
 		while (TheGame::Instance()->running())
 		{
@@ -58,6 +56,9 @@ int main(int argc, char* argv[])
 	std::cout << "game closing...\n";
 	//When it is all done clean up.
 	TheGame::Instance()->clean();
+	TheGame::Instance()->destroy();
+	std::cout << "Please enter a number: ";
+	//	int numberInput;;
+	//std::cin >> numberInput;
 	return 0;
-
 }

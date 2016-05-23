@@ -47,19 +47,17 @@ LOCAL_SRC_FILES += \
 	../../MiniSDL/StateMachine.cpp \
 	../../MiniSDL/InputHandler.cpp \
 	../../MiniSDL/TextureManager.cpp \
-	../../MiniSDL/CollisionManager.cpp \
 	../../MiniSDL/GeneralParameters.cpp \
 	../../MiniSDL/MovingObject.cpp \
-	../../MiniSDL/ObjectFactory.cpp \
 	../../MiniSDL/PlayState.cpp \
 	../../MiniSDL/MainMenuState.cpp \
 	../../MiniSDL/MenuButton.cpp \
 	../../MiniSDL/StateParser.cpp \
 	../../MiniSDL/StaticObject.cpp \
-	../../MiniSDL/AnimatedGraphics.cpp \
 	../../MiniSDL/DoneState.cpp \
 	../../MiniSDL/YelloBlue.cpp \
 	../../MiniSDL/NumberDraw.cpp \
+	../../MiniSDL/Texter.cpp
 #Cornel add SDL2 libraries and external libraries
 LOCAL_SHARED_LIBRARIES := SDL2 SDL2_image SDL2_ttf
 #LOCAL_STATIC_LIBRARIES += FreeImage

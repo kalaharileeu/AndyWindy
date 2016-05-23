@@ -14,6 +14,11 @@ public:
 
 		return instance;
 	}
+	static void destroy()
+	{
+		delete instance;
+		instance = nullptr;
+	}
 //********Get the boundaries of the game********
 
 	int Getxaxmin()

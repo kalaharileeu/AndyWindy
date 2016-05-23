@@ -31,6 +31,14 @@ public:
 	}
 
 
+	static void destroy()
+	{
+		delete s_pInstance;
+		s_pInstance = nullptr;
+	}
+
+	~InputHandler();
+
 	// init joysticks
 	//void initialiseJoysticks();
 	//bool joysticksInitialised() const { return m_bJoysticksInitialised; }
@@ -61,7 +69,6 @@ public:
 private:
 	std::string happy;
 	InputHandler();
-	~InputHandler();
 	SDL_Event event;
 	SDL_Event oldevent;
 

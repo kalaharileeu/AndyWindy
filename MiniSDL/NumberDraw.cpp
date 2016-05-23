@@ -2,7 +2,7 @@
 #include "Goback.h"
 #include "MainMenuState.h"
 #include "InputHandler.h"
-
+#include <stdlib.h>//absolute value
 const std::string NumberDraw::stateid = "DRAWNUMBER";
 
 NumberDraw::~NumberDraw()
@@ -55,20 +55,28 @@ void NumberDraw::update()
 			(playobjects[0])->update();
 			#endif
 			#if defined( ANDROID )
-			//Doing a dffient update for touch and drag...mmm..
+			//Doing a dffient update for touch and drag.
 			//because te response is deffent to touch and lift
 			dynamic_cast<Number*>(playobjects[0])->updatefingermotion();
 			#endif
+			//if it is touched it is in target to draw on it
 			if (dynamic_cast<Number*>(playobjects[0])->Getiftouchedbool())
 			{
-				int x, y;
+				//int x, y;
 				//return value by reference
-				dynamic_cast<Number*>(playobjects[0])->Getposition(x, y);
-				//limit the size to draw to 100
-				if (drawcoord.size() < 100)
+				dynamic_cast<Number*>(playobjects[0])->Getposition(xstart, ystart);
+				int x = abs(tempx - xstart);
+				int y = abs(tempy - ystart);
+				if ((x > 30 ) || (y > 30))//30 pixel spacing
 				{
-					drawcoord.push_back(Vector2D(x, y));
-					TheGame::Instance()->Setredrawbool(true);
+					//limit the size to draw to 100
+					if (drawcoord.size() < 100)
+					{
+						tempx = xstart;
+						tempy = ystart;
+						drawcoord.push_back(Vector2D(xstart, ystart));
+						TheGame::Instance()->Setredrawbool(true);
+					}
 				}
 			}
 		}
@@ -103,7 +111,7 @@ bool NumberDraw::onEnter()
 {
 	counter = 1;
 	//finger touch start
-	xstart, ystart = -1;
+	xstart, ystart, tempx, tempy = -1;
 	//Do general setup
 	setup();
 	boolloadingcomplete = true;
@@ -130,13 +138,11 @@ bool NumberDraw::onExit()
 	boolexiting = true;
 	if (goback != nullptr)
 	{
-		std::cout << "clear ";
 		delete goback;
 		goback = nullptr;
 	}
 	if (goforward != nullptr)
 	{
-		std::cout << "clear ";
 		delete goforward;
 		goforward = nullptr;
 	}
@@ -146,7 +152,6 @@ bool NumberDraw::onExit()
 		{
 			if (playobjects[i] != nullptr)
 			{
-				std::cout << "clear ";
 				delete playobjects[i];
 				playobjects[i] = nullptr;
 			}
@@ -162,8 +167,8 @@ void NumberDraw::setup()
 	//Load text to be written here
 	//textmanager.load("Draw the number.", "drawnumber", TheGame::Instance()->getdrawer());
 	//image height width, the number image loaded by game.cpp
-	int w1 = TextureManager::Instance()->GetTextureDimensions("One").getX();
-	int h1 = TextureManager::Instance()->GetTextureDimensions("One").getY();
+	int w1 = TextureManager::Instance()->GetTextureDimensions("Two").getX();
+	int h1 = TextureManager::Instance()->GetTextureDimensions("Two").getY();
 	//game height width
 	int gamew = TheGame::Instance()->getGameWidth();
 	int gameh = TheGame::Instance()->getGameHeight();

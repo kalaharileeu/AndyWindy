@@ -49,7 +49,7 @@ bool MainMenuState::onEnter()
     m_callbacks.push_back(menutopplay);
     m_callbacks.push_back(exitfromMenu);
 	m_callbacks.push_back(menutopdraw);
-	m_callbacks.push_back(menutopdraw);
+	m_callbacks.push_back(menutosum);
     // set the callbacks for menu items
     setCallbacks(m_callbacks);
 	boolloadingcomplete = true;
@@ -121,6 +121,12 @@ void MainMenuState::exitfromMenu()
 }
 // Callbacks linked to buttons
 void MainMenuState::menutopdraw()
+{
+	//change to playstate
+	TheGame::Instance()->getstatemachine()->changeState(new NumberDraw());
+}
+// Callbacks linked to buttons
+void MainMenuState::menutosum()
 {
 	//change to playstate
 	TheGame::Instance()->getstatemachine()->changeState(new NumberDraw());

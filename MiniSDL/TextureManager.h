@@ -25,6 +25,17 @@ public:
 		return instance;
 	}
 
+	~TextureManager()
+	{
+		clearTextureMap(); 
+	}
+
+	static void destroy()
+	{
+		delete instance;
+		instance = nullptr;
+	}
+
 	bool load(std::string fileName, std::string id, SDL_Renderer* pRenderer);
 
 	void clearTextureMap();
@@ -42,7 +53,7 @@ public:
 
 private:
 	TextureManager() {}
-	~TextureManager() { clearTextureMap(); }
+
 	std::map<std::string, SDL_Texture*> texturemap;
 	static TextureManager* instance;
 };

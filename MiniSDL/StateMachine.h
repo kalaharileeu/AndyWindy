@@ -1,7 +1,7 @@
 /*
 -The game loop and its pipelines: The Clean, update, draw, handleevents
 are the four pipelines pumped by the game loop.
--StateMachine has 3 of those pipes rinnung through it, Clean, update and drad
+-StateMachine has 3 of pipes runnung through it, Clean, update and draw
 -Get initialized in Game.cpp.
 • Removing one state and adding another: use this way to completely
 change states without leaving the option to return
@@ -17,11 +17,23 @@ class StateMachine
 {
 public:
 	StateMachine() {}
-	~StateMachine() {}
-
+	~StateMachine()
+	{
+		if (!gamestate.empty())
+		{
+			for (int i = 0; i < gamestate.size(); i++)
+			{
+				if (gamestate[i] != nullptr)
+				{
+					gamestate[i]->onExit();
+					delete gamestate[i];
+					gamestate[i] = nullptr;
+				}
+			}
+		}
+	}
 	void update();
 	void draw();
-
 	void pushState(GameState* state);
 	void changeState(GameState* state);
 	void popState();

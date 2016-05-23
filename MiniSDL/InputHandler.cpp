@@ -3,7 +3,7 @@
 
 InputHandler* InputHandler::s_pInstance = 0;
 
-InputHandler::InputHandler() : m_keystates(0), m_bJoysticksInitialised(false), 
+InputHandler::InputHandler() : m_keystates(nullptr), m_bJoysticksInitialised(false), 
 m_mousePosition(new Vector2D(0, 0)), 
 MouseMoved(false), 
 touchfingerposition(new Vector2D(0, 0)),
@@ -21,6 +21,7 @@ touched(false)
 
 InputHandler::~InputHandler()
 {
+	std::cout << "inputhandler destroyed!!!!!!!!!!!!!" << std::endl;
 	// delete anything we created dynamically
 	if (m_keystates != nullptr)
 	{

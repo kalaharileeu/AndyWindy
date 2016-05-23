@@ -55,18 +55,22 @@ void DoneState::update()
 		if (numbertodraw == "ten")
 		{
 			TheGame::Instance()->getstatemachine()->changeState(new YelloBlue());
+			return;
 		}
 		if (numbertodraw == "five")
 		{
 			TheGame::Instance()->getstatemachine()->changeState(new RedYelloBlue());
+			return;
 		}
 		if (numbertodraw == "three")
 		{
 			TheGame::Instance()->getstatemachine()->changeState(new Multisix());
+			return;
 		}
 		if (numbertodraw == "six")
 		{
 			TheGame::Instance()->getstatemachine()->changeState(new MainMenuState());
+			return;
 		}
 	}
 }
@@ -99,8 +103,8 @@ bool DoneState::onEnter()
 
 	int gamewidth = TheGame::Instance()->getGameWidth();
 	/*************Spacing down here************/
-	int numberimagewidth = TheTextureManager::Instance()->GetTextureDimensions("One").getX();
-	int numberimageheight = TheTextureManager::Instance()->GetTextureDimensions("One").getY();
+	int numberimagewidth = TheTextureManager::Instance()->GetTextureDimensions("Two").getX();
+	int numberimageheight = TheTextureManager::Instance()->GetTextureDimensions("Two").getY();
 	//******Horizontal spacing end****** 
 	//*****vertical spacing****
 	int centerheight = TheGame::Instance()->getGameHeight() / 2;

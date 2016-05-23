@@ -123,8 +123,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AnimatedGraphics.cpp" />
-    <ClCompile Include="CollisionManager.cpp" />
+    <ClCompile Include="SumState.cpp" />
     <ClCompile Include="DoneState.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GeneralParameters.cpp" />
@@ -134,7 +133,6 @@
     <ClCompile Include="MenuButton.cpp" />
     <ClCompile Include="MovingObject.cpp" />
     <ClCompile Include="NumberDraw.cpp" />
-    <ClCompile Include="ObjectFactory.cpp" />
     <ClCompile Include="PlayState.cpp" />
     <ClCompile Include="StateMachine.cpp" />
     <ClCompile Include="StateParser.cpp" />
@@ -144,7 +142,7 @@
     <ClCompile Include="YelloBlue.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AnimatedGraphics.h" />
+    <ClInclude Include="SumState.h" />
     <ClInclude Include="DoneState.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
@@ -161,7 +159,6 @@
     <ClInclude Include="Multiplecolorsix.h" />
     <ClInclude Include="Number.h" />
     <ClInclude Include="NumberDraw.h" />
-    <ClInclude Include="ObjectFactory.h" />
     <ClInclude Include="PlayState.h" />
     <ClInclude Include="RedYellowBlue.h" />
     <ClInclude Include="StateMachine.h" />

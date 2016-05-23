@@ -277,8 +277,8 @@ void PlayState::setup()
 	int imageheight = TextureManager::Instance()->GetTextureDimensions("bluesquare").getY();
 	//EXIT:insert the exit byutton, same width and height as bluesquare
 	goback = new Goback(1, Vector2D(0, 0), imagewidth, imageheight, "exit", 1);
-	int numberimagewidth = TheTextureManager::Instance()->GetTextureDimensions("One").getX();
-	int numberimageheight = TheTextureManager::Instance()->GetTextureDimensions("One").getY();
+	int numberimagewidth = TheTextureManager::Instance()->GetTextureDimensions("Two").getX();
+	int numberimageheight = TheTextureManager::Instance()->GetTextureDimensions("Two").getY();
 	//number of squares
 //	int numberofitems = 10;
 	int gamewidth = TheGame::Instance()->getGameWidth();

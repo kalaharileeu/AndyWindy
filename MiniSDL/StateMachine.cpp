@@ -1,14 +1,12 @@
 #include "StateMachine.h"
 #include <iostream>
-
+//this onlu cleans the last state and not the whole state machine
 void StateMachine::clean()
 {
 	if (!gamestate.empty())
 	{
 		gamestate.back()->onExit();
-
 		delete gamestate.back();
-
 		gamestate.clear();
 	}
 }
@@ -33,7 +31,6 @@ void StateMachine::draw()
 to initialise the state. Loading content etc.*/
 void StateMachine::pushState(GameState *state)
 {
-	std::cout << "popstate ";
 	gamestate.push_back(state);
 	gamestate.back()->onEnter();
 }
@@ -44,8 +41,9 @@ void StateMachine::popState()
 {
 	if (!gamestate.empty())
 	{
-		std::cout << "popstate ";
+
 		gamestate.back()->onExit();
+		delete gamestate.back();
 		gamestate.pop_back();
 	}
 
@@ -63,8 +61,8 @@ void StateMachine::changeState(GameState *state)
 			return; // do nothing
 		}
 		gamestate.back()->onExit();
+		delete gamestate.back();
 		gamestate.pop_back();
-		std::cout << "popstate ";
 	}
 	// initialise it
 	state->onEnter();
