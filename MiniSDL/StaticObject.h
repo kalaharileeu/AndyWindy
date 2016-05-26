@@ -12,6 +12,7 @@ public:
 	virtual void collision();
 	virtual std::string type() { return textureid; }
 	virtual Vector2D Getposition() { return Vector2D(position.getX(), position.getY()); };
+	virtual void Setposition(Vector2D v){ position.setX(v.getX()); position.setY(v.getY()); }
 	//Setter
 	virtual void Setcollisiontrue();
 	//Get

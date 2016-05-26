@@ -17,7 +17,6 @@ class GameObject;
 class StateParser
 {
 public:
-
     StateParser() {}
     ~StateParser() {}
 	//not using the statefile and tinyxml here, load manually

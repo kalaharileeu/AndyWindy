@@ -96,6 +96,7 @@ bool Game::init(const char * title, int xpos, int ypos, bool fullscreen)
 	//register some GameObjsect here
 	//Register the image with the TextureManager
 	TextureManager::Instance()->load("Content/bluesquare2.png", "bluesquare", TheGame::Instance()->getdrawer());
+	TextureManager::Instance()->load("Content/bluesquare.png", "blue", TheGame::Instance()->getdrawer());
 	TextureManager::Instance()->load("Content/redsquare.png", "redsquare", TheGame::Instance()->getdrawer());
 	TextureManager::Instance()->load("Content/yellowsquare.png", "yellowsquare", TheGame::Instance()->getdrawer());
 	TextureManager::Instance()->load("Content/greensquare.png", "greensquare", TheGame::Instance()->getdrawer());
@@ -112,6 +113,8 @@ bool Game::init(const char * title, int xpos, int ypos, bool fullscreen)
 	TextureManager::Instance()->load("Content/exit.png", "exit", TheGame::Instance()->getdrawer());
 	TextureManager::Instance()->load("Content/next.png", "next", TheGame::Instance()->getdrawer());
 	TextureManager::Instance()->load("Content/star.png", "star", TheGame::Instance()->getdrawer());
+	TextureManager::Instance()->load("Content/plus.png", "plus", TheGame::Instance()->getdrawer());
+	TextureManager::Instance()->load("Content/equal.png", "equal", TheGame::Instance()->getdrawer());
 	Texter::Instance()->load("one", "one", TheGame::Instance()->getdrawer());
 	Texter::Instance()->load("two", "two", TheGame::Instance()->getdrawer());
 	Texter::Instance()->load("three", "three", TheGame::Instance()->getdrawer());
@@ -123,7 +126,8 @@ bool Game::init(const char * title, int xpos, int ypos, bool fullscreen)
 	Texter::Instance()->load("nine", "nine", TheGame::Instance()->getdrawer());
 	Texter::Instance()->load("ten", "ten", TheGame::Instance()->getdrawer());
 	Texter::Instance()->load("Count the blue squares.", "count10", TheGame::Instance()->getdrawer());
-	Texter::Instance()->load("From left to right!", "bluecircles", TheGame::Instance()->getdrawer());
+	Texter::Instance()->load("From left to right, top to bottom.", "bluecircles", TheGame::Instance()->getdrawer());
+	Texter::Instance()->load("Choose two number to add together.", "addtogether", TheGame::Instance()->getdrawer());
 	/*change the state tells statemachine a new state is coming
 	statemachine will call on enter for that state*/
 	//Can start immediately with new Playstate(), I want to start with menustate

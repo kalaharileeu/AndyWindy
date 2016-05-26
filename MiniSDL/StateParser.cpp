@@ -60,5 +60,5 @@ void StateParser::parseObjects(std::vector<GameObject *> *gameobjects)
 	gameobjects->push_back(new MenuButton(0, Vector2D(TheGame::Instance()->getGameWidth() / 2 - 200, 260),
 		400, 100, "addbutton", 0, 3));
 	gameobjects->push_back(new MenuButton(0, Vector2D(TheGame::Instance()->getGameWidth() / 2 - 200, 380),
-		400, 100, "drawbutton", 0, 3));
+		400, 100, "drawbutton", 0, 4));
 }

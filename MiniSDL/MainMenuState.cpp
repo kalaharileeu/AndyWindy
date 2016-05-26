@@ -6,6 +6,7 @@
 #include "InputHandler.h"
 #include "StateParser.h"
 #include "NumberDraw.h"
+#include "SumState.h"
 
 const std::string MainMenuState::menuid = "MENU";
 
@@ -48,8 +49,8 @@ bool MainMenuState::onEnter()
     m_callbacks.push_back(0);
     m_callbacks.push_back(menutopplay);
     m_callbacks.push_back(exitfromMenu);
-	m_callbacks.push_back(menutopdraw);
 	m_callbacks.push_back(menutosum);
+	m_callbacks.push_back(menutopdraw);
     // set the callbacks for menu items
     setCallbacks(m_callbacks);
 	boolloadingcomplete = true;
@@ -129,7 +130,8 @@ void MainMenuState::menutopdraw()
 void MainMenuState::menutosum()
 {
 	//change to playstate
-	TheGame::Instance()->getstatemachine()->changeState(new NumberDraw());
+	std::cout << "Menu to sum" << std::endl;
+	TheGame::Instance()->getstatemachine()->changeState(new SumState());
 }
 // end callbacks
 

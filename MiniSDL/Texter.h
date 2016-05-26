@@ -21,7 +21,8 @@ public:
 
 	~Texter()
 	{
-		for (std::map<std::string, SDL_Texture*>::iterator it = texturemap.begin(); it != texturemap.end(); it++)
+		for (std::map<std::string, SDL_Texture*>::iterator
+			it = texturemap.begin(); it != texturemap.end(); it++)
 		{
 			SDL_DestroyTexture(it->second);
 			it->second = nullptr;
@@ -40,7 +41,7 @@ public:
 
 	void loadfont()
 	{
-		Sans = TTF_OpenFont("Content/Sans.ttf", 24);
+		Sans = TTF_OpenFont("Content/Sans.ttf", 12);
 		if (Sans == nullptr)
 		{
 			std::cout << "TTF_font issue - " << SDL_GetError() << "\n";
@@ -124,7 +125,7 @@ private:
 			std::cout << "TTF_Init: %s\n", TTF_GetError();
 		}
 		Sans = nullptr;
-		Sans = TTF_OpenFont("Content/Sans.ttf", 72);
+		Sans = TTF_OpenFont("Content/Sans.ttf", 40);
 		if (Sans == nullptr)
 		{
 			std::cout << "TTF_font issue - " << SDL_GetError() << "\n";
