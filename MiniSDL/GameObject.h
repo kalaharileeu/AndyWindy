@@ -29,6 +29,7 @@ public:
 	// draw the object
 	virtual void draw() = 0;
 	virtual void drawzoom(float zoom) = 0;
+	virtual void drawframe(int row, int col) = 0;
 	// do update stuff
 	virtual void update() = 0;
 	// remove anything that needs to be deleted

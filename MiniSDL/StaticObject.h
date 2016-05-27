@@ -8,6 +8,7 @@ public:
 	~StaticObject();
 	virtual void draw();
 	virtual void drawzoom(float zoom);
+	virtual void drawframe(int row, int col);
 	virtual void update();
 	virtual void collision();
 	virtual std::string type() { return textureid; }
@@ -18,7 +19,6 @@ public:
 	//Get
 	std::string Gettextureid() { return textureid; }
 protected:
-
 	/*constructor is protected so that it can be accessed
 	from derived class*/
 	StaticObject(int ms, Vector2D pos, int w, int h, std::string id, int nf);

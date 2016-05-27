@@ -41,6 +41,13 @@ void StaticObject::drawzoom(float newzoom)
 	TextureManager::Instance()->draw(textureid, (Uint32)position.getX(), (Uint32)position.getY(),
 		width, height, TheGame::Instance()->getdrawer(), SDL_FLIP_NONE);
 }
+
+void StaticObject::drawframe(int row, int col)
+{
+	TextureManager::Instance()->drawFrame(textureid, (Uint32)position.getX(), (Uint32)position.getY(),
+		width, height, row, col, TheGame::Instance()->getdrawer(), 0, alpha);
+}
+
 // apply velocity to current position
 void StaticObject::update()
 {

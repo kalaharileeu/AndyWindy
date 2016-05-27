@@ -115,6 +115,7 @@ bool Game::init(const char * title, int xpos, int ypos, bool fullscreen)
 	TextureManager::Instance()->load("Content/star.png", "star", TheGame::Instance()->getdrawer());
 	TextureManager::Instance()->load("Content/plus.png", "plus", TheGame::Instance()->getdrawer());
 	TextureManager::Instance()->load("Content/equal.png", "equal", TheGame::Instance()->getdrawer());
+	TextureManager::Instance()->load("Content/tick.png", "tick", TheGame::Instance()->getdrawer());
 	Texter::Instance()->load("one", "one", TheGame::Instance()->getdrawer());
 	Texter::Instance()->load("two", "two", TheGame::Instance()->getdrawer());
 	Texter::Instance()->load("three", "three", TheGame::Instance()->getdrawer());

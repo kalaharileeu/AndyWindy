@@ -15,16 +15,19 @@ public:
 protected:
 	void setup();
 	//this write the screen text
+	int a, b, sum;
 	GameObject* goback;
 	GameObject* goforward;
 	int counter;
+	int counterb;
 	std::vector<GameObject*> playobjects;
 	GameObject* firstarg;
 	GameObject* secarg;
 	GameObject* thesum;
-	GameObject* firstargdot;
-	GameObject* secargdot;
-	GameObject* thesumdot;
+	GameObject* firstargdot;//dots
+	GameObject* secargdot;//dots
+	GameObject* thesumdot;//dots
+	GameObject* tick;//dots
 	std::vector<GameObject*> frameobjects;
 	std::vector<std::string> numbertostring;
 	GameObject* plus;
