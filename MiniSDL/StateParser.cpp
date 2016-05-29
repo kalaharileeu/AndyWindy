@@ -53,12 +53,13 @@ void StateParser::parseObjects(std::vector<GameObject *> *gameobjects)
 	//gameobjects->load(std::unique_ptr<LoaderParams>(new LoaderParams
 	//(x, y, width, height, textureID, numFrames, callbackID, animSpeed)));
 	//int x, int y, int width, int height, std::string textureID, int numFrames, callback id
-	gameobjects->push_back(new MenuButton(0, Vector2D((TheGame::Instance()->getGameWidth() / 2 - 200), 20),
+	int center = TheGame::Instance()->getGameWidth() / 2;
+	gameobjects->push_back(new MenuButton(0, Vector2D((center - 200), 20),
 		400, 100, "count", 0, 1));
-	gameobjects->push_back(new MenuButton(0, Vector2D(TheGame::Instance()->getGameWidth() / 2 - 200, 140),
-		400, 100, "exitbutton", 0, 2));
-	gameobjects->push_back(new MenuButton(0, Vector2D(TheGame::Instance()->getGameWidth() / 2 - 200, 260),
+	gameobjects->push_back(new MenuButton(0, Vector2D(center - 200, 140),
 		400, 100, "addbutton", 0, 3));
-	gameobjects->push_back(new MenuButton(0, Vector2D(TheGame::Instance()->getGameWidth() / 2 - 200, 380),
+	gameobjects->push_back(new MenuButton(0, Vector2D(center - 200, 260),
 		400, 100, "drawbutton", 0, 4));
+	gameobjects->push_back(new MenuButton(0, Vector2D(center - 200, TheGame::Instance()->getGameHeight() - 120),
+		400, 100, "exitbutton", 0, 2));
 }

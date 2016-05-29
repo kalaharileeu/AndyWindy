@@ -83,7 +83,8 @@ void DoneState::draw()
 	{
 		for (int i = 0; i < numberobjects.size(); i++)
 		{
-			numberobjects[i]->draw();
+			//numberobjects[i]->draw();
+			numberobjects[i]->drawframe(0, 0);
 		}
 		//numbertodraw must tie up with texturemanager
 		int xposition = ((TheGame::Instance()->getGameWidth() - Texter::Instance()->GetTextureDimensions(numbertodraw).getX()) / 2);
@@ -116,8 +117,9 @@ bool DoneState::onEnter()
 	//Load up the numberobjects.
 	if (numbertodraw == "ten")
 	{
-		numberobjects.push_back(new GeneralNumber(1, Vector2D(centerwidth - numberimagewidth, numberverticalposition),
-			numberimagewidth, numberimageheight, "One", 1));
+		//one have some special stuff going on, not good
+		numberobjects.push_back(new GeneralNumber(1, Vector2D(centerwidth - (numberimagewidth/2), numberverticalposition),
+			numberimagewidth / 2, numberimageheight, "One", 2));
 		numberobjects.push_back(new GeneralNumber(1, Vector2D(centerwidth, numberverticalposition),
 			numberimagewidth, numberimageheight, "Zero", 1));
 	}

@@ -84,7 +84,10 @@ void SumState::update()
 			dynamic_cast<Number*>(thesumdot)->Settextureid("Zero");
 			dynamic_cast<Number*>(tick)->Settextureid("blue");
 			counter = 0;
-			counterb, a, b, sum = -1;
+			counterb = -1;
+			a = -1;
+			b = -1;
+			sum = -1;
 		}
 		//**********************Navigation buttons end********************************
 		//Now update the game objects; can only choose wo numbers
@@ -160,13 +163,17 @@ void SumState::draw()
 		{
 			Texter::Instance()->draw("addtogether", 250, 20, TheGame::Instance()->getdrawer());
 		}
+		//tick has different draw depending on value
+		if (dynamic_cast<Number*>(tick)->Gettextureid() == "blue")
+		{
+			tick->drawzoom(1.0);
+		}
 		//draw the argument and the answer
 		firstarg->draw();
 		plus->draw();
 		secarg->draw();
 		equal->draw();
 		thesum->draw();
-
 		//draw the Dots
 		firstargdot->drawframe(0, 1);
 		secargdot->drawframe(0, 1);
@@ -174,14 +181,11 @@ void SumState::draw()
 		//draw the go back to main menu button
 		goback->draw();
 		goforward->draw();
-		if (dynamic_cast<Number*>(tick)->Gettextureid() == "blue")
+		if (dynamic_cast<Number*>(tick)->Gettextureid() == "tick")
 		{
-			tick->drawzoom(1.0);
+			tick->drawframe(0, 1);
 		}
-		else
-		{
-			thesumdot->drawframe(0, 1);
-		}
+
 
 		if (!playobjects.empty())
 		{

@@ -23,30 +23,30 @@ public:
 		int centerheight = TheGame::Instance()->getGameHeight() / 2;
 		//****Horizontal spacing*****
 		//only two space here left and write side of the screeen
-		int spacing = (gamewidth - (numberofitems * imagewidth)) / 2;
+		int spacing = 20;
 		int centerwidth = gamewidth / 2;
 		//*****vertical spaces end***
 		//****vertical and horizontal start points******
-		int startpoint = centerwidth - ((numberofitems / 2) * (imagewidth));
-		int verticalposition = centerheight + (imageheight * 2);
+		int startpoint = centerwidth - ((numberofitems / 2) * (imagewidth + spacing));
+		int verticalposition = centerheight + (imageheight * 1);
 		//add 20 playobject "Number" to the gameobject list
 		for (int i = 0; i < 20; i++)
 		{
 			//There should be 6 blue squares
 			if ((i + 1) % 3 == 0)
 			{
-				playobjects.push_back(new Number(1, Vector2D(startpoint + ((imagewidth) * (i % 10)),
-					verticalposition + (imageheight * (i / numberofitems)) ), imagewidth, imageheight, "bluesquare", 1));
+				playobjects.push_back(new Number(1, Vector2D(startpoint + ((imagewidth + spacing) * (i % 10)),
+					verticalposition + ((imageheight + spacing) * (i / numberofitems)) ), imagewidth, imageheight, "bluesquare", 1));
 			}
 			else if ((i + 1) % 2 == 0)
 			{
-				playobjects.push_back(new Number(1, Vector2D(startpoint + ((imagewidth) * (i % 10)),
-					verticalposition + (imageheight * (i / numberofitems))), imagewidth, imageheight, "yellowsquare", 1));
+				playobjects.push_back(new Number(1, Vector2D(startpoint + ((imagewidth + spacing) * (i % 10)),
+					verticalposition + ((imageheight + spacing) * (i / numberofitems))), imagewidth, imageheight, "yellowsquare", 1));
 			}
 			else
 			{
-				playobjects.push_back(new Number(1, Vector2D(startpoint + ((imagewidth) * (i % 10)),
-					verticalposition + (imageheight * (i / numberofitems))), imagewidth, imageheight, "redsquare", 1));
+				playobjects.push_back(new Number(1, Vector2D(startpoint + ((imagewidth + spacing) * (i % 10)),
+					verticalposition + ((imageheight + spacing) * (i / numberofitems))), imagewidth, imageheight, "redsquare", 1));
 			}
 		}
 
