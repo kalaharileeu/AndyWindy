@@ -21,7 +21,6 @@ touched(false)
 
 InputHandler::~InputHandler()
 {
-	std::cout << "inputhandler destroyed!!!!!!!!!!!!!" << std::endl;
 	// delete anything we created dynamically
 	if (m_keystates != nullptr)
 	{
@@ -197,24 +196,82 @@ Vector2D* InputHandler::Getreleaseposition()
 void InputHandler::update()
 {
 	int i = 0;
-	//unique event printing
-	if (oldevent.type != event.type)
-	{
-		i = static_cast<int>(event.type);
-		std::string s = happystring(i);
-		//SDL_Log(".");
-		//SDL_Log("%s", s.c_str());
-		//SDL_Log(".");
-		//std::cout << "." << i << ".";
-	}
-	oldevent = event;
-	////end unique event printing
-	//if (i == 767)
+	//if (event.type == onPause())
 	//{
-	//	SDL_Log("Here trying to quit!!!!!????????????????????????");
+
+	//}
+	//unique event printing
+	std::string s;
+	//if (oldevent.type != event.type)
+	//{
+	///*	i = static_cast<int>(event.type);
+	//	s = happystring(i);
+	//	SDL_Log(".");
+	//	SDL_Log("%s", s.c_str());
+	//	SDL_Log(".");*/
+	//	//std::cout << "." << i << ".";
+	//	//if (event.type != SDL_APP_DIDENTERBACKGROUND)
+	//	//{
+	//	//	//TheGame::Instance()->quit();
+	//	//	std::cout << "DIDENTERBACKGROUND" << std::endl;
+	//	//	SDL_Log("DIDENTERBACKGROUND");
+	//	//}
+	//	//if (event.type != SDL_APP_WILLENTERFOREGROUND)
+	//	//{
+	//	//	std::cout << "SDL_APP_WILLENTERFOREGROUND" << std::endl;
+	//	//	TheGame::Instance()->Setredrawbool(true);
+	//	//	SDL_Log("SDL_APP_WILLENTERFOREGROUND");
+	//	//}
+	//	//if (event.type != SDL_APP_DIDENTERFOREGROUND)
+	//	//{
+	//	//	std::cout << "SDL_APP_DIDENTERFOREGROUND" << std::endl;
+	//	//	TheGame::Instance()->Setredrawbool(true);
+	//	//	SDL_Log("SDL_APP_DIDENTERFOREGROUND");
+	//	//}
+	//	//if (event.type == SDL_APP_WILLENTERFOREGROUND)
+	//	//{
+	//	//	SDL_Log(".");
+	//	//	TheGame::Instance()->Setredrawbool(true);
+	//	//}
+	//	//if (event.type == SDL_APP_DIDENTERFOREGROUND)
+	//	//{
+	//	//	SDL_Log(".");
+	//	//	TheGame::Instance()->Setredrawbool(true);
+	//	//}
+	//	//if (event.type == SDL_APP_DIDENTERBACKGROUND)
+	//	//{
+	//	//	TheGame::Instance()->Setredrawbool(true);
+	//	//}
+	//}
+	//oldevent = event;
+	if (event.type == SDL_APP_DIDENTERFOREGROUND)
+	{
+		//SDL_Log("SDL_APP_DIDENTERFOREGROUND");
+		TheGame::Instance()->quit();
+		return;
+	}
+	if (event.type == SDL_APP_WILLENTERFOREGROUND)
+	{
+		//SDL_Log("SDL_APP_WILL!!!ENTERFOREGROUND");
+		TheGame::Instance()->quit();
+		return;
+	}
+	if (event.type == SDL_APP_DIDENTERFOREGROUND)
+	{
+		//SDL_Log("SDL_APP_DID!!!!!!ENTERFOREGROUND");
+		TheGame::Instance()->Setredrawbool(true);
+	}
+
+
+	//////end unique event printing
+	//Uint32 j = 767;
+	////SDL_Log("767!");
+	//SDL_Log("!_%s", s.c_str());
+	//if (s == "767") 
+	//{
 	//	i = 0;
-	//	//TheGame::Instance()->quit();
-	//	//return;
+	//	TheGame::Instance()->quit();
+	//	return;
 	//}
 
 	if (event.type != SDL_MOUSEMOTION)

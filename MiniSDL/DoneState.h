@@ -1,5 +1,6 @@
 #pragma once
 #include "GameState.h"
+#include "Goback.h"
 
 class GameObject;
 //public inheritance with GameState: important
@@ -20,6 +21,7 @@ private:
 	//const: has to initialised outside of the class, done it in .cpp file 
 	static const std::string doneid;
 	std::vector<GameObject*> numberobjects;
+	GameObject* goforward;
 	//CollisionManager CM;
 	bool textdonebool;
 	//This is the number to draw

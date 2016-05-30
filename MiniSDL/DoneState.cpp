@@ -12,6 +12,7 @@ const std::string DoneState::doneid = "DONEONE";
 DoneState::DoneState(std::string drawvalue)
 {
 	numbertodraw = drawvalue;
+	goforward = nullptr;
 }
 
 DoneState::~DoneState()
@@ -24,6 +25,11 @@ DoneState::~DoneState()
 			delete numberobjects[i];
 		}
 		numberobjects.clear();
+	}
+	if (goforward != nullptr)
+	{
+		delete goforward;
+		goforward = nullptr;
 	}
 }
 /*update state*/
@@ -77,6 +83,7 @@ void DoneState::update()
 
 void DoneState::draw()
 {
+	goforward->draw();
 	//textdonebool is true once the draw is complete, do not have to continuously draw
 	//nothing is moving at this stage
 	if (boolloadingcomplete)
@@ -103,12 +110,13 @@ bool DoneState::onEnter()
 	//textmanager.load(numbertodraw, numbertodraw, TheGame::Instance()->getdrawer());
 
 	int gamewidth = TheGame::Instance()->getGameWidth();
+	int gameheight = TheGame::Instance()->getGameHeight();
 	/*************Spacing down here************/
 	int numberimagewidth = TheTextureManager::Instance()->GetTextureDimensions("Two").getX();
 	int numberimageheight = TheTextureManager::Instance()->GetTextureDimensions("Two").getY();
 	//******Horizontal spacing end****** 
 	//*****vertical spacing****
-	int centerheight = TheGame::Instance()->getGameHeight() / 2;
+	int centerheight = gameheight / 2;
 	int verticalposition = centerheight;
 	int numberverticalposition = verticalposition - numberimageheight - 50;
 	//****Horizontal spacing*****
@@ -138,7 +146,11 @@ bool DoneState::onEnter()
 		numberobjects.push_back(new GeneralNumber(1, Vector2D(centerwidth - (numberimagewidth / 2), numberverticalposition),
 			numberimagewidth, numberimageheight, "Six", 1));
 	}
-
+	//this is the go back to main menu symbol
+	int w = TextureManager::Instance()->GetTextureDimensions("next").getX();
+	int h = TextureManager::Instance()->GetTextureDimensions("next").getY();
+	//this is the to move to next number
+	goforward = new Next(1, Vector2D(gamewidth - w, gameheight - h), w, h, "next", 1);
 	//This is clearing say please write text
 	textdonebool = false;
 	boolloadingcomplete = true;
@@ -163,6 +175,11 @@ bool DoneState::onExit()
 			delete numberobjects[i];
 		}
 		numberobjects.clear();
+	}
+	if (goforward != nullptr)
+	{
+		delete goforward;
+		goforward = nullptr;
 	}
 	//This is clearing say please write text
 	textdonebool = false;

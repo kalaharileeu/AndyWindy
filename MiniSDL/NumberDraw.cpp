@@ -65,9 +65,9 @@ void NumberDraw::update()
 		//check if the playobject was touched was touched
 		for (int i = 0; i < playobjects.size(); i++)
 		{
-			#if !defined( ANDROID )
+			//#if !defined( ANDROID )
 			(playobjects[0])->update();
-			#endif
+			//#endif
 			#if defined( ANDROID )
 			//Doing a dffient update for touch and drag.
 			//because te response is deffent to touch and lift
@@ -84,7 +84,7 @@ void NumberDraw::update()
 				if ((x > 30 ) || (y > 30))//30 pixel spacing
 				{
 					//limit the size to draw to 100
-					if (drawcoord.size() < 100)
+					if (drawcoord.size() < 80)
 					{
 						tempx = xstart;
 						tempy = ystart;

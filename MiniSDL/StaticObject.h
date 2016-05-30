@@ -5,6 +5,7 @@
 class StaticObject : public GameObject
 {
 public:
+	StaticObject(int ms, Vector2D pos, int w, int h, std::string id, int nf);
 	~StaticObject();
 	virtual void draw();
 	virtual void drawzoom(float zoom);
@@ -21,7 +22,7 @@ public:
 protected:
 	/*constructor is protected so that it can be accessed
 	from derived class*/
-	StaticObject(int ms, Vector2D pos, int w, int h, std::string id, int nf);
+	//StaticObject(int ms, Vector2D pos, int w, int h, std::string id, int nf);
 	int movespeed = 0;
 	int m = 0; //movement gradient, for liear angled movement
 };
