@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-      package="com.packtpub.ndkmastering"
+      package="com.andywindy.math"
       android:versionCode="1"
       android:versionName="1.0.0">
     <!--require Android 4.4 and higher-->
@@ -13,7 +13,7 @@
                  android:allowBackup="true"
                  android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
                  android:hardwareAccelerated="true" >
-        <activity android:name="com.packtpub.ndkmastering.AppActivity"
+        <activity android:name="com.andywindy.math.AppActivity"
                   android:label="@string/app_name"
                   android:screenOrientation="landscape"
                   android:configChanges="keyboardHidden">
