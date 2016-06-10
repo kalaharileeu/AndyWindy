@@ -53,11 +53,11 @@ int main(int argc, char* argv[])
 		std::cout << "game init failure - " << SDL_GetError() << "\n";
 		return -1;
 	}
-	std::cout << "game closing...\n";
+	//std::cout << "game closing...\n";
 	//When it is all done clean up.
 	TheGame::Instance()->clean();
 	TheGame::Instance()->destroy();
-	std::cout << "Please enter a number: ";
+	//std::cout << "Please enter a number: ";
 	//	int numberInput;;
 	//std::cin >> numberInput;
 	return 0;
